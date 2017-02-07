@@ -80,6 +80,7 @@ function stopRecording()
 	myMedia.stopRecord();
 	alert("Stopped recording");
 	myMedia.play();
+	uploadAudio();
 }
 
 function failFile(err) {
