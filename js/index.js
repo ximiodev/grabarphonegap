@@ -42,10 +42,15 @@ var app = {
        document.getElementById("btnStop").addEventListener('click', stopRecording, false);
 		window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
         console.log('Received Event: ' + id);
+		if(devicePlatform=="iOS") {
+			audioRecord = 'record.wav';
+		} else {
+			audioRecord = 'record.mp3';
+		}
     }
 };
 var fileURL;
-var audioRecord = 'record.wav';
+var audioRecord;
 var devicePlatform;
 
 function gotFS(fileSystem) {
