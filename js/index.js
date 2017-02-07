@@ -116,5 +116,7 @@ var uploadAudio = function () {
 	} else {
 		realPath = Environment.getExternalStorageDirectory().getPath()+audioRecord;  
 	}
+	var elemento = document.getElementById("responde");
+	elemento.innerHTML = realPath;
     ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
 }
