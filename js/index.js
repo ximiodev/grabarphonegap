@@ -114,9 +114,8 @@ var uploadAudio = function () {
     if(devicePlatform=="iOS") {
 		realPath = fileURL;
 	} else {
-		realPath = Environment.getExternalStorageDirectory().getPath()+audioRecord;  
+		realPath = cordova.file.externalRootDirectory;+audioRecord;  
 	}
-	var elemento = document.getElementById("responde");
-	elemento.innerHTML = realPath;
+	alert(realPath);
     ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
 }
