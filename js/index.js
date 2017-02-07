@@ -44,6 +44,7 @@ var app = {
     }
 };
 var fileURL;
+var audioRecord = 'record.wav';
 
 function gotFS(fileSystem) {
 	fileSystem.root.getFile(audioRecord, {
@@ -58,7 +59,7 @@ function gotFileEntry(fileEntry) {
 
 function startRecording()
 {
-	var src = "FinalAudio.wav";
+	var src = audioRecord;
 	myMedia = new Media(src, onSuccess, onError);
 	myMedia.startRecord();
 	alert("Started recording");
