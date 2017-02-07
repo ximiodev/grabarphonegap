@@ -154,6 +154,19 @@
 
     <!-- Added the following intents to support the removal of whitelist code from base cordova to a plugin -->
     <!-- Whitelist configuration. Refer to https://cordova.apache.org/docs/en/edge/guide_appdev_whitelist_index.md.html -->
+	<feature name="File">
+		<param name="android-package" value="org.apache.cordova.file.FileUtils" />
+	</feature>
+	<feature name="Capture">
+		<param name="android-package" value="org.apache.cordova.mediacapture.Capture" />
+		<param name="ios-package" value="CDVCapture" />
+	</feature>
+	<!-- root-level config-file block -->
+	<config-file target="AndroidManifest.xml" parent="/*">
+		<uses-permission android:name="android.permission.RECORD_AUDIO" />
+		<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	</config-file>
 
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
