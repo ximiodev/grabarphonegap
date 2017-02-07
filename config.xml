@@ -27,7 +27,7 @@
 	  <preference name="ios-statusbarstyle" value="black-opaque" />
 
     <!-- Define a specific version of PhoneGap to build into your app. -->
-    <preference name="phonegap-version"       value="cli-5.0.0" />
+    <preference name="phonegap-version"       value="cli-6.5.0" />
 
     <!-- Plugins -->
     <!-- Core plugins -->
