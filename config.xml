@@ -23,11 +23,10 @@
     <preference name="DisallowOverscroll"         value="true" />
     <!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->
     <preference name="android-minSdkVersion"      value="11" />
-	  <preference name="deployment-target" value="7.0" />
-	  <preference name="ios-statusbarstyle" value="black-opaque" />
+    <preference name="deployment-target" value="7.1.2" />
 
     <!-- Define a specific version of PhoneGap to build into your app. -->
-    <preference name="phonegap-version"       value="cli-6.5.0" />
+    <!-- <preference name="phonegap-version"       value="cli-6.0.0" /> -->
 
     <!-- Plugins -->
     <!-- Core plugins -->
