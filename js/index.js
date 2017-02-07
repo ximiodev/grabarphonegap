@@ -111,8 +111,9 @@ var uploadAudio = function () {
 
     var options = new FileUploadOptions();
     options.fileKey = "file";
-    options.fileName = "recordupload.wav";
+    options.fileName = audioRecord;
     options.mimeType = "audio/wav";
+    options.params = { 'devicePlatform': devicePlatform};
 
     var ft = new FileTransfer();
     var realPath
