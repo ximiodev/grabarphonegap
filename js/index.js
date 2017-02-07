@@ -34,6 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        devicePlatform = device.platform;
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -45,6 +46,7 @@ var app = {
 };
 var fileURL;
 var audioRecord = 'record.wav';
+var devicePlatform;
 
 function gotFS(fileSystem) {
 	fileSystem.root.getFile(audioRecord, {
@@ -108,5 +110,11 @@ var uploadAudio = function () {
     options.mimeType = "audio/wav";
 
     var ft = new FileTransfer();
-    ft.upload(fileURL, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
+    var realPath
+    if(devicePlatform=="iOS") {
+		realPath = fileURL;
+	} else {
+		realPath = Environment.getExternalStorageDirectory().getPath();  
+	}
+    ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
 }
