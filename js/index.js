@@ -39,10 +39,22 @@ var app = {
     receivedEvent: function(id) {
        document.getElementById("btnStart").addEventListener('click', startRecording, false);
        document.getElementById("btnStop").addEventListener('click', stopRecording, false);
-
+		window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
         console.log('Received Event: ' + id);
     }
 };
+var fileURL;
+
+function gotFS(fileSystem) {
+	fileSystem.root.getFile(audioRecord, {
+		create: true,
+		exclusive: false
+	}, gotFileEntry, fail);
+}
+
+function gotFileEntry(fileEntry) {
+	fileURL = fileEntry.toURL();
+}
 
 function startRecording()
 {
@@ -53,8 +65,13 @@ function startRecording()
  }
 function onSuccess() {
 	console.log("Created Audio for Recording");
+	uploadAudio();
 }
 function onError(error) {
+	alert('code: '    + error.code    + '\n' +
+		  'message: ' + error.message + '\n');
+}
+function fail(error) {
 	alert('code: '    + error.code    + '\n' +
 		  'message: ' + error.message + '\n');
 }
@@ -65,11 +82,16 @@ function stopRecording()
 	myMedia.play();
 }
 
-function uploadAudio(fileURL) {
+function failFile(err) {
+}
+
+var uploadAudio = function () {
     var win = function (r) {
         console.log("Code = " + r.responseCode);
         console.log("Response = " + r.response);
         console.log("Sent = " + r.bytesSent);
+        var elemento = document.getElementById("responde");
+        elemento.innerHTML = r.response;
     }
 
     var fail = function (error) {
@@ -79,10 +101,10 @@ function uploadAudio(fileURL) {
     }
 
     var options = new FileUploadOptions();
-    options.fileKey = "file";//the name of the file you expect on the server
-    options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
+    options.fileKey = "file";
+    options.fileName = "recordupload.wav";
+    options.mimeType = "audio/wav";
 
     var ft = new FileTransfer();
-    ft.upload(fileURL, encodeURI("http://some.server.com/upload.php"), win, fail, options);
-
+    ft.upload(fileURL, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
 }
