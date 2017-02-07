@@ -45,21 +45,44 @@ var app = {
 };
 
 function startRecording()
-        {
-            var src = "FinalAudio.wav";
-            myMedia = new Media(src, onSuccess, onError);
-            myMedia.startRecord();
-            alert("Started recording");
-         }
-        function onSuccess() {
-            console.log("Created Audio for Recording");
-        }
-        function onError(error) {
-            alert('code: '    + error.code    + '\n' +
-                  'message: ' + error.message + '\n');
-        }
-        function stopRecording()
-        {
-            myMedia.stopRecord();
-            alert("Stopped recording");
-        }
+{
+	var src = "FinalAudio.wav";
+	myMedia = new Media(src, onSuccess, onError);
+	myMedia.startRecord();
+	alert("Started recording");
+ }
+function onSuccess() {
+	console.log("Created Audio for Recording");
+}
+function onError(error) {
+	alert('code: '    + error.code    + '\n' +
+		  'message: ' + error.message + '\n');
+}
+function stopRecording()
+{
+	myMedia.stopRecord();
+	alert("Stopped recording");
+	myMedia.play();
+}
+
+function uploadAudio(fileURL) {
+    var win = function (r) {
+        console.log("Code = " + r.responseCode);
+        console.log("Response = " + r.response);
+        console.log("Sent = " + r.bytesSent);
+    }
+
+    var fail = function (error) {
+        alert("An error has occurred: Code = " + error.code);
+        console.log("upload error source " + error.source);
+        console.log("upload error target " + error.target);
+    }
+
+    var options = new FileUploadOptions();
+    options.fileKey = "file";//the name of the file you expect on the server
+    options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
+
+    var ft = new FileTransfer();
+    ft.upload(fileURL, encodeURI("http://some.server.com/upload.php"), win, fail, options);
+
+}
