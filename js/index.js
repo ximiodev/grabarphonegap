@@ -107,20 +107,17 @@ var uploadAudio = function () {
         console.log("Response = " + r.response);
         console.log("Sent = " + r.bytesSent);
         mostrarMensaje(r.response);
-		myMedia.release();
     }
 
     var fail = function (error) {
         mostrarMensaje("An error has occurred: Code = " + error.code);
         console.log("upload error source " + error.source);
         console.log("upload error target " + error.target);
-		myMedia.release();
     }
 
     var options = new FileUploadOptions();
     options.fileKey = "file";
     options.fileName = audioRecord;
-    options.params = { 'devicePlatform': devicePlatform};
 
     var ft = new FileTransfer();
     var realPath;
@@ -129,6 +126,7 @@ var uploadAudio = function () {
 	} else {
 		realPath = cordova.file.externalRootDirectory+audioRecord;  
 	}
+	mostrarMensaje("PAssing");
     ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
 }
 
