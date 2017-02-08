@@ -123,10 +123,10 @@ var uploadAudio = function () {
 	mostrarMensaje("PAssing1");
     var ft = new FileTransfer();
     var realPath;
-	mostrarMensaje("PAssing1-b");
     if(devicePlatform.toUpperCase()=="IOS") {
 		realPath = fileURL;
 	} else {
+		mostrarMensaje("PAssing1-c");
 		realPath = audioRecord;  
 	}
 	mostrarMensaje("PAssing2");
