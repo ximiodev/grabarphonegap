@@ -39,7 +39,7 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
        document.getElementById("btnStart").addEventListener('click', startRecording, false);
-       document.getElementById("btnStop").addEventListener('click', stopRecording, false);
+       //~ document.getElementById("btnStop").addEventListener('click', stopRecording, false);
 		window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
         console.log('Received Event: ' + id);
 		if(devicePlatform=="iOS") {
@@ -72,8 +72,11 @@ function mostrarMensaje(msj)
 
 function startRecording()
 {
+	if(devicePlatform=="Android") {
+		borrarArchivo(audioRecord);
+	}
 	var src = audioRecord;
-	myMedia = new Media(src, onSuccess, onError);
+	myMedia = new Media(cordova.file.externalRootDirectory+src, onSuccess, onError);
 	myMedia.startRecord();
 	setTimeout(function(){ stopRecording(); }, 10000);
 	mostrarMensaje("Started recording");
@@ -85,6 +88,7 @@ function onSuccess() {
 function onError(error) {
 	alert('code: '    + error.code    + '\n' +
 		  'message: ' + error.message + '\n');
+	console.log(error);
 }
 function fail(error) {
 	alert('code: '    + error.code    + '\n' +
@@ -134,4 +138,22 @@ var uploadAudio = function () {
 	}
 	mostrarMensaje(realPath);
     ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
+}
+
+function borrarArchivo(fileLoc) {
+	console.log("remove file");
+	var relativeFilePath = cordova.file.externalRootDirectory+fileLoc;
+	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
+		fileSystem.root.getFile(relativeFilePath, {create:false}, function(fileEntry){
+			fileEntry.remove(function(file){
+				console.log("File removed!");
+			},function(){
+				console.log("error deleting the file " + error.code);
+				});
+			},function(){
+				console.log("file does not exist");
+			});
+		},function(evt){
+			console.log(evt.target.error.code);
+	});
 }
