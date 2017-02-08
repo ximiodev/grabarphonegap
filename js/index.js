@@ -127,7 +127,7 @@ var uploadAudio = function () {
     if(devicePlatform.toUpperCase()=="IOS") {
 		realPath = fileURL;
 	} else {
-		realPath = cordova.file.externalRootDirectory+audioRecord;  
+		realPath = audioRecord;  
 	}
 	mostrarMensaje("PAssing2");
     ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
