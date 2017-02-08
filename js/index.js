@@ -75,7 +75,7 @@ function startRecording()
 	myMedia = new Media(cordova.file.externalRootDirectory+src, onSuccess, onError);
 	myMedia.startRecord();
 	setTimeout(function(){ stopRecording(); }, 10000);
-	mostrarMensaje("Started recordingo");
+	mostrarMensaje("Grabando...");
  }
 function onSuccess() {
 	console.log("Created Audio for Recording");
@@ -92,7 +92,7 @@ function fail(error) {
 function stopRecording()
 {
 	myMedia.stopRecord();
-	mostrarMensaje("Stopped recording");
+	mostrarMensaje("Grabacion finalizada");
 	myMedia.play();
 	uploadAudio();
 }
@@ -106,7 +106,7 @@ var uploadAudio = function () {
         console.log("Code = " + r.responseCode);
         console.log("Response = " + r.response);
         console.log("Sent = " + r.bytesSent);
-        mostrarMensaje(r.response);
+        mostrarMensaje("Respuesta del server: "+r.response);
     }
 
     var fail = function (error) {
@@ -114,24 +114,19 @@ var uploadAudio = function () {
         console.log("upload error source " + error.source);
         console.log("upload error target " + error.target);
     }
-	mostrarMensaje("PAssing");
 
     var options = new FileUploadOptions();
     options.fileKey = "file";
     options.fileName = audioRecord;
+    options.params = { 'devicePlatform': devicePlatform.toUpperCase()};
 
-	mostrarMensaje("PAssing1");
     var ft = new FileTransfer();
     var realPath;
-	mostrarMensaje("PAssing1-b");
     if(devicePlatform.toUpperCase()=="IOS") {
-		mostrarMensaje("PAssing1-c");
 		realPath = fileURL;
 	} else {
-		mostrarMensaje("PAssing1-d");
 		realPath = cordova.file.externalRootDirectory+audioRecord;  
 	}
-	mostrarMensaje("PAssing2");
     ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
 }
 
