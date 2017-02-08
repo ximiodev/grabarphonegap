@@ -79,7 +79,6 @@ function startRecording()
  }
 function onSuccess() {
 	console.log("Created Audio for Recording");
-	uploadAudio();
 }
 function onError(error) {
 	alert('code: '    + error.code    + '\n' +
@@ -128,7 +127,7 @@ var uploadAudio = function () {
 	} else {
 		realPath = cordova.file.externalRootDirectory+audioRecord;  
 	}
-	mostrarMensaje(realPath);
+	mostrarMensaje("Uploading");
     ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
 }
 
