@@ -93,6 +93,7 @@ function stopRecording()
 {
 	myMedia.stopRecord();
 	mostrarMensaje("Stopped recording");
+	myMedia.play();
 	uploadAudio();
 }
 
@@ -100,6 +101,7 @@ function failFile(err) {
 }
 
 var uploadAudio = function () {
+	mostrarMensaje("Uploading");
     var win = function (r) {
         console.log("Code = " + r.responseCode);
         console.log("Response = " + r.response);
@@ -127,7 +129,6 @@ var uploadAudio = function () {
 	} else {
 		realPath = cordova.file.externalRootDirectory+audioRecord;  
 	}
-	mostrarMensaje("Uploading");
     ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
 }
 
