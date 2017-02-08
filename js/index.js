@@ -121,8 +121,8 @@ var uploadAudio = function () {
     options.params = { 'devicePlatform': devicePlatform};
 
     var ft = new FileTransfer();
-    var realPath
-    if(devicePlatformtoUpperCase()=="IOS") {
+    var realPath;
+    if(devicePlatform.toUpperCase()=="IOS") {
 		realPath = fileURL;
 	} else {
 		realPath = cordova.file.externalRootDirectory+audioRecord;  
