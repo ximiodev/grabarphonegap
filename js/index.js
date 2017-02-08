@@ -45,7 +45,7 @@ var app = {
         console.log('Received Event: ' + id);
         devicePlatform = device.platform;
         mostrarMensaje("dispositivo:"+devicePlatform);
-		if(devicePlatform=="iOS") {
+		if(devicePlatform.toUpperCase()=="IOS") {
 			audioRecord = 'record.wav';
 		} else {
 			audioRecord = 'record.arm';
@@ -77,7 +77,7 @@ function startRecording()
 {
 	devicePlatform = device.platform;
 	mostrarMensaje("dispositivo:"+devicePlatform);
-	if(devicePlatform=="Android") {
+	if(devicePlatform=="ANDROID") {
 		borrarArchivo(audioRecord);
 	}
 	var src = audioRecord;
@@ -135,7 +135,7 @@ var uploadAudio = function () {
 
     var ft = new FileTransfer();
     var realPath
-    if(devicePlatform=="iOS") {
+    if(devicePlatformtoUpperCase()=="IOS") {
 		realPath = fileURL;
 	} else {
 		realPath = cordova.file.externalRootDirectory+audioRecord;  
