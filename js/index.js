@@ -119,10 +119,6 @@ var uploadAudio = function () {
     options.fileKey = "file";
     options.fileName = audioRecord;
     options.params = { 'devicePlatform': devicePlatform};
-    options.chunkedMode = false;
-	options.headers = {
-		Connection: "close"
-	};
 
     var ft = new FileTransfer();
     var realPath
