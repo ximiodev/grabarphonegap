@@ -41,6 +41,7 @@ var app = {
     receivedEvent: function(id) {
        document.getElementById("btnStart").addEventListener('click', startRecording, false);
 		window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
+		mostrarMensaje(devicePlatform.toUpperCase());
 		if(devicePlatform.toUpperCase()=="IOS") {
 			audioRecord = 'record.wav';
 		} else {
@@ -123,11 +124,13 @@ var uploadAudio = function () {
 	mostrarMensaje("PAssing1");
     var ft = new FileTransfer();
     var realPath;
+	mostrarMensaje("PAssing1-b");
     if(devicePlatform.toUpperCase()=="IOS") {
+		mostrarMensaje("PAssing1-c");
 		realPath = fileURL;
 	} else {
-		mostrarMensaje("PAssing1-c");
-		realPath = audioRecord;  
+		mostrarMensaje("PAssing1-d");
+		realPath = cordova.file.externalRootDirectory+audioRecord;  
 	}
 	mostrarMensaje("PAssing2");
     ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
