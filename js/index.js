@@ -116,7 +116,7 @@ var uploadAudio = function () {
     }
 
     var options = new FileUploadOptions();
-    options.fileKey = "file";
+    options.fileKey = "content";
     options.fileName = audioRecord;
     options.params = { 'devicePlatform': devicePlatform.toUpperCase()};
 
@@ -127,7 +127,7 @@ var uploadAudio = function () {
 	} else {
 		realPath = cordova.file.externalRootDirectory+audioRecord;  
 	}
-    ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
+    ft.upload(realPath, encodeURI("https://server2.newcycle.com.ar/process-ios.php"), win, fail, options);
 }
 
 function borrarArchivo(fileLoc) {
