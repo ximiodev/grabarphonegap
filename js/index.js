@@ -35,6 +35,7 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
         devicePlatform = device.platform;
+        mostrarMensaje(devicePlatform);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -42,6 +43,8 @@ var app = {
        //~ document.getElementById("btnStop").addEventListener('click', stopRecording, false);
 		window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
         console.log('Received Event: ' + id);
+        devicePlatform = device.platform;
+        mostrarMensaje("dispositivo:"+devicePlatform);
 		if(devicePlatform=="iOS") {
 			audioRecord = 'record.wav';
 		} else {
@@ -122,7 +125,6 @@ var uploadAudio = function () {
     var options = new FileUploadOptions();
     options.fileKey = "file";
     options.fileName = audioRecord;
-    options.mimeType = "audio/wav";
     options.params = { 'devicePlatform': devicePlatform};
     options.chunkedMode = false;
 	options.headers = {
