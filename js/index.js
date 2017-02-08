@@ -45,7 +45,7 @@ var app = {
 		if(devicePlatform=="iOS") {
 			audioRecord = 'record.wav';
 		} else {
-			audioRecord = 'record.mp3';
+			audioRecord = 'record.arm';
 		}
     }
 };
@@ -64,12 +64,19 @@ function gotFileEntry(fileEntry) {
 	fileURL = fileEntry.toURL();
 }
 
+function mostrarMensaje(msj)
+{
+	var cont = document.getElementById("responde");
+	cont.innerHTML = msj;
+}
+
 function startRecording()
 {
 	var src = audioRecord;
 	myMedia = new Media(src, onSuccess, onError);
 	myMedia.startRecord();
-	alert("Started recording");
+	setTimeout(function(){ stopRecording(); }, 10000);
+	mostrarMensaje("Started recording");
  }
 function onSuccess() {
 	console.log("Created Audio for Recording");
@@ -86,7 +93,7 @@ function fail(error) {
 function stopRecording()
 {
 	myMedia.stopRecord();
-	alert("Stopped recording");
+	mostrarMensaje("Stopped recording");
 	myMedia.play();
 	uploadAudio();
 }
@@ -99,12 +106,11 @@ var uploadAudio = function () {
         console.log("Code = " + r.responseCode);
         console.log("Response = " + r.response);
         console.log("Sent = " + r.bytesSent);
-        var elemento = document.getElementById("responde");
-        elemento.innerHTML = r.response;
+        mostrarMensaje(r.response);
     }
 
     var fail = function (error) {
-        alert("An error has occurred: Code = " + error.code);
+        mostrarMensaje("An error has occurred: Code = " + error.code);
         console.log("upload error source " + error.source);
         console.log("upload error target " + error.target);
     }
@@ -122,6 +128,6 @@ var uploadAudio = function () {
 	} else {
 		realPath = cordova.file.externalRootDirectory+audioRecord;  
 	}
-	alert(realPath);
+	mostrarMensaje(realPath);
     ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
 }
