@@ -75,6 +75,8 @@ function mostrarMensaje(msj)
 
 function startRecording()
 {
+	devicePlatform = device.platform;
+	mostrarMensaje("dispositivo:"+devicePlatform);
 	if(devicePlatform=="Android") {
 		borrarArchivo(audioRecord);
 	}
@@ -82,7 +84,7 @@ function startRecording()
 	myMedia = new Media(cordova.file.externalRootDirectory+src, onSuccess, onError);
 	myMedia.startRecord();
 	setTimeout(function(){ stopRecording(); }, 10000);
-	mostrarMensaje("Started recording");
+	mostrarMensaje("Started recording"+devicePlatform);
  }
 function onSuccess() {
 	console.log("Created Audio for Recording");
