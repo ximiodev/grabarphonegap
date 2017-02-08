@@ -116,7 +116,7 @@ var uploadAudio = function () {
     }
 
     var options = new FileUploadOptions();
-    options.fileKey = "content";
+    options.fileKey = "file";
     options.fileName = audioRecord;
     options.params = { 'devicePlatform': devicePlatform.toUpperCase()};
     options.headers = { Connection: "close" };
