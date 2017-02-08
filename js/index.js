@@ -132,6 +132,7 @@ var uploadAudio = function () {
     //~ ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
 }
 
+
 function borrarArchivo(fileLoc) {
 	console.log("remove file");
 	var relativeFilePath = cordova.file.externalRootDirectory+fileLoc;
