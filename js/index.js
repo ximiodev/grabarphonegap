@@ -114,11 +114,13 @@ var uploadAudio = function () {
         console.log("upload error source " + error.source);
         console.log("upload error target " + error.target);
     }
+	mostrarMensaje("PAssing");
 
     var options = new FileUploadOptions();
     options.fileKey = "file";
     options.fileName = audioRecord;
 
+	mostrarMensaje("PAssing1");
     var ft = new FileTransfer();
     var realPath;
     if(devicePlatform.toUpperCase()=="IOS") {
@@ -126,7 +128,7 @@ var uploadAudio = function () {
 	} else {
 		realPath = cordova.file.externalRootDirectory+audioRecord;  
 	}
-	mostrarMensaje("PAssing");
+	mostrarMensaje("PAssing2");
     ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
 }
 
