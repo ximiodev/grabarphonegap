@@ -94,7 +94,6 @@ function stopRecording()
 {
 	myMedia.stopRecord();
 	mostrarMensaje("Stopped recording");
-	myMedia.release();
 	uploadAudio();
 }
 
@@ -107,12 +106,14 @@ var uploadAudio = function () {
         console.log("Response = " + r.response);
         console.log("Sent = " + r.bytesSent);
         mostrarMensaje(r.response);
+		myMedia.release();
     }
 
     var fail = function (error) {
         mostrarMensaje("An error has occurred: Code = " + error.code);
         console.log("upload error source " + error.source);
         console.log("upload error target " + error.target);
+		myMedia.release();
     }
 
     var options = new FileUploadOptions();
