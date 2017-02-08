@@ -123,6 +123,7 @@ var uploadAudio = function () {
 	mostrarMensaje("PAssing1");
     var ft = new FileTransfer();
     var realPath;
+	mostrarMensaje("PAssing1-b");
     if(devicePlatform.toUpperCase()=="IOS") {
 		realPath = fileURL;
 	} else {
