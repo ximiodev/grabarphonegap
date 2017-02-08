@@ -40,7 +40,7 @@ var app = {
        document.getElementById("btnStart").addEventListener('click', startRecording, false);
 		window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
         devicePlatform = device.platform;
-		mostrarMensaje(devicePlatform.toUpperCase());
+		mostrarMensaje("so: "+devicePlatform.toUpperCase());
 		if(devicePlatform.toUpperCase()=="IOS") {
 			audioRecord = 'record.wav';
 		} else {
