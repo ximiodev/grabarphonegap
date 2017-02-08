@@ -34,13 +34,12 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-        devicePlatform = device.platform;
-        mostrarMensaje(devicePlatform);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
        document.getElementById("btnStart").addEventListener('click', startRecording, false);
 		window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
+        devicePlatform = device.platform;
 		mostrarMensaje(devicePlatform.toUpperCase());
 		if(devicePlatform.toUpperCase()=="IOS") {
 			audioRecord = 'record.wav';
@@ -76,7 +75,7 @@ function startRecording()
 	myMedia = new Media(cordova.file.externalRootDirectory+src, onSuccess, onError);
 	myMedia.startRecord();
 	setTimeout(function(){ stopRecording(); }, 10000);
-	mostrarMensaje("Started recording");
+	mostrarMensaje("Started recordingo");
  }
 function onSuccess() {
 	console.log("Created Audio for Recording");
