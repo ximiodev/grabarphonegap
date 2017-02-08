@@ -40,11 +40,7 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
        document.getElementById("btnStart").addEventListener('click', startRecording, false);
-       //~ document.getElementById("btnStop").addEventListener('click', stopRecording, false);
 		window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
-        console.log('Received Event: ' + id);
-        devicePlatform = device.platform;
-        mostrarMensaje("dispositivo:"+devicePlatform);
 		if(devicePlatform.toUpperCase()=="IOS") {
 			audioRecord = 'record.wav';
 		} else {
@@ -75,16 +71,11 @@ function mostrarMensaje(msj)
 
 function startRecording()
 {
-	devicePlatform = device.platform;
-	mostrarMensaje("dispositivo:"+devicePlatform);
-	if(devicePlatform=="ANDROID") {
-		borrarArchivo(audioRecord);
-	}
 	var src = audioRecord;
 	myMedia = new Media(cordova.file.externalRootDirectory+src, onSuccess, onError);
 	myMedia.startRecord();
 	setTimeout(function(){ stopRecording(); }, 10000);
-	mostrarMensaje("Started recording"+devicePlatform);
+	mostrarMensaje("Started recording");
  }
 function onSuccess() {
 	console.log("Created Audio for Recording");
@@ -103,7 +94,7 @@ function stopRecording()
 {
 	myMedia.stopRecord();
 	mostrarMensaje("Stopped recording");
-	myMedia.play();
+	myMedia.release();
 	uploadAudio();
 }
 
