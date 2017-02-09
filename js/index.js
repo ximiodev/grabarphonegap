@@ -44,7 +44,7 @@ var app = {
 		if(devicePlatform.toUpperCase()=="IOS") {
 			audioRecord = 'record.wav';
 		} else {
-			audioRecord = 'record.arm';
+			audioRecord = cordova.file.externalRootDirectory+'record.arm';
 		}
     }
 };
@@ -72,7 +72,7 @@ function mostrarMensaje(msj)
 function startRecording()
 {
 	var src = audioRecord;
-	myMedia = new Media(cordova.file.externalRootDirectory+src, onSuccess, onError);
+	myMedia = new Media(src, onSuccess, onError);
 	myMedia.startRecord();
 	setTimeout(function(){ stopRecording(); }, 10000);
 	mostrarMensaje("Grabando...");
