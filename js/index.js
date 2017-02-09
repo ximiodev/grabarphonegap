@@ -107,6 +107,7 @@ var uploadAudio = function () {
         console.log("Response = " + r.response);
         console.log("Sent = " + r.bytesSent);
         mostrarMensaje("Respuesta del server: "+r.response);
+        alert(r.response);
     }
 
     var fail = function (error) {
@@ -128,8 +129,8 @@ var uploadAudio = function () {
 	} else {
 		realPath = cordova.file.externalRootDirectory+audioRecord;  
 	}
-    ft.upload(realPath, encodeURI("http://server2.newcycle.com.ar/process-ios.php"), win, fail, options);
-    //~ ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
+    //~ ft.upload(realPath, encodeURI("http://server2.newcycle.com.ar/process-ios.php"), win, fail, options);
+    ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
 }
 
 
