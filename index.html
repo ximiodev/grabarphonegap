@@ -531,16 +531,16 @@
                         <img id="sec5-1-title" src="imgs/sec5_1-title.png" />
                     </div>
                     <div class="col-md-12 col-xs-12 mt-5 pw-10">
-                        <div class="blue-gradient-small btn-lyric" _id="1" mp3="bases/crash.mp3" base="crash">NO PARA DE TRABAJAR O ESTUDIAR.</div>
+                        <div class="blue-gradient-small btn-lyric" _id="1" mp3="/android_asset/www/bases/crash.mp3" base="crash">NO PARA DE TRABAJAR O ESTUDIAR.</div>
                     </div>
                     <div class="col-md-12 col-xs-12 mt-5 pw-10">
-                        <div class="blue-gradient-small btn-lyric" _id="2" mp3="bases/fine.mp3" base="fine">ESTÁ DE NOVIO/A TODO EL TIEMPO.</div>
+                        <div class="blue-gradient-small btn-lyric" _id="2" mp3="/android_asset/www/bases/fine.mp3" base="fine">ESTÁ DE NOVIO/A TODO EL TIEMPO.</div>
                     </div>
                     <div class="col-md-12 col-xs-12 mt-5 pw-10">
-                        <div class="blue-gradient-small btn-lyric" _id="3" mp3="bases/ice.mp3" base="ice">PONE LAS PEORES EXCUSAS DEL MUNDO.</div>
+                        <div class="blue-gradient-small btn-lyric" _id="3" mp3="/android_asset/www/bases/ice.mp3" base="ice">PONE LAS PEORES EXCUSAS DEL MUNDO.</div>
                     </div>
                     <div class="col-md-12 col-xs-12 mt-5 pw-10">
-                        <div class="blue-gradient-small btn-lyric" _id="4" mp3="bases/pam.mp3" base="rap" _base="pam">CANCELA SIEMPRE A ÚLTIMO MOMENTO.</div>
+                        <div class="blue-gradient-small btn-lyric" _id="4" mp3="/android_asset/www/bases/pam.mp3" base="rap" _base="pam">CANCELA SIEMPRE A ÚLTIMO MOMENTO.</div>
                     </div>
 
                     <div class="col-md-12 col-xs-12 mt-15 pw-10">
@@ -563,7 +563,7 @@
                     <div class="col-md-12 col-xs-12 pw-15">
                         <div class="row mt-10">
                             <div class="col-md-3 col-xs-3">
-                                <div class="play-btn" mp3="bases/crash.mp3" _id="1" base="crash"></div>
+                                <div class="play-btn" mp3="/android_asset/www/bases/crash.mp3" _id="1" base="crash"></div>
                             </div>
                             <div class="col-md-6 col-xs-6">
                                 <div class="sound-name">CRASH</div>
@@ -576,7 +576,7 @@
                         </div>
                         <div class="row mt-10">
                             <div class="col-md-3 col-xs-3">
-                                <div class="play-btn" mp3="bases/fine.mp3" _id="2" base="fine"></div>
+                                <div class="play-btn" mp3="/android_asset/www/bases/fine.mp3" _id="2" base="fine"></div>
                             </div>
                             <div class="col-md-6 col-xs-6">
                                 <div class="sound-name">FINE</div>
@@ -589,7 +589,7 @@
                         </div>
                         <div class="row mt-10">
                             <div class="col-md-3 col-xs-3">
-                                <div class="play-btn" mp3="bases/ice.mp3" _id="3" base="ice"></div>
+                                <div class="play-btn" mp3="/android_asset/www/bases/ice.mp3" _id="3" base="ice"></div>
                             </div>
                             <div class="col-md-6 col-xs-6">
                                 <div class="sound-name">ICE SUMER</div>
@@ -602,7 +602,7 @@
                         </div>
                         <div class="row mt-10">
                             <div class="col-md-3 col-xs-3">
-                                <div class="play-btn" mp3="bases/pam.mp3" _id="4" base="pam"></div>
+                                <div class="play-btn" mp3="/android_asset/www/bases/pam.mp3" _id="4" base="pam"></div>
                             </div>
                             <div class="col-md-6 col-xs-6">
                                 <div class="sound-name">PAM DEMBOW</div>
@@ -615,7 +615,7 @@
                         </div>
                         <div class="row mt-10">
                             <div class="col-md-3 col-xs-3">
-                                <div class="play-btn" mp3="bases/rap.mp3" _id="5" base="rap"></div>
+                                <div class="play-btn" mp3="/android_asset/www/bases/rap.mp3" _id="5" base="rap"></div>
                             </div>
                             <div class="col-md-6 col-xs-6">
                                 <div class="sound-name">RAP TIME</div>
@@ -1767,8 +1767,8 @@
             if ($(this).hasClass('active')) {
                 if (isPlaying) {
                     isPlaying = false;
-                    audio.pause();
-                    audio.currentTime = 0;
+                    //~ audio.pause();
+                    //~ audio.currentTime = 0;
                     $('#sec6-1-title').css({"display":"block"});
                     $('#subtitles').css({"display":"none"});
                 }
@@ -1778,8 +1778,8 @@
                 $('#subtitles').css({"display":"block"});
                 if (isPlaying) {
                     isPlaying = false;
-                    audio.pause();
-                    audio.currentTime = 0;
+                    //~ audio.pause();
+                    //~ audio.currentTime = 0;
                     $('#sec6-1-title').css({"display":"block"});
                     $('#subtitles').css({"display":"none"});
                 }
@@ -1792,34 +1792,39 @@
                 
                 
                 
-                actx = new(window.AudioContext || window.webkitAudioContext)();
-                audio = actx.createBufferSource();
-                analyser = actx.createAnalyser();
+                //~ actx = new(window.AudioContext || window.webkitAudioContext)();
+                //~ audio = actx.createBufferSource();
+                //~ analyser = actx.createAnalyser();
                 playing = false;
                 
 
-                analyser.fftSize = 32;
-                actx.smoothingConstant = 20;
-                audio.connect(analyser);
-                analyser.connect(actx.destination);
+                //~ analyser.fftSize = 32;
+                //~ actx.smoothingConstant = 20;
+                //~ audio.connect(analyser);
+                //~ analyser.connect(actx.destination);
 
-                var req = new XMLHttpRequest();
-                req.open('GET', 'bases/'+base+'.mp3', true);
-                req.responseType = 'arraybuffer';
+                //~ var req = new XMLHttpRequest();
+                //~ req.open('GET', '/android_asset/www/bases/'+base+'.mp3', true);
+                //~ req.responseType = 'arraybuffer';
 
-                req.onload = function() {
-                    actx.decodeAudioData(req.response, function(buffer) {
-                        console.log('received');
-                        audio.buffer = buffer;
-                        audio.start(0);
-                        playing = true;
-                        requestAnimationFrame(updateVisualizer);
-                    });
-                };
-                req.send();
+                //~ req.onload = function() {
+                    //~ actx.decodeAudioData(req.response, function(buffer) {
+                        //~ console.log('received');
+                        //~ audio.buffer = buffer;
+                        //~ audio.start(0);
+                        //~ playing = true;
+                        //~ requestAnimationFrame(updateVisualizer);
+                    //~ });
+                //~ };
+                //~ req.send();
 
-                audio.addEventListener("ended", audioEnded);
-                
+                //~ audio.addEventListener("ended", audioEnded);
+                audio = new Media('bases/'+base+'.mp3',
+							// success callback
+							 function () { console.log("playAudio():Audio Success"); },
+							// error callback
+							 function (err) { console.log("playAudio():Audio Error: " + err); }
+					);
                 createSubtitle(line);
 
                 isPlaying = true;
@@ -1842,10 +1847,10 @@
             isPlaying = false;
             playing = false;
             
-            audio.removeEventListener('ended',audioEnded);
+            //~ audio.removeEventListener('ended',audioEnded);
             
-            audio.stop();
-            audio.currentTime = 0;
+            //~ audio.stop();
+            //~ audio.currentTime = 0;
             $('#sec6-1-title').css({"display":"block"});
             $('#subtitles').css({"display":"none"});
             $(this).addClass('hidden');
@@ -1863,10 +1868,10 @@
             isPlaying = false;
             playing = false;
             
-            audio.removeEventListener('ended',audioEnded);
+            //~ audio.removeEventListener('ended',audioEnded);
             
-            audio.stop();
-            audio.currentTime = 0;
+            //~ audio.stop();
+            //~ audio.currentTime = 0;
             $(this).addClass('hidden');
             $('#btn-step6-2-grabar').removeClass('hidden');
             $('#btn-step6-2-grabar').removeClass('active');
@@ -1887,18 +1892,18 @@
                 //console.log(actx.currentTime);
                 if(withSubtitles){
                     syncData.forEach(function(element, index, array) {
-                        if (actx.currentTime >= element.start){
-                            if(element.line!=line){
-                                line = element.line;
-                                createSubtitle(line);
-                            }
-                        }
+                        //~ if (actx.currentTime >= element.start){
+                            //~ if(element.line!=line){
+                                //~ line = element.line;
+                                //~ createSubtitle(line);
+                            //~ }
+                        //~ }
                     });
 
                     $('#subtitles span').each(function(){
-                        if (actx.currentTime >= $(this).attr('start')){
-                            $(this).css({"color":"#1e94d2"});
-                        }
+                        //~ if (actx.currentTime >= $(this).attr('start')){
+                            //~ $(this).css({"color":"#1e94d2"});
+                        //~ }
                     });
                 }
                 
@@ -1955,8 +1960,8 @@
             if ($(this).hasClass('active')) {
                 if (isPlaying) {
                     isPlaying = false;
-                    audio.pause();
-                    audio.currentTime = 0;
+                    //~ audio.pause();
+                    //~ audio.currentTime = 0;
                 }
                 $('.play-btn').removeClass('active');
                 $('.record-btn').addClass('hidden');
@@ -1975,11 +1980,16 @@
 
                 if (isPlaying) {
                     isPlaying = false;
-                    audio.pause();
-                    audio.currentTime = 0;
+                    //~ audio.pause();
+                    //~ audio.currentTime = 0;
                 }
 
-                audio = new Audio(mp3);
+                audio = new Media(mp3,
+						// success callback
+						 function () { console.log("playAudio():Audio Success"); },
+						// error callback
+						 function (err) { console.log("playAudio():Audio Error: " + err); }
+				);
 
                 audio.play();
                 isPlaying = true;
@@ -1992,8 +2002,8 @@
             gotoSec('sec6-2');
             if (isPlaying) {
                 isPlaying = false;
-                audio.pause();
-                audio.currentTime = 0;
+                //~ audio.pause();
+                //~ audio.currentTime = 0;
             }
             $('.play-btn').removeClass('active');
             $('.record-btn').addClass('hidden');
@@ -2007,15 +2017,15 @@
             if ($(this).hasClass('active')) {
                 if (isPlaying) {
                     isPlaying = false;
-                    audio.pause();
-                    actx.currentTime = 0;
+                    //~ audio.pause();
+                    //~ actx.currentTime = 0;
                 }
             } else {
                 $(this).addClass('active');
                 if (isPlaying) {
                     isPlaying = false;
-                    audio.pause();
-                    actx.currentTime = 0;
+                    //~ audio.pause();
+                    //~ actx.currentTime = 0;
                 }
                 
                 var html = '';
@@ -2026,34 +2036,39 @@
                 
                 
                 
-                actx = new(window.AudioContext || window.webkitAudioContext)();
-                audio = actx.createBufferSource();
-                analyser = actx.createAnalyser();
+                //~ actx = new(window.AudioContext || window.webkitAudioContext)();
+                //~ audio = actx.createBufferSource();
+                //~ analyser = actx.createAnalyser();
                 playing = false;
                 withSubtitles=false;
 
-                analyser.fftSize = 32;
-                actx.smoothingConstant = 20;
-                audio.connect(analyser);
-                analyser.connect(actx.destination);
+                //~ analyser.fftSize = 32;
+                //~ actx.smoothingConstant = 20;
+                //~ audio.connect(analyser);
+                //~ analyser.connect(actx.destination);
 
-                var req = new XMLHttpRequest();
-                req.open('GET', 'bases/'+base+'.mp3', true);
-                req.responseType = 'arraybuffer';
+                //~ var req = new XMLHttpRequest();
+                //~ req.open('GET', '/android_asset/www/bases/'+base+'.mp3', true);
+                //~ req.responseType = 'arraybuffer';
 
-                req.onload = function() {
-                    actx.decodeAudioData(req.response, function(buffer) {
-                        console.log('received');
-                        audio.buffer = buffer;
-                        audio.start(0);
-                        playing = true;
-                        requestAnimationFrame(updateVisualizer);
-                    });
-                };
-                req.send();
+                //~ req.onload = function() {
+                    //~ actx.decodeAudioData(req.response, function(buffer) {
+                        //~ console.log('received');
+                        //~ audio.buffer = buffer;
+                        //~ audio.start(0);
+                        //~ playing = true;
+                        //~ requestAnimationFrame(updateVisualizer);
+                    //~ });
+                //~ };
+                //~ req.send();
 
-                audio.addEventListener("ended", audioEnded);
-
+                //~ audio.addEventListener("ended", audioEnded);
+				audio = new Media('bases/'+base+'.mp3',
+							// success callback
+							 function () { console.log("playAudio():Audio Success"); },
+							// error callback
+							 function (err) { console.log("playAudio():Audio Error: " + err); }
+					);
                 isPlaying = true;
                 
                 startRecording();
@@ -2072,9 +2087,9 @@
         //~ var recorder;
 
         function startUserMedia(stream) {
-            var input = audio_context.createMediaStreamSource(stream);
-            __log('Media stream created.');
-            __log("input sample rate " + input.context.sampleRate);
+            //~ var input = audio_context.createMediaStreamSource(stream);
+            //~ __log('Media stream created.');
+            //~ __log("input sample rate " + input.context.sampleRate);
 
             // Feedback!
             //input.connect(audio_context.destination);
@@ -2122,27 +2137,27 @@
 	}
 
         window.onload = function init() {
-            try {
-                // webkit shim
-                window.AudioContext = window.AudioContext || window.webkitAudioContext;
-                navigator.getUserMedia = (navigator.getUserMedia ||
-                    navigator.webkitGetUserMedia ||
-                    navigator.mozGetUserMedia ||
-                    navigator.msGetUserMedia);
-                window.URL = window.URL || window.webkitURL;
+            //~ try {
+                //~ // webkit shim
+                //~ window.AudioContext = window.AudioContext || window.webkitAudioContext;
+                //~ navigator.getUserMedia = (navigator.getUserMedia ||
+                    //~ navigator.webkitGetUserMedia ||
+                    //~ navigator.mozGetUserMedia ||
+                    //~ navigator.msGetUserMedia);
+                //~ window.URL = window.URL || window.webkitURL;
 
-                audio_context = new AudioContext;
-                __log('Audio context set up.');
-                __log('navigator.getUserMedia ' + (navigator.getUserMedia ? 'available.' : 'not present!'));
-            } catch (e) {
-                alert('No web audio support in this browser!');
-            }
+                //~ audio_context = new AudioContext;
+                //~ __log('Audio context set up.');
+                //~ __log('navigator.getUserMedia ' + (navigator.getUserMedia ? 'available.' : 'not present!'));
+            //~ } catch (e) {
+                //~ alert('No web audio support in this browser!');
+            //~ }
 
-            navigator.getUserMedia({
+            //~ navigator.getUserMedia({
                 audio: true
-            }, startUserMedia, function(e) {
-                __log('No live audio input: ' + e);
-            });
+            //~ }, startUserMedia, function(e) {
+                //~ __log('No live audio input: ' + e);
+            //~ });
         };
         
         
