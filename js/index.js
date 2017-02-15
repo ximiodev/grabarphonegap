@@ -37,7 +37,7 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-       document.getElementById("btnStart").addEventListener('click', startRecording, false);
+       //~ document.getElementById("btnStart").addEventListener('click', startRecording, false);
 		window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
         devicePlatform = device.platform;
 		mostrarMensaje("so: "+devicePlatform.toUpperCase());
@@ -115,6 +115,7 @@ var uploadAudio = function () {
         console.log("upload error source " + error.source);
         console.log("upload error target " + error.target);
     }
+                showLoader();
 
     var options = new FileUploadOptions();
     options.fileKey = "file";
@@ -130,6 +131,7 @@ var uploadAudio = function () {
 		realPath = cordova.file.externalRootDirectory+audioRecord;  
 	}
     ft.upload(realPath, encodeURI("http://server2.newcycle.com.ar/process-ios.php"), win, fail, options);
+                showLoader();
     //~ ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
 }
 

@@ -1,1 +1,577 @@
-/* Empty. Add your own CSS if you like */
+/*FONTS*/
+@font-face {
+    font-family: "Gobold";
+    src: url('fonts/Gobold Regular.ttf');
+    font-weight: normal;
+}
+
+.hidden{
+    display: none;
+}
+
+.col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xs, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9{
+    padding: 0;
+}
+
+.row{
+    margin: 0;
+}
+
+
+.mt-5{
+    margin-top:5px;
+}
+.mt-10{
+    margin-top:10px;
+}
+.mt-15{
+    margin-top:15px;
+}
+.mt-20{
+    margin-top:20px;
+}
+
+.pl-5{
+    padding-left:5px;
+}
+.pl-10{
+    padding-left:10px;
+}
+.pl-15{
+    padding-left:15px;
+}
+.pl-20{
+    padding-left:20px;
+}
+
+.pr-5{
+    padding-right:5px;
+}
+.pr-10{
+    padding-right:10px;
+}
+.pr-15{
+    padding-right:15px;
+}
+.pr-20{
+    padding-right:20px;
+}
+
+.pw-5{
+    padding-left:5px;
+    padding-right:5px;
+}
+.pw-10{
+    padding-left:10px;
+    padding-right:10px;
+}
+.pw-15{
+    padding-left:15px;
+    padding-right:15px;
+}
+.pw-20{
+    padding-left:20px;
+    padding-right:20px;
+}
+
+
+
+
+/*FLEX*/
+.fb{
+   display: flex;
+}
+.fb-center{
+    justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+.checkbox{
+    
+}
+.checkbox-label{
+    
+}
+
+
+
+body{
+    background-color: #fff;
+    font-family: "Gobold";
+}
+#wraper{
+    position: fixed;
+    top:0;
+    bottom: 0px;
+    right: 0;
+    left: 0;
+    opacity: 0;
+    background-color: #fff;
+    background-image: url(../imgs/sec2-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+#main-header{
+    z-index: 9999;
+    position: fixed;
+    top: -80px;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background-color: rgba(255,255,255,0.6);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+#main-footer{
+    z-index: 9999;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+}
+#footer-copy{
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    height: 100%;
+}
+#footer-beer{
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    height: 150px;
+    pointer-events: none;
+}
+
+
+.section{
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    overflow: auto;
+    display: none;
+    padding-bottom: 70px;
+}
+
+.blue-gradient{
+    border: none;
+    padding: 15px 10px;
+    border-radius: 5px;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#97c0e6+0,1e94d2+46,142950+100 */
+    background: #1e94d2;
+
+}
+.red-gradient{
+    border: none;
+    padding: 15px 10px;
+    border-radius: 5px;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ff3f6a+30,810700+100 */
+    background: #ec1e3f;
+
+}
+
+.blue-gradient-small{
+    border: none;
+    padding: 12px 10px;
+    border-radius: 5px;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    background: #1e94d2;
+    font-size: 14px;
+}
+.blue-title{
+    font-size: 14px;
+    color: #142950;
+    text-align: center;
+}
+
+
+#sec1{
+    display: block;
+}
+#splash-logo{
+text-align: center;
+    width: 100%;
+    margin-top: 50px;
+}
+#splash-logo img{
+        width: 100%;
+    max-width: 270px;
+}
+
+
+
+
+#sec2{
+    background-color: rgba(255,255,255,0.5);
+}
+#sec2-title{
+    color: #142950;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    margin: 100px auto 0;
+    font-size: 25px;
+}
+#sec2 .checkbox {
+    width: 40px!important;
+    height: 40px;
+    padding: 0!important;
+    display: inline-block;
+    vertical-align: middle;
+}
+#sec2 .checkbox span{
+        background-color: #fff;
+    height: 25px;
+    width: 25px;
+    border-radius: 5px;
+    float: left;
+    margin-left: 7.5px;
+    margin-top: 7.5px;
+}
+#sec2 .checkbox.active span{
+    background-image: url(../imgs/check-on.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 80%;
+}
+#sec2 .checkbox-label{
+    color: #fff;
+    font-size: 17px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+#bases-box {
+    position: fixed;
+    z-index: 99999;
+    top: 90px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px 0px;
+    display: none;
+}
+#bases-close {
+        background: rgb(255,255,255);
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,63,106,1) 30%, rgba(129,7,0,1) 100%);
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,63,106,1) 30%,rgba(129,7,0,1) 100%);
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,63,106,1) 30%,rgba(129,7,0,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#810700',GradientType=0 );
+    padding: 5px 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 14px;
+}
+#bases-inner {
+    overflow: auto;
+    height: 100%;
+    text-align: center;
+    padding: 0 20px;
+}
+#bases-title {
+        color: #142950;
+    font-size: 21px;
+    margin-bottom: 20px
+}
+#bases-text {
+        font-family: 'helvetica';
+}
+#btn-step2{
+    width: 150px;
+    margin: 0 auto;
+}
+
+
+
+
+
+
+#sec3{
+    background-color: rgba(255,255,255,0.5);
+}
+#sec3-title{
+    margin: 100px auto 0;
+    width: 100%;
+    max-width: 330px;
+}
+#btn-step3{
+    width: 150px;
+    margin: 30px auto 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+#sec4{
+    background-color: rgba(255,255,255,0.7);
+}
+#sec4-title{
+    margin: 100px auto 0;
+    width: 100%;
+    max-width: 371px;
+}
+#btn-step4{
+    width: 150px;
+    margin: 0 auto;
+}
+#sec4-btn1{
+    background-image: url(../imgs/sec4-btn1-off.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    width: 100%;
+    max-width: 340px;
+    height: 74px;
+}
+#sec4-btn1.active{
+    background-image: url(../imgs/sec4-btn1-on.png);
+}
+#sec4-btn2{
+    background-image: url(../imgs/sec4-btn2-off.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    width: 100%;
+    max-width: 340px;
+    height: 74px;
+}
+#sec4-btn2.active{
+    background-image: url(../imgs/sec4-btn2-on.png);
+}
+
+
+
+
+
+
+
+/*SEC5*/
+#sec5-1{
+    background-color: rgba(255,255,255,0.7);
+}
+#sec5-1-title{
+    margin: 100px auto 0;
+    width: 100%;
+    max-width: 215px;
+    display: block;
+}
+
+.btn-gender {
+    padding: 5px 10px;
+    background-color: #1e94d2;
+    margin: 0 5px;
+    border-radius: 5px;
+}
+.btn-gender.active, .blue-gradient-small.active {
+    background-color: #142950;
+}
+
+
+/*SEC5-2*/
+#sec5-2{
+    background-color: rgba(255,255,255,0.7);
+}
+#sec5-2-title{
+    margin: 100px auto 0;
+    width: 100%;
+    max-width: 215px;
+    display: block;
+}
+.play-btn{
+        background-image: url(../imgs/play-blue.png);
+    background-size: 90%;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 55px;
+    height: 56px;
+}
+.play-btn.active{
+    background-image: url(../imgs/stop-blue.png);
+}
+.sound-name{
+    border-bottom: 2px solid #142950;
+    margin: 12px 0 0;
+    color: #142950;
+}
+.record-btn{
+      background-image: url(../imgs/record-red.png);
+    background-size: 90%;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 55px;
+    height: 56px;
+    position: relative;
+}
+.record-lb{
+    position: absolute;
+    top: -11px;
+    font-size: 11px;
+    left: 10px;
+    color: #ec2c4c;
+}
+
+
+
+/*SEC6-1*/
+#sec6-1{
+    background-color: rgba(255,255,255,0.7);
+}
+#sec6-1-title{
+    margin: 100px auto 0;
+    width: 100%;
+    max-width: 250px;
+    display: block;
+}
+#btn-step6-1-grabar{
+        width: 150px;
+    margin: 15px auto 0;
+}
+#btn-step6-1-regrabar{
+        width: 150px;
+    margin: 0 auto;
+}
+
+#sec6-1-player {
+    padding: 0 10px;
+    position: relative;
+    width: 100%;
+    max-width: 270px;
+    height: 100px;
+}
+#sec6-1-player-bar {
+        height: 4px;
+    border-radius: 10px;
+    background-color: #142950;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 80px;
+    z-index: 2;
+}
+#sec6-1-player-bar-circle {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    width: 12px;
+    height: 12px;
+    background-color: #142950;
+    border-radius: 50%;
+}
+#sec6-1-player-bar-progress {
+    height: 4px;
+    position: absolute;
+    left: 0;
+    width: 0;
+    background-color: #142950;
+}
+
+
+#sec6-1-player-bar.active #sec6-1-player-bar-circle{
+        background-color: #ec2c4c;
+}
+#sec6-1-player-bar.active #sec6-1-player-bar-progress{
+        background-color: #ec2c4c;
+}
+
+
+#sec6-1-player-equelizer {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 1px;
+    z-index: 1;
+}
+#sec6-1-player img {
+    width: 100%;
+}
+
+
+
+
+/*SEC6-2*/
+#sec6-2{
+    background-color: rgba(255,255,255,0.7);
+}
+#sec6-2-title{
+    margin: 100px auto 0;
+    width: 100%;
+    max-width: 250px;
+    display: block;
+}
+#btn-step6-2-grabar{
+        width: 150px;
+    margin: 0 auto;
+}
+#btn-step6-2-regrabar{
+        width: 150px;
+    margin: 0 auto;
+}
+
+
+/*SEC7*/
+#sec7{
+    background-color: rgba(255,255,255,0.7);
+}
+#sec7-title{
+    margin: 100px auto 0;
+    width: 100%;
+    max-width: 250px;
+    display: block;
+}
+#btn-step7-compartir{
+        width: 150px;
+    margin: 0 auto;
+}
+#btn-step7-start{
+        width: 150px;
+    margin: 0 auto;
+}
+
+
+
+
