@@ -71,6 +71,7 @@ function mostrarMensaje(msj)
 
 function startRecording()
 {
+	alert("#asd");
 	var src = audioRecord;
 	myMedia = new Media(src, onSuccess, onError);
 	myMedia.startRecord();
