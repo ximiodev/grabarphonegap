@@ -74,7 +74,6 @@ function startRecording()
 	var src = audioRecord;
 	myMedia = new Media(src, onSuccess, onError);
 	myMedia.startRecord();
-	setTimeout(function(){ stopRecording(); }, 10000);
 	mostrarMensaje("Grabando...");
  }
 function onSuccess() {
@@ -95,6 +94,7 @@ function stopRecording()
 	mostrarMensaje("Grabacion finalizada");
 	myMedia.play();
 	uploadAudio();
+	//createDownloadLink();
 }
 
 function failFile(err) {
@@ -108,6 +108,13 @@ var uploadAudio = function () {
         console.log("Sent = " + r.bytesSent);
         mostrarMensaje("Respuesta del server: "+r.response);
         alert(r.response);
+					
+		$('#btn-step7-compartir').attr('href','https://'+data);
+		
+		hideLoader();
+		gotoSec('sec7');
+		$('#btn-step6-1-grabar').removeClass('active');
+		$('#btn-step6-2-grabar').removeClass('active');
     }
 
     var fail = function (error) {

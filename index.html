@@ -149,6 +149,7 @@
 </head>
 
 <body>
+	<div id="responde"></div>
     <div id="wraper">
         <header id="main-header">
             <img src="imgs/header-logo.png" style="height: 85%;margin: 0 auto;margin-top: 5px;display: block;" />
@@ -531,16 +532,16 @@
                         <img id="sec5-1-title" src="imgs/sec5_1-title.png" />
                     </div>
                     <div class="col-md-12 col-xs-12 mt-5 pw-10">
-                        <div class="blue-gradient-small btn-lyric" _id="1" mp3="/android_asset/www/bases/crash.mp3" base="crash">NO PARA DE TRABAJAR O ESTUDIAR.</div>
+                        <div class="blue-gradient-small btn-lyric" _id="1" mp3="bases/crash.mp3" base="crash">NO PARA DE TRABAJAR O ESTUDIAR.</div>
                     </div>
                     <div class="col-md-12 col-xs-12 mt-5 pw-10">
-                        <div class="blue-gradient-small btn-lyric" _id="2" mp3="/android_asset/www/bases/fine.mp3" base="fine">ESTÁ DE NOVIO/A TODO EL TIEMPO.</div>
+                        <div class="blue-gradient-small btn-lyric" _id="2" mp3="bases/fine.mp3" base="fine">ESTÁ DE NOVIO/A TODO EL TIEMPO.</div>
                     </div>
                     <div class="col-md-12 col-xs-12 mt-5 pw-10">
-                        <div class="blue-gradient-small btn-lyric" _id="3" mp3="/android_asset/www/bases/ice.mp3" base="ice">PONE LAS PEORES EXCUSAS DEL MUNDO.</div>
+                        <div class="blue-gradient-small btn-lyric" _id="3" mp3="bases/ice.mp3" base="ice">PONE LAS PEORES EXCUSAS DEL MUNDO.</div>
                     </div>
                     <div class="col-md-12 col-xs-12 mt-5 pw-10">
-                        <div class="blue-gradient-small btn-lyric" _id="4" mp3="/android_asset/www/bases/pam.mp3" base="rap" _base="pam">CANCELA SIEMPRE A ÚLTIMO MOMENTO.</div>
+                        <div class="blue-gradient-small btn-lyric" _id="4" mp3="bases/pam.mp3" base="rap" _base="pam">CANCELA SIEMPRE A ÚLTIMO MOMENTO.</div>
                     </div>
 
                     <div class="col-md-12 col-xs-12 mt-15 pw-10">
@@ -563,7 +564,7 @@
                     <div class="col-md-12 col-xs-12 pw-15">
                         <div class="row mt-10">
                             <div class="col-md-3 col-xs-3">
-                                <div class="play-btn" mp3="/android_asset/www/bases/crash.mp3" _id="1" base="crash"></div>
+                                <div class="play-btn" mp3="bases/crash.mp3" _id="1" base="crash"></div>
                             </div>
                             <div class="col-md-6 col-xs-6">
                                 <div class="sound-name">CRASH</div>
@@ -576,7 +577,7 @@
                         </div>
                         <div class="row mt-10">
                             <div class="col-md-3 col-xs-3">
-                                <div class="play-btn" mp3="/android_asset/www/bases/fine.mp3" _id="2" base="fine"></div>
+                                <div class="play-btn" mp3="bases/fine.mp3" _id="2" base="fine"></div>
                             </div>
                             <div class="col-md-6 col-xs-6">
                                 <div class="sound-name">FINE</div>
@@ -589,7 +590,7 @@
                         </div>
                         <div class="row mt-10">
                             <div class="col-md-3 col-xs-3">
-                                <div class="play-btn" mp3="/android_asset/www/bases/ice.mp3" _id="3" base="ice"></div>
+                                <div class="play-btn" mp3="bases/ice.mp3" _id="3" base="ice"></div>
                             </div>
                             <div class="col-md-6 col-xs-6">
                                 <div class="sound-name">ICE SUMER</div>
@@ -602,7 +603,7 @@
                         </div>
                         <div class="row mt-10">
                             <div class="col-md-3 col-xs-3">
-                                <div class="play-btn" mp3="/android_asset/www/bases/pam.mp3" _id="4" base="pam"></div>
+                                <div class="play-btn" mp3="bases/pam.mp3" _id="4" base="pam"></div>
                             </div>
                             <div class="col-md-6 col-xs-6">
                                 <div class="sound-name">PAM DEMBOW</div>
@@ -615,7 +616,7 @@
                         </div>
                         <div class="row mt-10">
                             <div class="col-md-3 col-xs-3">
-                                <div class="play-btn" mp3="/android_asset/www/bases/rap.mp3" _id="5" base="rap"></div>
+                                <div class="play-btn" mp3="bases/rap.mp3" _id="5" base="rap"></div>
                             </div>
                             <div class="col-md-6 col-xs-6">
                                 <div class="sound-name">RAP TIME</div>
@@ -1892,18 +1893,33 @@
                 //console.log(actx.currentTime);
                 if(withSubtitles){
                     syncData.forEach(function(element, index, array) {
-                        //~ if (actx.currentTime >= element.start){
-                            //~ if(element.line!=line){
-                                //~ line = element.line;
-                                //~ createSubtitle(line);
-                            //~ }
-                        //~ }
+						audio.getCurrentPosition(
+							// success callback
+							function(position) {
+								
+								if (position >= element.start){
+									if(element.line!=line){
+										line = element.line;
+										createSubtitle(line);
+									}
+								}
+							},
+							// error callback
+							function(e) {
+								console.log("Error getting pos=" + e);
+							}
+						);
                     });
 
                     $('#subtitles span').each(function(){
-                        //~ if (actx.currentTime >= $(this).attr('start')){
-                            //~ $(this).css({"color":"#1e94d2"});
-                        //~ }
+						audio.getCurrentPosition(
+							// success callback
+							function(position) {
+								if (position >= $(this).attr('start')){
+									$(this).css({"color":"#1e94d2"});
+								}
+							}
+						);
                     });
                 }
                 
@@ -2069,6 +2085,8 @@
 							// error callback
 							 function (err) { console.log("playAudio():Audio Error: " + err); }
 					);
+				setTimeout(function(){ stopRecording(); }, (audio.getDuration()*1000));
+				mostrarMensaje("Dura: "+audio.getDuration());
                 isPlaying = true;
                 
                 startRecording();
