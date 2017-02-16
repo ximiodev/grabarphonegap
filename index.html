@@ -2091,11 +2091,22 @@
 								 
 				isPlaying = true;
 				audio.play();
+				timerDur = setInterval(function() {
+					counter = counter + 100;
+					if (counter > 2000) {
+						clearInterval(timerDur);
+					}
+					var dur = my_media.getDuration();
+					if (dur > 0) {
+						clearInterval(timerDur);
+						
+						alert(dur);
+						setTimeout(function(){ stopRecording(); }, (dur*1000));
+						mostrarMensaje("Dura: "+dur);
+						startRecording();
+					}
+				}, 100);
 				
-				alert(audio.getDuration());
-				setTimeout(function(){ stopRecording(); }, (30000));
-				mostrarMensaje("Dura: "+audio.getDuration());
-				startRecording();
             }
             
         });

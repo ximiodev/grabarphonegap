@@ -64,6 +64,7 @@ function onError(error) {
 var fileURL;
 var audioRecord;
 var devicePlatform;
+var timerDur;
 var basePath_pg;
 
 function gotFS(fileSystem) {
