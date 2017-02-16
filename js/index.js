@@ -38,19 +38,33 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
        //~ document.getElementById("btnStart").addEventListener('click', startRecording, false);
-		window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
         devicePlatform = device.platform;
 		mostrarMensaje("so: "+devicePlatform.toUpperCase());
 		if(devicePlatform.toUpperCase()=="IOS") {
 			audioRecord = 'record.wav';
+			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
+			basePath_pg = '';
 		} else {
 			audioRecord = cordova.file.externalRootDirectory+'record.arm';
+			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
+                
+			basePath_pg = '/android_asset/www/';
 		}
     }
 };
+
+function onSuccess(fileSystem) {
+	console.log(fileSystem.name);
+	basePath_pg = fileSystem.name;
+}
+function onError(error) {
+	console.log(error.code);
+}
+
 var fileURL;
 var audioRecord;
 var devicePlatform;
+var basePath_pg;
 
 function gotFS(fileSystem) {
 	fileSystem.root.getFile(audioRecord, {
@@ -136,13 +150,17 @@ var uploadAudio = function () {
     if(devicePlatform.toUpperCase()=="IOS") {
 		realPath = fileURL;
 	} else {
-		realPath = cordova.file.externalRootDirectory+audioRecord;  
+		realPath = audioRecord;  
 	}
     ft.upload(realPath, encodeURI("http://server2.newcycle.com.ar/process-ios.php"), win, fail, options);
                 showLoader();
     //~ ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
 }
 
+function getMediaURL(s) {
+    if(device.platform.toLowerCase() === "android") return "/android_asset/www/" + s;
+    return s;
+}
 
 function borrarArchivo(fileLoc) {
 	console.log("remove file");

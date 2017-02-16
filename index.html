@@ -1820,7 +1820,8 @@
                 //~ req.send();
 
                 //~ audio.addEventListener("ended", audioEnded);
-                audio = new Media('bases/'+base+'.mp3',
+                console.log('1823 bases/'+base+'.mp3');
+                audio = new Media(basePath_pg+'bases/'+base+'.mp3',
 							// success callback
 							 function () { console.log("playAudio():Audio Success"); },
 							// error callback
@@ -1999,12 +2000,12 @@
                     //~ audio.pause();
                     //~ audio.currentTime = 0;
                 }
-
-                audio = new Media(mp3,
+				console.log('2004 '+getMediaURL(mp3));
+                audio = new Media(basePath_pg+mp3,
 						// success callback
 						 function () { console.log("playAudio():Audio Success"); },
 						// error callback
-						 function (err) { console.log("playAudio():Audio Error: " + err); }
+						 function (err) { console.log("playAudio():Audio Error: " + err.code +" "+ err.code); }
 				);
 
                 audio.play();
@@ -2079,11 +2080,11 @@
                 //~ req.send();
 
                 //~ audio.addEventListener("ended", audioEnded);
-				audio = new Media('bases/'+base+'.mp3',
+				audio = new Media(basePath_pg+'bases/'+base+'.mp3',
 							// success callback
 							 function () { console.log("playAudio():Audio Success"); },
 							// error callback
-							 function (err) { console.log("playAudio():Audio Error: " + err); }
+							 function (err) { console.log("playAudio():Audio Error: " + err.code); console.log(err.toSource()); }
 					);
 				setTimeout(function(){ stopRecording(); }, (audio.getDuration()*1000));
 				mostrarMensaje("Dura: "+audio.getDuration());

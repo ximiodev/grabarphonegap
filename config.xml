@@ -169,6 +169,9 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <gap:config-file target="AndroidManifest.xml" parent="/manifest">
+		 <uses-permission android:name="com.sopra.core.permission.READ" />
+	</gap:config-file>
     <platform name="android">
         <allow-intent href="market:*" />
     </platform>
