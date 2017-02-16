@@ -124,7 +124,7 @@ var uploadAudio = function () {
         console.log("Sent = " + r.bytesSent);
         mostrarMensaje("Respuesta del server: "+r.response);
 					
-		$('#btn-step7-compartir').attr('href','https://'+r.response);
+		$('#btn-step7-compartir').attr('href','whatsapp://send?text='+r.response);
 		
 		hideLoader();
 		gotoSec('sec7');
