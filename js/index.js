@@ -115,7 +115,7 @@ function stopRecording()
 
 function failFile(err) {
 }
-
+var urlToshare;
 var uploadAudio = function () {
 	mostrarMensaje("Uploading");
     var win = function (r) {
@@ -125,11 +125,16 @@ var uploadAudio = function () {
         mostrarMensaje("Respuesta del server: "+r.response);
 					
 		$('#btn-step7-compartir').attr('href','whatsapp://send?text='+r.response);
+		urlToshare = r.response;
 		
 		hideLoader();
 		gotoSec('sec7');
 		$('#btn-step6-1-grabar').removeClass('active');
 		$('#btn-step6-2-grabar').removeClass('active');
+		$('#btn-step7-compartir').click(function(e) {
+			e.preventDefault();
+			window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null /* img */, urlToshare /* url */, function() {console.log('share ok')}, function(errormsg){alert(errormsg)})
+		});
     }
 
     var fail = function (error) {
