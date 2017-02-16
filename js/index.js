@@ -87,7 +87,6 @@ function mostrarMensaje(msj)
 
 function startRecording()
 {
-	alert("#asd");
 	var src = audioRecord;
 	myMedia = new Media(src, onSuccess, onError);
 	myMedia.startRecord();
@@ -111,7 +110,7 @@ function stopRecording()
 	mostrarMensaje("Grabacion finalizada");
 	myMedia.play();
 	uploadAudio();
-	//createDownloadLink();
+	
 }
 
 function failFile(err) {
@@ -124,7 +123,6 @@ var uploadAudio = function () {
         console.log("Response = " + r.response);
         console.log("Sent = " + r.bytesSent);
         mostrarMensaje("Respuesta del server: "+r.response);
-        alert(r.response);
 					
 		$('#btn-step7-compartir').attr('href','https://'+data);
 		
@@ -139,7 +137,6 @@ var uploadAudio = function () {
         console.log("upload error source " + error.source);
         console.log("upload error target " + error.target);
     }
-                showLoader();
 
     var options = new FileUploadOptions();
     options.fileKey = "file";
@@ -155,7 +152,7 @@ var uploadAudio = function () {
 		realPath = audioRecord;  
 	}
     ft.upload(realPath, encodeURI("http://server2.newcycle.com.ar/process-ios.php"), win, fail, options);
-                showLoader();
+	showLoader();
     //~ ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
 }
 

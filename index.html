@@ -1534,6 +1534,7 @@
         
         
         function hideLoader() {
+			alert("SALELOADER");
             $('#loader').animate({
                 "opacity": "0"
             }, 500, function() {
@@ -1820,18 +1821,40 @@
                 //~ req.send();
 
                 //~ audio.addEventListener("ended", audioEnded);
-                console.log('1823 bases/'+base+'.mp3');
-                audio = new Media(basePath_pg+'bases/'+base+'.mp3',
-							// success callback
-							 function () { console.log("playAudio():Audio Success"); },
-							// error callback
-							 function (err) { console.log("playAudio():Audio Error: " + err); }
-					);
+                
+                
                 createSubtitle(line);
 
-                isPlaying = true;
+                
+                
+				audio = new Media(basePath_pg+'bases/'+base+'.mp3',
+						// success callback
+						 function () {
+							 console.log("playAudio():Audio Success"); 
+						 },
+						// error callback
+						 function (err) { console.log("playAudio():Audio Error: " + err.code); console.log(err.toSource()); }
+				);
+								 
+				isPlaying = true;
                 withSubtitles=true;
-                startRecording();
+                createSubtitle(line);
+                
+				//~ audio.play();
+				timerDur = setInterval(function() {
+					counter = counter + 100;
+					if (counter > 2000) {
+						clearInterval(timerDur);
+					}
+					var dur = audio.getDuration();
+					mostrarMensaje("Dura: "+dur);
+					if (dur > 0) {
+						clearInterval(timerDur);
+						
+						setTimeout(function(){ stopRecording(); }, (dur*1000));
+						startRecording();
+					}
+				}, 100);
                 
                 
 
@@ -2100,7 +2123,6 @@
 					if (dur > 0) {
 						clearInterval(timerDur);
 						
-						alert(dur);
 						setTimeout(function(){ stopRecording(); }, (dur*1000));
 						startRecording();
 					}
