@@ -27,6 +27,7 @@
 
     <!-- Define a specific version of PhoneGap to build into your app. -->
     <preference name="phonegap-version"       value="cli-5.2.0" />
+
     <!-- Plugins -->
     <!-- Core plugins -->
     <plugin name="cordova-plugin-battery-status"      source="npm" spec="~1.1.1" />
@@ -168,9 +169,6 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
-    <gap:config-file target="AndroidManifest.xml" parent="/manifest">
-		 <uses-permission android:name="com.sopra.core.permission.READ" />
-	</gap:config-file>
     <platform name="android">
         <allow-intent href="market:*" />
     </platform>
