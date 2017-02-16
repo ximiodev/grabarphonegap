@@ -2086,7 +2086,8 @@
 							// error callback
 							 function (err) { console.log("playAudio():Audio Error: " + err.code); console.log(err.toSource()); }
 					);
-				setTimeout(function(){ stopRecording(); }, (audio.getDuration()*1000));
+				alert(audio.getDuration());
+				setTimeout(function(){ stopRecording(); }, (30000));
 				mostrarMensaje("Dura: "+audio.getDuration());
                 isPlaying = true;
                 
