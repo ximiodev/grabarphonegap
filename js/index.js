@@ -167,7 +167,7 @@ var uploadAudio = function () {
 
 function getMediaURL(s) {
     if(device.platform.toLowerCase() === "android") return "/android_asset/www/" + s;
-    return s;
+    return cordova.file.applicationDirectory + 'www/'+s;
 }
 
 function borrarArchivo(fileLoc) {
