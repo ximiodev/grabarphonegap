@@ -1977,8 +1977,8 @@
             if ($(this).hasClass('active')) {
                 if (isPlaying) {
                     isPlaying = false;
-                    //~ audio.pause();
-                    //~ audio.currentTime = 0;
+                    audio.pause();
+                    audio.seekTo(0);
                 }
                 $('.play-btn').removeClass('active');
                 $('.record-btn').addClass('hidden');
@@ -1997,8 +1997,8 @@
 
                 if (isPlaying) {
                     isPlaying = false;
-                    //~ audio.pause();
-                    //~ audio.currentTime = 0;
+                    audio.pause();
+                    audio.seekTo(0);
                 }
 				console.log('2004 '+getMediaURL(mp3));
                 audio = new Media(basePath_pg+mp3,
@@ -2019,8 +2019,8 @@
             gotoSec('sec6-2');
             if (isPlaying) {
                 isPlaying = false;
-                //~ audio.pause();
-                //~ audio.currentTime = 0;
+                audio.pause();
+                audio.seekTo(0);
             }
             $('.play-btn').removeClass('active');
             $('.record-btn').addClass('hidden');
@@ -2034,15 +2034,15 @@
             if ($(this).hasClass('active')) {
                 if (isPlaying) {
                     isPlaying = false;
-                    audio.pause();
-                    //~ actx.currentTime = 0;
+					audio.pause();
+					audio.seekTo(0);
                 }
             } else {
                 $(this).addClass('active');
                 if (isPlaying) {
                     isPlaying = false;
-                    audio.pause();
-                    //~ actx.currentTime = 0;
+					audio.pause();
+					audio.seekTo(0);
                 }
                 
                 var html = '';
@@ -2081,22 +2081,21 @@
 
                 //~ audio.addEventListener("ended", audioEnded);
 				audio = new Media(basePath_pg+'bases/'+base+'.mp3',
-							// success callback
-							 function () {
-								 console.log("playAudio():Audio Success"); 
-												 
-								isPlaying = true;
-								audio.play();
-								
-								alert(audio.getDuration());
-								setTimeout(function(){ stopRecording(); }, (30000));
-								mostrarMensaje("Dura: "+audio.getDuration());
-								startRecording();
-							 },
-							// error callback
-							 function (err) { console.log("playAudio():Audio Error: " + err.code); console.log(err.toSource()); }
-					);
-
+						// success callback
+						 function () {
+							 console.log("playAudio():Audio Success"); 
+						 },
+						// error callback
+						 function (err) { console.log("playAudio():Audio Error: " + err.code); console.log(err.toSource()); }
+				);
+								 
+				isPlaying = true;
+				audio.play();
+				
+				alert(audio.getDuration());
+				setTimeout(function(){ stopRecording(); }, (30000));
+				mostrarMensaje("Dura: "+audio.getDuration());
+				startRecording();
             }
             
         });
