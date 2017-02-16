@@ -2021,12 +2021,12 @@
                     audio.pause();
                     audio.seekTo(0);
                 }
-				console.log('2004 '+getMediaURL(mp3));
+                
                 audio = new Media(basePath_pg+mp3,
 						// success callback
-						 function () { console.log("playAudio():Audio Success"); },
+						 function () { mostrarMensaje("playAudio():Audio Success"); },
 						// error callback
-						 function (err) { console.log("playAudio():Audio Error: " + err.code +" "+ err.code); }
+						 function (err) { mostrarMensaje(basePath_pg+mp3); }
 				);
 
                 audio.play();
@@ -2065,6 +2065,15 @@
 					audio.pause();
 					audio.seekTo(0);
                 }
+				isPlaying = false;
+				audio.pause();
+				audio.seekTo(0);
+				try {
+					clearInterval(timerRe);
+				}
+				catch(err) {
+					
+				}
                 
                 var html = '';
                 for(var i=0;i<16;i++){
@@ -2101,7 +2110,7 @@
                 //~ req.send();
 
                 //~ audio.addEventListener("ended", audioEnded);
-				audio = new Media(basePath_pg+'bases/'+base+'.mp3',
+				audio = new Media(basePath_pg+mp3,
 						// success callback
 						 function () {
 							 console.log("playAudio():Audio Success"); 
@@ -2121,8 +2130,9 @@
 					mostrarMensaje("Dura: "+dur);
 					if (dur > 0) {
 						clearInterval(timerDur);
+					mostrarMensaje("Dura: "+dur);
 						
-						setTimeout(function(){ stopRecording(); }, (dur*1000));
+						timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
 						startRecording();
 					}
 				}, 100);

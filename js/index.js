@@ -71,6 +71,7 @@ var audioRecord;
 var counter;
 var devicePlatform;
 var timerDur;
+var timerRe;
 var basePath_pg;
 
 function gotFS(fileSystem) {
