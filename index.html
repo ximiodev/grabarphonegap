@@ -2020,13 +2020,12 @@
 
                 if (isPlaying) {
                     isPlaying = false;
-                    audio.pause();
-                    audio.seekTo(0);
+					audio.release();
                 }
                 
                 audio = new Media(basePath_pg+mp3,
 						// success callback
-						 function () { mostrarMensaje("playAudio():Audio Success"); },
+						 function () { mostrarMensaje("playAudio():Audio Success"); audio.release();},
 						// error callback
 						 function (err) { mostrarMensaje(basePath_pg+mp3); }
 				);
