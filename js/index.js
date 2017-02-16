@@ -43,7 +43,7 @@ var app = {
 		if(devicePlatform.toUpperCase()=="IOS") {
 			audioRecord = 'record.wav';
 			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
-			basePath_pg = '';
+			basePath_pg = cordova.file.applicationDirectory + 'www/';
 		} else {
 			audioRecord = cordova.file.externalRootDirectory+'record.arm';
 			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
