@@ -40,13 +40,13 @@ var app = {
        //~ document.getElementById("btnStart").addEventListener('click', startRecording, false);
         devicePlatform = device.platform;
 		mostrarMensaje("so: "+devicePlatform.toUpperCase());
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
 		if(devicePlatform.toUpperCase()=="IOS") {
 			audioRecord = 'record.wav';
 			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
 			basePath_pg = getPhoneGapPath();
 		} else {
 			audioRecord = cordova.file.externalRootDirectory+'record.arm';
-			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
                 
 			basePath_pg = '/android_asset/www/';
 		}
