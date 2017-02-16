@@ -108,7 +108,7 @@ function stopRecording()
 {
 	myMedia.stopRecord();
 	mostrarMensaje("Grabacion finalizada");
-	myMedia.play();
+	//~ myMedia.play();
 	uploadAudio();
 	
 }
