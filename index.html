@@ -1768,8 +1768,8 @@
             if ($(this).hasClass('active')) {
                 if (isPlaying) {
                     isPlaying = false;
-                    //~ audio.pause();
-                    //~ audio.currentTime = 0;
+					audio.pause();
+					audio.seekTo(0);
                     $('#sec6-1-title').css({"display":"block"});
                     $('#subtitles').css({"display":"none"});
                 }
@@ -1779,8 +1779,8 @@
                 $('#subtitles').css({"display":"block"});
                 if (isPlaying) {
                     isPlaying = false;
-                    //~ audio.pause();
-                    //~ audio.currentTime = 0;
+					audio.pause();
+					audio.seekTo(0);
                     $('#sec6-1-title').css({"display":"block"});
                     $('#subtitles').css({"display":"none"});
                 }
@@ -1849,10 +1849,10 @@
             isPlaying = false;
             playing = false;
             
-            //~ audio.removeEventListener('ended',audioEnded);
+            clearInterval(timerDur);
             
-            //~ audio.stop();
-            //~ audio.currentTime = 0;
+			audio.pause();
+			audio.seekTo(0);
             $('#sec6-1-title').css({"display":"block"});
             $('#subtitles').css({"display":"none"});
             $(this).addClass('hidden');
@@ -1860,8 +1860,8 @@
             $('#btn-step6-1-grabar').removeClass('active');
             
             
-            recorder && recorder.stop();
-            recorder.clear();
+            //~ recorder && recorder.stop();
+            myMedia.stopRecord();
             
         });
         
@@ -1869,18 +1869,17 @@
         $('#btn-step6-2-regrabar').click(function(){
             isPlaying = false;
             playing = false;
+            clearInterval(timerDur);
             
-            //~ audio.removeEventListener('ended',audioEnded);
-            
-            //~ audio.stop();
-            //~ audio.currentTime = 0;
+			audio.pause();
+			audio.seekTo(0);
             $(this).addClass('hidden');
             $('#btn-step6-2-grabar').removeClass('hidden');
             $('#btn-step6-2-grabar').removeClass('active');
             
             
-            recorder && recorder.stop();
-            recorder.clear();
+            //~ recorder && recorder.stop();
+            myMedia.stopRecord();
             
         });
         
@@ -2097,12 +2096,12 @@
 						clearInterval(timerDur);
 					}
 					var dur = my_media.getDuration();
+					mostrarMensaje("Dura: "+dur);
 					if (dur > 0) {
 						clearInterval(timerDur);
 						
 						alert(dur);
 						setTimeout(function(){ stopRecording(); }, (dur*1000));
-						mostrarMensaje("Dura: "+dur);
 						startRecording();
 					}
 				}, 100);
