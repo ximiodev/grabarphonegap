@@ -63,6 +63,7 @@ function onError(error) {
 
 var fileURL;
 var audioRecord;
+var counter;
 var devicePlatform;
 var timerDur;
 var basePath_pg;
