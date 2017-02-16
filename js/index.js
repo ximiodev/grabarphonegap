@@ -43,7 +43,7 @@ var app = {
 		if(devicePlatform.toUpperCase()=="IOS") {
 			audioRecord = 'record.wav';
 			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
-			basePath_pg = cordova.file.applicationDirectory + 'www/';
+			basePath_pg = getPhoneGapPath();
 		} else {
 			audioRecord = cordova.file.externalRootDirectory+'record.arm';
 			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
@@ -51,6 +51,11 @@ var app = {
 			basePath_pg = '/android_asset/www/';
 		}
     }
+};
+function getPhoneGapPath() {
+   var path = window.location.pathname;
+   path = path.substr( path, path.length - 10 );
+   return path;
 };
 
 function onSuccess(fileSystem) {
