@@ -113,6 +113,10 @@ function stopRecording()
 	
 }
 
+function compartirW() {
+	window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null /* img */, urlToshare /* url */, function() {console.log('share ok')}, function(errormsg){alert(errormsg)})
+}
+
 function failFile(err) {
 }
 var urlToshare;
@@ -133,7 +137,7 @@ var uploadAudio = function () {
 		$('#btn-step6-2-grabar').removeClass('active');
 		$('#btn-step7-compartir').click(function(e) {
 			e.preventDefault();
-			window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null /* img */, urlToshare /* url */, function() {console.log('share ok')}, function(errormsg){alert(errormsg)})
+			window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null /* img */, urlToshare /* url */, function() {console.log('share ok')}, function(errormsg){alert(errormsg)});
 		});
     }
 
