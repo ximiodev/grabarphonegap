@@ -65,7 +65,7 @@ function onSuccess(fileSystem) {
 function onError(error) {
 	console.log(error.code);
 }
-
+var superinterval;
 var recorder = new Object;
 recorder.stop = function() {
   window.plugins.audioRecorderAPI.stop(function(msg) {
@@ -81,11 +81,16 @@ recorder.record = function(seg) {
     // complete 
     //~ alert('ok: ' + msg);
     recorder.playback();
+    clearInterval(superinterval);
 	uploadAudio(msg);
   }, function(msg) {
     // failed 
     alert('ko: ' + msg);
-  }, seg); // record 30 seconds 
+  }, seg); // record 30 seconds
+  
+  
+  
+  superinterval = setInterval(updateVisualizer, 100);
 }
 recorder.playback = function() {
   window.plugins.audioRecorderAPI.playback(function(msg) {
