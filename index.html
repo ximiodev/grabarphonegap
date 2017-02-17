@@ -1823,38 +1823,37 @@
 
                 //~ audio.addEventListener("ended", audioEnded);
                 
-                
+               								 
+				isPlaying = true;
+                withSubtitles=true;
                 createSubtitle(line);
-
                 
-                console.log("Antes de entrar");
-                console.log(basePath_pg+'bases/'+base+'.mp3');
+				
+				//////////////////////////////
+				
 				audio = new Media(basePath_pg+'bases/'+base+'.mp3',
 						// success callback
 						 function () {
 							 console.log("playAudio():Audio Success"); 
 						 },
 						// error callback
-						 function (err) { console.log("playAudidsaasdo():Audio Error: " + err.code); console.log(err.message); }
+						 function (err) { console.log("playAudio():Audio Error: " + err.code); console.log(err.message); }
 				);
 								 
 				isPlaying = true;
-                withSubtitles=true;
-                createSubtitle(line);
-                
-				//~ audio.play();
+				audio.play();
 				timerDur = setInterval(function() {
 					counter = counter + 100;
 					if (counter > 2000) {
 						clearInterval(timerDur);
 					}
 					var dur = audio.getDuration();
-					mostrarMensaje("Dura: "+dur);
 					if (dur > 0) {
 						clearInterval(timerDur);
+						mostrarMensaje("Dura: "+dur);
 						
-						setTimeout(function(){ stopRecording(); }, (dur*1000));
-						startRecording();
+						timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
+						startRecording(dur);
 					}
 				}, 100);
                 
