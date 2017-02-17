@@ -80,7 +80,7 @@ recorder.record = function(seg) {
   window.plugins.audioRecorderAPI.record(function(msg) {
     // complete 
     //~ alert('ok: ' + msg);
-    recorder.playback();
+    //~ recorder.playback();
     clearInterval(superinterval);
 	uploadAudio(msg);
   }, function(msg) {
@@ -176,6 +176,15 @@ var uploadAudio = function (sonido) {
 					
 		$('#btn-step7-compartir').attr('href','whatsapp://send?text='+r.response);
 		urlToshare = r.response;
+		
+		 audio = new Media(r.response,
+				// success callback
+				 function () { mostrarMensaje("playAudio():Audio Success");},
+				// error callback
+				 function (err) { mostrarMensaje(basePath_pg+mp3); }
+		);
+
+		audio.play();
 		
 		hideLoader();
 		gotoSec('sec7');
