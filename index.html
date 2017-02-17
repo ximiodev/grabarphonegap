@@ -1911,19 +1911,21 @@
         
         
         function updateVisualizer() {
-            
+            mostrarMesaje("1914");
             var f = 3;
             if (playing) {
                 //console.log(actx.currentTime);
                 if(withSubtitles){
+					mostrarMesaje("1919");
                     syncData.forEach(function(element, index, array) {
 						audio.getCurrentPosition(
 							// success callback
 							function(position) {
-								
+								mostrarMensaje("pos: "+position);
 								if (position >= element.start){
 									if(element.line!=line){
 										line = element.line;
+										mostrarMesaje("1928: "+element.line);
 										createSubtitle(line);
 									}
 								}
