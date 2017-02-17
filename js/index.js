@@ -44,7 +44,7 @@ var app = {
 		if(devicePlatform.toUpperCase()=="IOS") {
 			audioRecord = 'record.wav';
 			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
-			basePath_pg = '';
+			basePath_pg = getPhoneGapPath();
 		} else {
 			audioRecord = cordova.file.externalRootDirectory+'record.arm';
                 
@@ -60,7 +60,7 @@ function getPhoneGapPath() {
 
 function onSuccess(fileSystem) {
 	console.log(fileSystem.name);
-	basePath_pg = fileSystem.name;
+	//~ basePath_pg2 = fileSystem.name;
 }
 function onError(error) {
 	console.log(error.code);
@@ -73,6 +73,7 @@ var devicePlatform;
 var timerDur;
 var timerRe;
 var basePath_pg;
+var basePath_pg2;
 
 function gotFS(fileSystem) {
 	fileSystem.root.getFile(audioRecord, {
@@ -96,6 +97,7 @@ function startRecording()
 	var src = audioRecord;
 	myMedia = new Media(src, onSuccess, onError);
 	myMedia.startRecord();
+
 	mostrarMensaje("Grabando...");
  }
 function onSuccess() {
