@@ -2043,9 +2043,8 @@
         $('.record-btn').click(function() {
             gotoSec('sec6-2');
             if (isPlaying) {
-                isPlaying = false;
-                audio.pause();
-                audio.seekTo(0);
+                //~ isPlaying = false;
+				//~ audio.release();
             }
             $('.play-btn').removeClass('active');
             $('.record-btn').addClass('hidden');
@@ -2065,8 +2064,8 @@
                 $(this).addClass('active');
                 
                 if (isPlaying) {
-                    isPlaying = false;
-					audio.release();
+                    //~ isPlaying = false;
+					//~ audio.release();
                 }
 				
                 
@@ -2116,7 +2115,7 @@
 				);
 								 
 				isPlaying = true;
-				audio.play();
+				//~ audio.play();
 				timerDur = setInterval(function() {
 					counter = counter + 100;
 					if (counter > 2000) {
