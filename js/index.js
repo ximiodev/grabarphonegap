@@ -44,6 +44,27 @@ var app = {
 		if(devicePlatform.toUpperCase()=="IOS") {
 			audioRecord = 'record.wav';
 			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
+			
+			var AVAudioSessionAdapter = gr.eworx.AVAudioSessionAdapter;
+			var audioSession = new AVAudioSessionAdapter();
+			audioSession.setCategoryWithOptions(
+				AVAudioSessionAdapter.Categories.PLAY_AND_RECORD,
+				AVAudioSessionAdapter.CategoryOptions.MIX_WITH_OTHERS,
+				function() {
+					// Do something on success.
+				}, 
+				function() {
+					// Handle the error.
+				}
+			);
+			audioSession.getCategory(
+				function(category) {
+					// Do something with category value.
+				}
+			);
+			
+			
+			
 			basePath_pg = getPhoneGapPath();
 		} else {
 			audioRecord = cordova.file.externalRootDirectory+'record.arm';

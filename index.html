@@ -508,15 +508,15 @@
 
         <div id="sec4" class="section">
             <div class="container-fluid">
-                <div class="row">
+                <div class="row" style="text-align: center;">
                     <div class="col-md-12 col-xs-12">
                         <img id="sec4-title" src="imgs/sec4-txt.png" />
                     </div>
                     <div class="col-md-12 col-xs-12">
-                        <div id="sec4-btn1"></div>
+                        <div id="sec4-btn1" style="margin: 0 auto;"></div>
                     </div>
                     <div class="col-md-12 col-xs-12">
-                        <div id="sec4-btn2"></div>
+                        <div id="sec4-btn2" style="margin: 0 auto;"></div>
                     </div>
                 </div>
             </div>
@@ -643,7 +643,7 @@
                         <div id="subtitles"></div>
                     </div>
                     <div class="col-md-12 col-xs-12 mt-5 pw-10">
-                        <div id="sec6-1-player">
+                        <div id="sec6-1-player" style="margin: 0 auto;">
                             <div id="sec6-1-player-bar">
                                 <div id="sec6-1-player-bar-circle"></div>
                                 <div id="sec6-1-player-bar-progress"></div>
@@ -669,7 +669,7 @@
                         <img id="sec6-2-title" src="imgs/sec6_2-title.png" />
                     </div>
                     <div class="col-md-12 col-xs-12 mt-5 pw-10">
-                        <div id="sec6-1-player">
+                        <div id="sec6-1-player" style="margin: 0 auto;">
                             <div id="sec6-1-player-bar">
                                 <div id="sec6-1-player-bar-circle"></div>
                                 <div id="sec6-1-player-bar-progress"></div>
@@ -2027,7 +2027,7 @@
                 console.log("2017 "+basePath_pg+mp3);
                 audio = new Media(basePath_pg+mp3,
 						// success callback
-						 function () { mostrarMensaje("playAudio():Audio Success"); audio.release();},
+						 function () { mostrarMensaje("playAudio():Audio Success");},
 						// error callback
 						 function (err) { mostrarMensaje(basePath_pg+mp3); }
 				);
@@ -2043,8 +2043,8 @@
         $('.record-btn').click(function() {
             gotoSec('sec6-2');
             if (isPlaying) {
-                //~ isPlaying = false;
-				//~ audio.release();
+                isPlaying = false;
+				audio.release();
             }
             $('.play-btn').removeClass('active');
             $('.record-btn').addClass('hidden');
@@ -2064,8 +2064,8 @@
                 $(this).addClass('active');
                 
                 if (isPlaying) {
-                    //~ isPlaying = false;
-					//~ audio.release();
+                    isPlaying = false;
+					audio.release();
                 }
 				
                 
@@ -2115,7 +2115,7 @@
 				);
 								 
 				isPlaying = true;
-				//~ audio.play();
+				audio.play();
 				timerDur = setInterval(function() {
 					counter = counter + 100;
 					if (counter > 2000) {
