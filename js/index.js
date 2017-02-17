@@ -71,20 +71,21 @@ recorder.stop = function() {
   window.plugins.audioRecorderAPI.stop(function(msg) {
     // success 
     alert('ok: ' + msg);
-    recorder.playback();
   }, function(msg) {
     // failed 
     alert('ko: ' + msg);
   });
 }
-recorder.record = function() {
+recorder.record = function(seg) {
   window.plugins.audioRecorderAPI.record(function(msg) {
     // complete 
-    alert('ok: ' + msg);
+    //~ alert('ok: ' + msg);
+    recorder.playback();
+	uploadAudio(msg);
   }, function(msg) {
     // failed 
     alert('ko: ' + msg);
-  }, 30); // record 30 seconds 
+  }, seg); // record 30 seconds 
 }
 recorder.playback = function() {
   window.plugins.audioRecorderAPI.playback(function(msg) {
@@ -122,13 +123,13 @@ function mostrarMensaje(msj)
 	cont.innerHTML = msj;
 }
 
-function startRecording()
+function startRecording(duracion)
 {
 	var src = audioRecord;
 	//~ myMedia = new Media(src, onSuccess, onError);
 	//~ myMedia.startRecord();
 	
-	recorder.record();
+	recorder.record(duracion);
 
 	mostrarMensaje("Grabando...");
  }
@@ -160,7 +161,7 @@ function compartirW() {
 function failFile(err) {
 }
 var urlToshare;
-var uploadAudio = function () {
+var uploadAudio = function (sonido) {
 	mostrarMensaje("Uploading");
     var win = function (r) {
         console.log("Code = " + r.responseCode);
@@ -196,7 +197,7 @@ var uploadAudio = function () {
     var ft = new FileTransfer();
     var realPath;
     if(devicePlatform.toUpperCase()=="IOS") {
-		realPath = fileURL;
+		realPath = sonido;
 	} else {
 		realPath = audioRecord;  
 	}
