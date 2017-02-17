@@ -1947,29 +1947,29 @@
                     });
                 }
                 
-                var aData = new Uint8Array(analyser.frequencyBinCount);
-                analyser.getByteFrequencyData(aData);
-                for (var i = 0; i < analyser.fftSize; i++) {
-                    $('#bar-0').height(aData[15] / (f));
-                    $('#bar-1').height(aData[12] / (f));
-                    $('#bar-2').height(aData[11] / (f));
-                    $('#bar-3').height(aData[9] / (f));
-                    $('#bar-4').height(aData[7] / (f));
-                    $('#bar-5').height(aData[5] / (f));
-                    $('#bar-6').height(aData[3] / (f));
-                    $('#bar-7').height(aData[1] / (f));
-                    $('#bar-8').height(aData[0] / (f));
-                    $('#bar-9').height(aData[2] / (f));
-                    $('#bar-10').height(aData[4] / (f));
-                    $('#bar-11').height(aData[6] / (f));
-                    $('#bar-12').height(aData[8] / (f));
-                    $('#bar-13').height(aData[10] / (f));
-                    $('#bar-14').height(aData[12] / (f));
-                    $('#bar-15').height(aData[14] / (f));;
+                //~ var aData = new Uint8Array(analyser.frequencyBinCount);
+                //~ analyser.getByteFrequencyData(aData);
+                //~ for (var i = 0; i < analyser.fftSize; i++) {
+                    //~ $('#bar-0').height(aData[15] / (f));
+                    //~ $('#bar-1').height(aData[12] / (f));
+                    //~ $('#bar-2').height(aData[11] / (f));
+                    //~ $('#bar-3').height(aData[9] / (f));
+                    //~ $('#bar-4').height(aData[7] / (f));
+                    //~ $('#bar-5').height(aData[5] / (f));
+                    //~ $('#bar-6').height(aData[3] / (f));
+                    //~ $('#bar-7').height(aData[1] / (f));
+                    //~ $('#bar-8').height(aData[0] / (f));
+                    //~ $('#bar-9').height(aData[2] / (f));
+                    //~ $('#bar-10').height(aData[4] / (f));
+                    //~ $('#bar-11').height(aData[6] / (f));
+                    //~ $('#bar-12').height(aData[8] / (f));
+                    //~ $('#bar-13').height(aData[10] / (f));
+                    //~ $('#bar-14').height(aData[12] / (f));
+                    //~ $('#bar-15').height(aData[14] / (f));;
 
 
-                }
-                requestAnimationFrame(updateVisualizer);
+                //~ }
+                //~ requestAnimationFrame(updateVisualizer);
             }
             
         }
