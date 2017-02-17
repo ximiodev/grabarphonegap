@@ -118,6 +118,7 @@ function startRecording()
 	var src = audioRecord;
 	myMedia = new Media(src, onSuccess, onError);
 	myMedia.startRecord();
+	audio.play();
 
 	mostrarMensaje("Grabando...");
  }
