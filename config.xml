@@ -26,7 +26,7 @@
     <preference name="deployment-target" value="7.1.2" />
 
     <!-- Define a specific version of PhoneGap to build into your app. -->
-    <preference name="phonegap-version"       value="cli-5.2.0" />
+    <preference name="phonegap-version"       value="cli-6.5.0" />
 
     <!-- Plugins -->
     <!-- Core plugins -->
@@ -45,7 +45,6 @@
     <plugin name="cordova-plugin-globalization"       source="npm" spec="~1.0.3" />
     <plugin name="cordova-plugin-inappbrowser"        source="npm" spec="~1.3.0" />
     <plugin name="cordova-plugin-media"               source="npm"  />
-    <plugin name="cordova-plugin-speechrecognition"               source="npm"  />
     <plugin name="cordova-plugin-network-information" source="npm" spec="~1.2.0" />
     <plugin name="cordova-plugin-splashscreen"        source="npm" spec="~3.2.1" />
     <plugin name="cordova-plugin-statusbar"           source="npm" spec="~2.1.2" />
