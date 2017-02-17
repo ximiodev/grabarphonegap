@@ -44,27 +44,6 @@ var app = {
 		if(devicePlatform.toUpperCase()=="IOS") {
 			audioRecord = 'record.wav';
 			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
-			
-			var AVAudioSessionAdapter = gr.eworx.AVAudioSessionAdapter;
-			var audioSession = new AVAudioSessionAdapter();
-			audioSession.setCategoryWithOptions(
-				AVAudioSessionAdapter.Categories.PLAY_AND_RECORD,
-				AVAudioSessionAdapter.CategoryOptions.MIX_WITH_OTHERS,
-				function() {
-					// Do something on success.
-				}, 
-				function() {
-					// Handle the error.
-				}
-			);
-			audioSession.getCategory(
-				function(category) {
-					// Do something with category value.
-				}
-			);
-			
-			
-			
 			basePath_pg = getPhoneGapPath();
 		} else {
 			audioRecord = cordova.file.externalRootDirectory+'record.arm';
@@ -85,6 +64,36 @@ function onSuccess(fileSystem) {
 }
 function onError(error) {
 	console.log(error.code);
+}
+
+var recorder = new Object;
+recorder.stop = function() {
+  window.plugins.audioRecorderAPI.stop(function(msg) {
+    // success 
+    alert('ok: ' + msg);
+    recorder.playback();
+  }, function(msg) {
+    // failed 
+    alert('ko: ' + msg);
+  });
+}
+recorder.record = function() {
+  window.plugins.audioRecorderAPI.record(function(msg) {
+    // complete 
+    alert('ok: ' + msg);
+  }, function(msg) {
+    // failed 
+    alert('ko: ' + msg);
+  }, 30); // record 30 seconds 
+}
+recorder.playback = function() {
+  window.plugins.audioRecorderAPI.playback(function(msg) {
+    // complete 
+    alert('ok: ' + msg);
+  }, function(msg) {
+    // failed 
+    alert('ko: ' + msg);
+  });
 }
 
 var fileURL;
@@ -116,9 +125,10 @@ function mostrarMensaje(msj)
 function startRecording()
 {
 	var src = audioRecord;
-	myMedia = new Media(src, onSuccess, onError);
-	myMedia.startRecord();
-	audio.play();
+	//~ myMedia = new Media(src, onSuccess, onError);
+	//~ myMedia.startRecord();
+	
+	recorder.record();
 
 	mostrarMensaje("Grabando...");
  }
