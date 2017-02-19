@@ -1907,11 +1907,12 @@
             
         });
         
-        
+        var posic = 0;
         
         
         function updateVisualizer() {
-            mostrarMesaje("1914");
+			posic++;
+            mostrarMesaje(playing+"pasas: "+posic);
             var f = 3;
             if (playing) {
                 //console.log(actx.currentTime);
