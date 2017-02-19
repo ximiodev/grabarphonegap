@@ -89,6 +89,8 @@ recorder.record = function(seg) {
   }, seg); // record 30 seconds
   
   
+  
+  //~ superinterval = setInterval(updateVisualizer, 100);
 }
 recorder.playback = function() {
   window.plugins.audioRecorderAPI.playback(function(msg) {
@@ -128,15 +130,13 @@ function mostrarMensaje(msj)
 
 function startRecording(duracion)
 {
-  
-  superinterval = setInterval(updateVisualizer, 100);
 	var src = audioRecord;
 	//~ myMedia = new Media(src, onSuccess, onError);
 	//~ myMedia.startRecord();
 	
+	mostrarMensaje("Grabando...");
 	recorder.record(duracion);
 
-	mostrarMensaje("Grabando...");
  }
 function onSuccess() {
 	console.log("Created Audio for Recording");

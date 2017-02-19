@@ -1917,36 +1917,36 @@
                 //console.log(actx.currentTime);
                 if(withSubtitles){
 					mostrarMesaje("1919");
-                    syncData.forEach(function(element, index, array) {
-						audio.getCurrentPosition(
-							// success callback
-							function(position) {
-								mostrarMensaje("pos: "+position);
-								if (position >= element.start){
-									if(element.line!=line){
-										line = element.line;
-										mostrarMesaje("1928: "+element.line);
-										createSubtitle(line);
-									}
-								}
-							},
-							// error callback
-							function(e) {
-								console.log("Error getting pos=" + e);
-							}
-						);
-                    });
+                    //~ syncData.forEach(function(element, index, array) {
+						//~ audio.getCurrentPosition(
+							//~ // success callback
+							//~ function(position) {
+								//~ mostrarMensaje("pos: "+position);
+								//~ if (position >= element.start){
+									//~ if(element.line!=line){
+										//~ line = element.line;
+										//~ mostrarMesaje("1928: "+element.line);
+										//~ createSubtitle(line);
+									//~ }
+								//~ }
+							//~ },
+							//~ // error callback
+							//~ function(e) {
+								//~ console.log("Error getting pos=" + e);
+							//~ }
+						//~ );
+                    //~ });
 
-                    $('#subtitles span').each(function(){
-						audio.getCurrentPosition(
-							// success callback
-							function(position) {
-								if (position >= $(this).attr('start')){
-									$(this).css({"color":"#1e94d2"});
-								}
-							}
-						);
-                    });
+                    //~ $('#subtitles span').each(function(){
+						//~ audio.getCurrentPosition(
+							//~ // success callback
+							//~ function(position) {
+								//~ if (position >= $(this).attr('start')){
+									//~ $(this).css({"color":"#1e94d2"});
+								//~ }
+							//~ }
+						//~ );
+                    //~ });
                 }
                 
                 //~ var aData = new Uint8Array(analyser.frequencyBinCount);
