@@ -1857,7 +1857,7 @@
 						timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
 						
 						superinterval = setInterval(function() {
-							actualizarTema();
+							updateVisualizer();
 						},1000);
 						startRecording(dur);
 					}
@@ -1913,7 +1913,49 @@
             
         });
         
+        var ponerPsub = true;
+        var elElemento;
         function updateVisualizer() {
+			try {
+				audio.getCurrentPosition(
+				// success callback
+				function(position) {
+					var f = 3;
+					window.ponerPsub = true;
+					if (isPlaying) {
+						//console.log(actx.currentTime);
+						if(withSubtitles){
+							
+							 syncData.forEach(function(element, index, array) {
+								if (position >= element.start){
+									if(element.line!=line){
+										line = element.line;
+										createSubtitle(line);
+									}
+								}
+							});
+
+							$('#subtitles span').each(function(){
+								if (position >= $(this).attr('start')){
+									$(this).css({"color":"#1e94d2"});
+								}
+							});
+						}
+						
+					}		
+					},
+					// error callback
+					function(e) {
+						console.log("Error getting pos=" + e);
+					}
+				);
+				
+			} catch(err) {
+				console.log(err.message);
+			}
+        }
+        
+        function updateVisualizer_ORG() {
 			posic++;
             mostrarMesaje(isPlaying+"pasas: "+posic);
             var f = 3;
@@ -2133,7 +2175,7 @@
 						
 						timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
 						superinterval = setInterval(function() {
-							actualizarTema();
+							updateVisualizer();
 						},1000);
 						startRecording(dur);
 					}

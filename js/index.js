@@ -82,6 +82,7 @@ recorder.record = function(seg) {
     //~ alert('ok: ' + msg);
     //~ recorder.playback();
     clearInterval(superinterval);
+    alert("Termino de grabar");
 	uploadAudio(msg);
   }, function(msg) {
     // failed 
@@ -97,6 +98,7 @@ recorder.playback = function() {
     alert('ko: ' + msg);
   });
 }
+
 
 var fileURL;
 var audioRecord;
