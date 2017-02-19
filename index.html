@@ -2162,7 +2162,6 @@
 				);
 								 
 				isPlaying = true;
-				audio.play();
 				timerDur = setInterval(function() {
 					counter = counter + 100;
 					if (counter > 2000) {
@@ -2178,6 +2177,7 @@
 							updateVisualizer();
 						},1000);
 						startRecording(dur);
+						audio.play();
 					}
 				}, 100);
 				

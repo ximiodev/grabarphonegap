@@ -80,9 +80,9 @@ recorder.record = function(seg) {
   window.plugins.audioRecorderAPI.record(function(msg) {
     // complete 
     //~ alert('ok: ' + msg);
-    //~ recorder.playback();
+    //~ recorder.playback();s
     clearInterval(superinterval);
-    alert("Termino de grabar");
+    //~ alert("Termino de grabar");
 	uploadAudio(msg);
   }, function(msg) {
     // failed 
@@ -140,7 +140,7 @@ function startRecording(duracion)
 	//~ myMedia = new Media(src, onSuccess, onError);
 	//~ myMedia.startRecord();
 	
-	//~ mostrarMensaje("Grabando...");
+	mostrarMensaje("Grabando...");
 	recorder.record(duracion);
 
  }
