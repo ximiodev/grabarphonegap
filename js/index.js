@@ -80,7 +80,7 @@ recorder.record = function(seg) {
   window.plugins.audioRecorderAPI.record(function(msg) {
     // complete 
     //~ alert('ok: ' + msg);
-    //~ recorder.playback();s
+    recorder.playback();
     clearInterval(superinterval);
     //~ alert("Termino de grabar");
 	uploadAudio(msg);
