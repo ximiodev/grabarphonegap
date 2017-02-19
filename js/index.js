@@ -88,6 +88,11 @@ recorder.record = function(seg) {
     // failed 
     alert('ko: ' + msg);
   }, seg); // record 30 seconds
+	try {
+		audio.play();
+	} catch(err) {
+		console.log(err.message);
+	}
 }
 recorder.playback = function() {
   window.plugins.audioRecorderAPI.playback(function(msg) {

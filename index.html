@@ -2091,7 +2091,7 @@
             gotoSec('sec6-2');
             if (isPlaying) {
                 isPlaying = false;
-				audio.release();
+				//~ audio.release();
             }
             $('.play-btn').removeClass('active');
             $('.record-btn').addClass('hidden');
@@ -2105,14 +2105,14 @@
             if ($(this).hasClass('active')) {
                 if (isPlaying) {
                     isPlaying = false;
-					audio.release();
+					//~ audio.release();
                 }
             } else {
                 $(this).addClass('active');
                 
                 if (isPlaying) {
                     isPlaying = false;
-					audio.release();
+					//~ audio.release();
                 }
 				
                 
@@ -2151,15 +2151,17 @@
                 //~ req.send();
 
                 //~ audio.addEventListener("ended", audioEnded);
-                console.log('2108'+basePath_pg+'bases/'+base+'.mp3');
-				audio = new Media(basePath_pg+'bases/'+base+'.mp3',
-						// success callback
-						 function () {
-							 console.log("playAudio():Audio Success"); 
-						 },
-						// error callback
-						 function (err) { console.log("playAudio():Audio Error: " + err.code); console.log(err.message); }
-				);
+                
+				//~ audio = new Media(basePath_pg+'bases/'+base+'.mp3',
+						//~ // success callback
+						 //~ function () {
+							 //~ console.log("playAudio():Audio Success"); 
+						 //~ },
+						//~ // error callback
+						 //~ function (err) { console.log("playAudio():Audio Error: " + err.code); console.log(err.message); }
+				//~ );
+				
+				audio.seekTo(0);
 								 
 				isPlaying = true;
 				timerDur = setInterval(function() {
@@ -2177,7 +2179,6 @@
 							updateVisualizer();
 						},1000);
 						startRecording(dur);
-						audio.play();
 					}
 				}, 100);
 				
