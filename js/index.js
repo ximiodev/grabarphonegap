@@ -90,7 +90,7 @@ recorder.record = function(seg) {
   
   
   
-  superinterval = setInterval(updateVisualizer, 100);
+  superinterval = setInterval(actualizarTema, 100);
 }
 recorder.playback = function() {
   window.plugins.audioRecorderAPI.playback(function(msg) {
@@ -128,6 +128,14 @@ function mostrarMensaje(msj)
 	cont.innerHTML = msj;
 }
 
+var posic = 0;
+
+
+function actualizarTema() {
+	posic++;
+	mostrarMesaje("pasas: "+posic);
+}
+
 function startRecording(duracion)
 {
 	var src = audioRecord;
@@ -135,7 +143,7 @@ function startRecording(duracion)
 	//~ myMedia.startRecord();
 	
 	mostrarMensaje("Grabando...");
-	updateVisualizer();
+	actualizarTema();
 	recorder.record(duracion);
 
  }

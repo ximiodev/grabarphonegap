@@ -1629,18 +1629,20 @@
 
 
         $('#btn-step2').click(function() {
-            if ($('#terms').hasClass('active')) {
-                userAge = new Date($('#ageYear').val() + '-' + $('#ageMonth').val() + '-' + $('#ageDay').val());
-                console.log(userAge);
-                console.log(_calculateAge(userAge));
-                if (_calculateAge(userAge) >= 18) {
+			
                     gotoSec('sec3');
-                } else {
-                    alert('Debes ser mayor de edad para entrar!');
-                }
-            } else {
-                alert('Debes aceptar los terminos y condiciones!');
-            }
+            //~ if ($('#terms').hasClass('active')) {
+                //~ userAge = new Date($('#ageYear').val() + '-' + $('#ageMonth').val() + '-' + $('#ageDay').val());
+                //~ console.log(userAge);
+                //~ console.log(_calculateAge(userAge));
+                //~ if (_calculateAge(userAge) >= 18) {
+                    //~ gotoSec('sec3');
+                //~ } else {
+                    //~ alert('Debes ser mayor de edad para entrar!');
+                //~ }
+            //~ } else {
+                //~ alert('Debes aceptar los terminos y condiciones!');
+            //~ }
         });
 
         $('#bases').click(function() {
@@ -1906,9 +1908,6 @@
             myMedia.stopRecord();
             
         });
-        
-        var posic = 0;
-        
         
         function updateVisualizer() {
 			posic++;
