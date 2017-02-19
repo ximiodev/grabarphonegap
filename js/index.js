@@ -81,7 +81,7 @@ recorder.record = function(seg) {
     // complete 
     //~ alert('ok: ' + msg);
     //~ recorder.playback();
-    //~ clearInterval(superinterval);
+    clearInterval(superinterval);
 	uploadAudio(msg);
   }, function(msg) {
     // failed 
@@ -90,7 +90,7 @@ recorder.record = function(seg) {
   
   
   
-  //~ superinterval = setInterval(updateVisualizer, 100);
+  superinterval = setInterval(updateVisualizer, 100);
 }
 recorder.playback = function() {
   window.plugins.audioRecorderAPI.playback(function(msg) {
