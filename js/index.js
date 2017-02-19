@@ -81,7 +81,7 @@ recorder.record = function(seg) {
     // complete 
     //~ alert('ok: ' + msg);
     //~ recorder.playback();
-    clearInterval(superinterval);
+    //~ clearInterval(superinterval);
 	uploadAudio(msg);
   }, function(msg) {
     // failed 
@@ -89,8 +89,6 @@ recorder.record = function(seg) {
   }, seg); // record 30 seconds
   
   
-  
-  superinterval = setInterval(updateVisualizer, 100);
 }
 recorder.playback = function() {
   window.plugins.audioRecorderAPI.playback(function(msg) {
@@ -130,6 +128,8 @@ function mostrarMensaje(msj)
 
 function startRecording(duracion)
 {
+  
+  superinterval = setInterval(updateVisualizer, 100);
 	var src = audioRecord;
 	//~ myMedia = new Media(src, onSuccess, onError);
 	//~ myMedia.startRecord();
