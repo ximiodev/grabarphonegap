@@ -135,6 +135,7 @@ function startRecording(duracion)
 	//~ myMedia.startRecord();
 	
 	mostrarMensaje("Grabando...");
+	updateVisualizer();
 	recorder.record(duracion);
 
  }
