@@ -1855,6 +1855,10 @@
 						mostrarMensaje("Dura: "+dur);
 						
 						timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
+						
+						superinterval = setInterval(function() {
+							actualizarTema();
+						},1000);
 						startRecording(dur);
 					}
 				}, 100);
@@ -2128,6 +2132,9 @@
 						mostrarMensaje("Dura: "+dur);
 						
 						timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
+						superinterval = setInterval(function() {
+							actualizarTema();
+						},1000);
 						startRecording(dur);
 					}
 				}, 100);

@@ -87,10 +87,6 @@ recorder.record = function(seg) {
     // failed 
     alert('ko: ' + msg);
   }, seg); // record 30 seconds
-  
-  
-  
-  superinterval = setInterval(actualizarTema, 100);
 }
 recorder.playback = function() {
   window.plugins.audioRecorderAPI.playback(function(msg) {
@@ -142,8 +138,7 @@ function startRecording(duracion)
 	//~ myMedia = new Media(src, onSuccess, onError);
 	//~ myMedia.startRecord();
 	
-	mostrarMensaje("Grabando...");
-	actualizarTema();
+	//~ mostrarMensaje("Grabando...");
 	recorder.record(duracion);
 
  }
