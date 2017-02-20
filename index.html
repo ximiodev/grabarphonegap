@@ -1772,8 +1772,8 @@
             if ($(this).hasClass('active')) {
                 if (isPlaying) {
                     isPlaying = false;
-					//~ audio.pause();
-					//~ audio.seekTo(0);
+					audio.pause();
+					audio.seekTo(0);
                     $('#sec6-1-title').css({"display":"block"});
                     $('#subtitles').css({"display":"none"});
                 }
@@ -1783,8 +1783,8 @@
                 $('#subtitles').css({"display":"block"});
                 if (isPlaying) {
                     isPlaying = false;
-					//~ audio.pause();
-					//~ audio.seekTo(0);
+					audio.pause();
+					audio.seekTo(0);
                     $('#sec6-1-title').css({"display":"block"});
                     $('#subtitles').css({"display":"none"});
                 }
@@ -1842,8 +1842,8 @@
 						 function (err) { console.log("playAudio():Audio Error: " + err.code); console.log(err.message); }
 				);
 								 
-				audio.play();
-				audio.seekTo(0);
+				//~ audio.play();
+				//~ audio.seekTo(0);
 				isPlaying = true;
 				timerDur = setInterval(function() {
 					counter = counter + 100;
@@ -2049,8 +2049,8 @@
             if ($(this).hasClass('active')) {
                 if (isPlaying) {
                     isPlaying = false;
-                    audio.pause();
-                    audio.seekTo(0);
+                    audio.stop();
+                    //~ audio.seekTo(0);
                 }
                 $('.play-btn').removeClass('active');
                 $('.record-btn').addClass('hidden');
@@ -2082,6 +2082,7 @@
 
                 audio.play();
                 mostrarMensaje("play "+basePath_pg+mp3);
+                console.log("play "+basePath_pg+mp3);
                 isPlaying = true;
                 
             }
@@ -2092,7 +2093,8 @@
             gotoSec('sec6-2');
             if (isPlaying) {
                 isPlaying = false;
-				//~ audio.release();
+				audio.pause();
+				console.log("SAD");
             }
             $('.play-btn').removeClass('active');
             $('.record-btn').addClass('hidden');
@@ -2106,14 +2108,14 @@
             if ($(this).hasClass('active')) {
                 if (isPlaying) {
                     isPlaying = false;
-					audio.stop();
+					audio.pause();
                 }
             } else {
                 $(this).addClass('active');
                 
                 if (isPlaying) {
                     isPlaying = false;
-					audio.stop();
+					audio.pause();
                 }
 				
                 
@@ -2130,29 +2132,6 @@
                 //~ analyser = actx.createAnalyser();
                 playing = false;
                 withSubtitles=false;
-
-                //~ analyser.fftSize = 32;
-                //~ actx.smoothingConstant = 20;
-                //~ audio.connect(analyser);
-                //~ analyser.connect(actx.destination);
-
-                //~ var req = new XMLHttpRequest();
-                //~ req.open('GET', '/android_asset/www/bases/'+base+'.mp3', true);
-                //~ req.responseType = 'arraybuffer';
-
-                //~ req.onload = function() {
-                    //~ actx.decodeAudioData(req.response, function(buffer) {
-                        //~ console.log('received');
-                        //~ audio.buffer = buffer;
-                        //~ audio.start(0);
-                        //~ playing = true;
-                        //~ requestAnimationFrame(updateVisualizer);
-                    //~ });
-                //~ };
-                //~ req.send();
-
-                //~ audio.addEventListener("ended", audioEnded);
-                
 								 
 				isPlaying = true;
 				timerDur = setInterval(function() {

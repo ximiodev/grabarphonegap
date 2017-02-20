@@ -89,7 +89,7 @@ recorder.record = function(seg) {
     alert('ko: ' + msg);
   }, seg); // record 30 seconds
 	try {
-		audio.play();
+		console.log("intento");
 	} catch(err) {
 		console.log(err.message);
 	}
@@ -146,17 +146,8 @@ function startRecording(duracion)
 	myMedia.startRecord();
 	
 	mostrarMensaje("Grabando...");
-	//~ recorder.record(duracion);
-
-	audio = new Media(basePath_pg+'bases/'+base+'.mp3',
-			// success callback
-			 function () {
-				 console.log("playAudio():Audio Success"); 
-			 },
-			// error callback
-			 function (err) { console.log("playAudio():Audio Error: " + err.code); console.log(err.message); }
-	);
-	
+	console.log("el otro play");
+	audio.seekTo(0);
 	audio.play();
  }
 function onSuccess() {
@@ -189,6 +180,7 @@ function failFile(err) {
 var urlToshare;
 var uploadAudio = function (sonido) {
 	mostrarMensaje("Uploading");
+	console.log("Uploading");
     var win = function (r) {
         console.log("Code = " + r.responseCode);
         console.log("Response = " + r.response);
@@ -222,7 +214,7 @@ var uploadAudio = function (sonido) {
         console.log("upload error source " + error.source);
         console.log("upload error target " + error.target);
     }
-
+try {
     var options = new FileUploadOptions();
     options.fileKey = "file";
     options.fileName = audioRecord;
@@ -236,8 +228,12 @@ var uploadAudio = function (sonido) {
 	} else {
 		realPath = audioRecord;  
 	}
+	console.log("archivo: "+realPath);
     ft.upload(realPath, encodeURI("http://server2.newcycle.com.ar/process-ios.php"), win, fail, options);
 	showLoader();
+} catch(err) {
+	console.log(err.message);
+}
     //~ ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
 }
 
