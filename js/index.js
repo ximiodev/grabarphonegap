@@ -178,7 +178,7 @@ function compartirW() {
 function failFile(err) {
 }
 var urlToshare;
-var uploadAudio = function (sonido) {
+var uploadAudio = function () {
 	mostrarMensaje("Uploading");
 	console.log("Uploading");
     var win = function (r) {
@@ -224,7 +224,7 @@ try {
     var ft = new FileTransfer();
     var realPath;
     if(devicePlatform.toUpperCase()=="IOS") {
-		realPath = sonido;
+		realPath = fileURL;
 	} else {
 		realPath = audioRecord;  
 	}
