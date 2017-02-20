@@ -1892,6 +1892,7 @@
             
             
             //~ recorder && recorder.stop();
+			mostrarMensaje("Grabacion finalizada antes");
             myMedia.stopRecord();
             
         });
@@ -1922,12 +1923,12 @@
 				// success callback
 				function(position) {
 					var f = 3;
-					var porcen = parseInt((position*100)/duracionDelTema);
-					
-					$('#sec6-1-player-bar-circle').css({left: porcen+'px'});
 					window.ponerPsub = true;
 					if (isPlaying) {
 						//console.log(actx.currentTime);
+						//~ var porcen = parseInt((position*100)/duracionDelTema);
+						
+						$('#sec6-1-player-bar-circle').css({'50px'});
 						if(withSubtitles){
 							mostrarMesaje(isPlaying+"pasas: "+posic);
 							
