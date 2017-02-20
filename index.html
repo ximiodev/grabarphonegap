@@ -1858,7 +1858,7 @@
 						timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
 						
 						superinterval = setInterval(function() {
-							updateVisualizer();
+							//~ updateVisualizer();
 						},1000);
 						startRecording(dur);
 					}
@@ -2049,7 +2049,7 @@
             if ($(this).hasClass('active')) {
                 if (isPlaying) {
                     isPlaying = false;
-                    audio.stop();
+                    audio.pause();
                     //~ audio.seekTo(0);
                 }
                 $('.play-btn').removeClass('active');
@@ -2093,7 +2093,7 @@
             gotoSec('sec6-2');
             if (isPlaying) {
                 isPlaying = false;
-				audio.pause();
+				audio.stop();
 				console.log("SAD");
             }
             $('.play-btn').removeClass('active');
@@ -2146,7 +2146,7 @@
 						
 						timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
 						superinterval = setInterval(function() {
-							updateVisualizer();
+							//~ updateVisualizer();
 						},1000);
 						startRecording(dur);
 					}
