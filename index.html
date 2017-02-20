@@ -1568,7 +1568,7 @@
         var subtitles = document.getElementById("subtitles");
 
         function createSubtitle(n) {
-            console.log('creando linea: '+n);
+            mostrarMensaje('creando linea: '+n);
             $('#subtitles').html('');
             for (var i = 0; i < syncData.length; i++) {
                 if(syncData[i].line == n){
@@ -1858,7 +1858,7 @@
 						timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
 						
 						superinterval = setInterval(function() {
-							//~ updateVisualizer();
+							updateVisualizer();
 						},1000);
 						startRecording(dur);
 					}
@@ -1880,6 +1880,7 @@
             isPlaying = false;
             playing = false;
             
+            clearInterval(superinterval);
             clearInterval(timerDur);
             
 			audio.pause();
@@ -1944,90 +1945,16 @@
 						}
 						
 					}		
-					},
-					// error callback
-					function(e) {
-						console.log("Error getting pos=" + e);
-					}
-				);
+				},
+				// error callback
+				function(e) {
+					console.log("Error getting pos=" + e);
+				});
 				
 			} catch(err) {
 				console.log(err.message);
 			}
         }
-        
-        function updateVisualizer_ORG() {
-			posic++;
-            mostrarMesaje(isPlaying+"pasas: "+posic);
-            var f = 3;
-            if (isPlaying) {
-                //console.log(actx.currentTime);
-                if(withSubtitles){
-					mostrarMesaje("1919");
-                    //~ syncData.forEach(function(element, index, array) {
-						//~ audio.getCurrentPosition(
-							//~ // success callback
-							//~ function(position) {
-								//~ mostrarMensaje("pos: "+position);
-								//~ if (position >= element.start){
-									//~ if(element.line!=line){
-										//~ line = element.line;
-										//~ mostrarMesaje("1928: "+element.line);
-										//~ createSubtitle(line);
-									//~ }
-								//~ }
-							//~ },
-							//~ // error callback
-							//~ function(e) {
-								//~ console.log("Error getting pos=" + e);
-							//~ }
-						//~ );
-                    //~ });
-
-                    //~ $('#subtitles span').each(function(){
-						//~ audio.getCurrentPosition(
-							//~ // success callback
-							//~ function(position) {
-								//~ if (position >= $(this).attr('start')){
-									//~ $(this).css({"color":"#1e94d2"});
-								//~ }
-							//~ }
-						//~ );
-                    //~ });
-                }
-                
-                //~ var aData = new Uint8Array(analyser.frequencyBinCount);
-                //~ analyser.getByteFrequencyData(aData);
-                //~ for (var i = 0; i < analyser.fftSize; i++) {
-                    //~ $('#bar-0').height(aData[15] / (f));
-                    //~ $('#bar-1').height(aData[12] / (f));
-                    //~ $('#bar-2').height(aData[11] / (f));
-                    //~ $('#bar-3').height(aData[9] / (f));
-                    //~ $('#bar-4').height(aData[7] / (f));
-                    //~ $('#bar-5').height(aData[5] / (f));
-                    //~ $('#bar-6').height(aData[3] / (f));
-                    //~ $('#bar-7').height(aData[1] / (f));
-                    //~ $('#bar-8').height(aData[0] / (f));
-                    //~ $('#bar-9').height(aData[2] / (f));
-                    //~ $('#bar-10').height(aData[4] / (f));
-                    //~ $('#bar-11').height(aData[6] / (f));
-                    //~ $('#bar-12').height(aData[8] / (f));
-                    //~ $('#bar-13').height(aData[10] / (f));
-                    //~ $('#bar-14').height(aData[12] / (f));
-                    //~ $('#bar-15').height(aData[14] / (f));;
-
-
-                //~ }
-                //~ requestAnimationFrame(updateVisualizer);
-            }
-            
-        }
-        
-        
-        
-        
-        
-        
         
         
         
