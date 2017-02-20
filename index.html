@@ -1842,9 +1842,9 @@
 						 function (err) { console.log("playAudio():Audio Error: " + err.code); console.log(err.message); }
 				);
 								 
-				isPlaying = true;
-				//~ audio.play();
+				audio.play();
 				audio.seekTo(0);
+				isPlaying = true;
 				timerDur = setInterval(function() {
 					counter = counter + 100;
 					if (counter > 2000) {
@@ -2106,14 +2106,14 @@
             if ($(this).hasClass('active')) {
                 if (isPlaying) {
                     isPlaying = false;
-					//~ audio.release();
+					audio.stop();
                 }
             } else {
                 $(this).addClass('active');
                 
                 if (isPlaying) {
                     isPlaying = false;
-					//~ audio.release();
+					audio.stop();
                 }
 				
                 
@@ -2153,16 +2153,6 @@
 
                 //~ audio.addEventListener("ended", audioEnded);
                 
-				//~ audio = new Media(basePath_pg+'bases/'+base+'.mp3',
-						//~ // success callback
-						 //~ function () {
-							 //~ console.log("playAudio():Audio Success"); 
-						 //~ },
-						//~ // error callback
-						 //~ function (err) { console.log("playAudio():Audio Error: " + err.code); console.log(err.message); }
-				//~ );
-				
-				audio.seekTo(0);
 								 
 				isPlaying = true;
 				timerDur = setInterval(function() {

@@ -142,12 +142,22 @@ function actualizarTema() {
 function startRecording(duracion)
 {
 	var src = audioRecord;
-	//~ myMedia = new Media(src, onSuccess, onError);
-	//~ myMedia.startRecord();
+	myMedia = new Media(src, onSuccess, onError);
+	myMedia.startRecord();
 	
 	mostrarMensaje("Grabando...");
-	recorder.record(duracion);
+	//~ recorder.record(duracion);
 
+	audio = new Media(basePath_pg+'bases/'+base+'.mp3',
+			// success callback
+			 function () {
+				 console.log("playAudio():Audio Success"); 
+			 },
+			// error callback
+			 function (err) { console.log("playAudio():Audio Error: " + err.code); console.log(err.message); }
+	);
+	
+	audio.play();
  }
 function onSuccess() {
 	console.log("Created Audio for Recording");
