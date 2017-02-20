@@ -1856,7 +1856,7 @@
 						mostrarMensaje("Dura: "+dur);
 						
 						timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
-						
+						duracionDelTema = dur;
 						superinterval = setInterval(function() {
 							updateVisualizer();
 						},1000);
@@ -1922,6 +1922,9 @@
 				// success callback
 				function(position) {
 					var f = 3;
+					var porcen = (position*100)/duracionDelTema;
+					
+					$('#sec6-1-player-bar-circle').css({left: parseInt(porcen)+'px'}):
 					window.ponerPsub = true;
 					if (isPlaying) {
 						//console.log(actx.currentTime);

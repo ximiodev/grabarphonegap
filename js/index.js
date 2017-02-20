@@ -132,7 +132,7 @@ function mostrarMensaje(msj)
 }
 
 var posic = 0;
-
+var duracionDelTema;
 
 function actualizarTema() {
 	posic++;
