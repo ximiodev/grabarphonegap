@@ -1568,7 +1568,7 @@
         var subtitles = document.getElementById("subtitles");
 
         function createSubtitle(n) {
-            console.log('creando linea: '+n);
+            mostrarMensaje('creando linea: '+n);
             $('#subtitles').html('');
             for (var i = 0; i < syncData.length; i++) {
                 if(syncData[i].line == n){
@@ -1772,8 +1772,8 @@
             if ($(this).hasClass('active')) {
                 if (isPlaying) {
                     isPlaying = false;
-					//~ audio.pause();
-					//~ audio.seekTo(0);
+					audio.pause();
+					audio.seekTo(0);
                     $('#sec6-1-title').css({"display":"block"});
                     $('#subtitles').css({"display":"none"});
                 }
@@ -1783,8 +1783,8 @@
                 $('#subtitles').css({"display":"block"});
                 if (isPlaying) {
                     isPlaying = false;
-					//~ audio.pause();
-					//~ audio.seekTo(0);
+					audio.pause();
+					audio.seekTo(0);
                     $('#sec6-1-title').css({"display":"block"});
                     $('#subtitles').css({"display":"none"});
                 }
@@ -1833,14 +1833,14 @@
 				
 				//////////////////////////////
 				
-				//~ audio = new Media(basePath_pg+'bases/'+base+'.mp3',
-						//~ // success callback
-						 //~ function () {
-							 //~ console.log("playAudio():Audio Success"); 
-						 //~ },
-						//~ // error callback
-						 //~ function (err) { console.log("playAudio():Audio Error: " + err.code); console.log(err.message); }
-				//~ );
+				audio = new Media(basePath_pg+'bases/'+base+'.mp3',
+						// success callback
+						 function () {
+							 console.log("playAudio():Audio Success"); 
+						 },
+						// error callback
+						 function (err) { console.log("playAudio():Audio Error: " + err.code); console.log(err.message); }
+				);
 								 
 				//~ audio.play();
 				//~ audio.seekTo(0);
@@ -1856,10 +1856,7 @@
 						mostrarMensaje("Dura: "+dur);
 						
 						timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
-						duracionDelTema = dur;
-						superinterval = setInterval(function() {
-							updateVisualizer();
-						},1000);
+						
 						startRecording(dur);
 					}
 				}, 100);
@@ -1880,6 +1877,7 @@
             isPlaying = false;
             playing = false;
             
+            clearInterval(superinterval);
             clearInterval(timerDur);
             
 			audio.pause();
@@ -1892,7 +1890,6 @@
             
             
             //~ recorder && recorder.stop();
-			mostrarMensaje("Grabacion finalizada antes");
             myMedia.stopRecord();
             
         });
@@ -1901,6 +1898,8 @@
         $('#btn-step6-2-regrabar').click(function(){
             isPlaying = false;
             playing = false;
+            
+            clearInterval(superinterval);
             clearInterval(timerDur);
             
 			audio.pause();
@@ -1917,123 +1916,47 @@
         
         var ponerPsub = true;
         var elElemento;
+        
+        
         function updateVisualizer() {
 			try {
 				audio.getCurrentPosition(
-				// success callback
-				function(position) {
-					var f = 3;
-					window.ponerPsub = true;
-					if (isPlaying) {
-						//console.log(actx.currentTime);
-						//~ var porcen = parseInt((position*100)/duracionDelTema);
-						
-						$('#sec6-1-player-bar-circle').css({left: '50px'});
-						if(withSubtitles){
-							mostrarMesaje(isPlaying+"pasas: "+posic);
-							
-							 syncData.forEach(function(element, index, array) {
-								if (position >= element.start){
-									if(element.line!=line){
-										line = element.line;
-										createSubtitle(line);
-										mostrarMesaje("createSubtitle: "+line);
+					// success callback
+					function(position) {
+						var f = 3;
+						window.ponerPsub = true;
+						if (isPlaying) {
+							//console.log(actx.currentTime);
+							if(withSubtitles){
+								
+								 syncData.forEach(function(element, index, array) {
+									if (position >= element.start){
+										if(element.line!=line){
+											line = element.line;
+											createSubtitle(line);
+										}
 									}
-								}
-							});
+								});
 
-							$('#subtitles span').each(function(){
-								if (position >= $(this).attr('start')){
-									$(this).css({"color":"#1e94d2"});
-								}
-							});
-						}
-						
-					}		
+								$('#subtitles span').each(function(){
+									if (position >= $(this).attr('start')){
+										$(this).css({"color":"#1e94d2"});
+									}
+								});
+							}
+							
+						}		
 					},
 					// error callback
 					function(e) {
 						console.log("Error getting pos=" + e);
-					}
+				}
 				);
 				
 			} catch(err) {
 				console.log(err.message);
 			}
         }
-        
-        function updateVisualizer_ORG() {
-			posic++;
-            mostrarMesaje(isPlaying+"pasas: "+posic);
-            var f = 3;
-            if (isPlaying) {
-                //console.log(actx.currentTime);
-                if(withSubtitles){
-					mostrarMesaje("1919");
-                    //~ syncData.forEach(function(element, index, array) {
-						//~ audio.getCurrentPosition(
-							//~ // success callback
-							//~ function(position) {
-								//~ mostrarMensaje("pos: "+position);
-								//~ if (position >= element.start){
-									//~ if(element.line!=line){
-										//~ line = element.line;
-										//~ mostrarMesaje("1928: "+element.line);
-										//~ createSubtitle(line);
-									//~ }
-								//~ }
-							//~ },
-							//~ // error callback
-							//~ function(e) {
-								//~ console.log("Error getting pos=" + e);
-							//~ }
-						//~ );
-                    //~ });
-
-                    //~ $('#subtitles span').each(function(){
-						//~ audio.getCurrentPosition(
-							//~ // success callback
-							//~ function(position) {
-								//~ if (position >= $(this).attr('start')){
-									//~ $(this).css({"color":"#1e94d2"});
-								//~ }
-							//~ }
-						//~ );
-                    //~ });
-                }
-                
-                //~ var aData = new Uint8Array(analyser.frequencyBinCount);
-                //~ analyser.getByteFrequencyData(aData);
-                //~ for (var i = 0; i < analyser.fftSize; i++) {
-                    //~ $('#bar-0').height(aData[15] / (f));
-                    //~ $('#bar-1').height(aData[12] / (f));
-                    //~ $('#bar-2').height(aData[11] / (f));
-                    //~ $('#bar-3').height(aData[9] / (f));
-                    //~ $('#bar-4').height(aData[7] / (f));
-                    //~ $('#bar-5').height(aData[5] / (f));
-                    //~ $('#bar-6').height(aData[3] / (f));
-                    //~ $('#bar-7').height(aData[1] / (f));
-                    //~ $('#bar-8').height(aData[0] / (f));
-                    //~ $('#bar-9').height(aData[2] / (f));
-                    //~ $('#bar-10').height(aData[4] / (f));
-                    //~ $('#bar-11').height(aData[6] / (f));
-                    //~ $('#bar-12').height(aData[8] / (f));
-                    //~ $('#bar-13').height(aData[10] / (f));
-                    //~ $('#bar-14').height(aData[12] / (f));
-                    //~ $('#bar-15').height(aData[14] / (f));;
-
-
-                //~ }
-                //~ requestAnimationFrame(updateVisualizer);
-            }
-            
-        }
-        
-        
-        
-        
-        
-        
         
         
         
@@ -2056,7 +1979,7 @@
                 if (isPlaying) {
                     isPlaying = false;
                     audio.pause();
-                    audio.seekTo(0);
+                    //~ audio.seekTo(0);
                 }
                 $('.play-btn').removeClass('active');
                 $('.record-btn').addClass('hidden');
@@ -2088,6 +2011,7 @@
 
                 audio.play();
                 mostrarMensaje("play "+basePath_pg+mp3);
+                console.log("play "+basePath_pg+mp3);
                 isPlaying = true;
                 
             }
@@ -2099,6 +2023,7 @@
             if (isPlaying) {
                 isPlaying = false;
 				audio.stop();
+				console.log("SAD");
             }
             $('.play-btn').removeClass('active');
             $('.record-btn').addClass('hidden');
@@ -2112,14 +2037,14 @@
             if ($(this).hasClass('active')) {
                 if (isPlaying) {
                     isPlaying = false;
-					audio.stop();
+					audio.pause();
                 }
             } else {
                 $(this).addClass('active');
                 
                 if (isPlaying) {
                     isPlaying = false;
-					audio.stop();
+					audio.pause();
                 }
 				
                 
@@ -2136,29 +2061,6 @@
                 //~ analyser = actx.createAnalyser();
                 playing = false;
                 withSubtitles=false;
-
-                //~ analyser.fftSize = 32;
-                //~ actx.smoothingConstant = 20;
-                //~ audio.connect(analyser);
-                //~ analyser.connect(actx.destination);
-
-                //~ var req = new XMLHttpRequest();
-                //~ req.open('GET', '/android_asset/www/bases/'+base+'.mp3', true);
-                //~ req.responseType = 'arraybuffer';
-
-                //~ req.onload = function() {
-                    //~ actx.decodeAudioData(req.response, function(buffer) {
-                        //~ console.log('received');
-                        //~ audio.buffer = buffer;
-                        //~ audio.start(0);
-                        //~ playing = true;
-                        //~ requestAnimationFrame(updateVisualizer);
-                    //~ });
-                //~ };
-                //~ req.send();
-
-                //~ audio.addEventListener("ended", audioEnded);
-                
 								 
 				isPlaying = true;
 				timerDur = setInterval(function() {
@@ -2172,9 +2074,6 @@
 						mostrarMensaje("Dura: "+dur);
 						
 						timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
-						superinterval = setInterval(function() {
-							updateVisualizer();
-						},1000);
 						startRecording(dur);
 					}
 				}, 100);
