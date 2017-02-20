@@ -152,7 +152,7 @@ function startRecording(duracion)
 	
 	
 	superinterval = setInterval(function() {
-		//~ updateVisualizer();
+		updateVisualizer();
 	},1000);
  }
 function onSuccess() {
