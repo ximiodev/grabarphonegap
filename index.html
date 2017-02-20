@@ -1833,17 +1833,17 @@
 				
 				//////////////////////////////
 				
-				audio = new Media(basePath_pg+'bases/'+base+'.mp3',
-						// success callback
-						 function () {
-							 console.log("playAudio():Audio Success"); 
-						 },
-						// error callback
-						 function (err) { console.log("playAudio():Audio Error: " + err.code); console.log(err.message); }
-				);
+				//~ audio = new Media(basePath_pg+'bases/'+base+'.mp3',
+						//~ // success callback
+						 //~ function () {
+							 //~ console.log("playAudio():Audio Success"); 
+						 //~ },
+						//~ // error callback
+						 //~ function (err) { console.log("playAudio():Audio Error: " + err.code); console.log(err.message); }
+				//~ );
 								 
-				audio.play();
-				audio.seekTo(0);
+				//~ audio.play();
+				//~ audio.seekTo(0);
 				isPlaying = true;
 				timerDur = setInterval(function() {
 					counter = counter + 100;
@@ -1926,12 +1926,14 @@
 					if (isPlaying) {
 						//console.log(actx.currentTime);
 						if(withSubtitles){
+							mostrarMesaje(isPlaying+"pasas: "+posic);
 							
 							 syncData.forEach(function(element, index, array) {
 								if (position >= element.start){
 									if(element.line!=line){
 										line = element.line;
 										createSubtitle(line);
+										mostrarMesaje("createSubtitle: "+line);
 									}
 								}
 							});
