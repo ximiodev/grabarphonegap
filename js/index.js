@@ -145,10 +145,15 @@ function startRecording(duracion)
 	myMedia = new Media(src, onSuccess, onError);
 	myMedia.startRecord();
 	
-	mostrarMensaje("Grabando...");
+	mostrarMensaje("Grabando... sad");
 	console.log("el otro play");
 	audio.seekTo(0);
 	audio.play();
+	
+	
+	superinterval = setInterval(function() {
+		updateVisualizer();
+	},1000);
  }
 function onSuccess() {
 	console.log("Created Audio for Recording");
@@ -195,7 +200,7 @@ var uploadAudio = function () {
 				// success callback
 				 function () { },
 				// error callback
-				 function (err) { alert("No se encuentra la cancion: "+r.response ): }
+				 function (err) { alert("No se encuentra la cancion: "+r.response ); }
 		);
 
 		finalAudio.play();
