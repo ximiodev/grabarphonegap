@@ -128,8 +128,24 @@ function startRecording(duracion)
 
 	audio.play();
 	
-	myMedia = new Media('record.wav', onSuccess, onError);
-	myMedia.startRecord();
+	
+	theFileSystem.root.getFile('record2.wav',{create:true},function(fileEntry){
+		mediaFileURL = fileEntry.toURL();
+		console.log('Created file ' + mediaFileURL);
+		myMedia = new Media(mediaFileURL, function(){
+			//console.log('Media File created');
+		}, function(err){
+			alert('Error creating the media file: ' + err.message);
+			console.log(mediaFileURL);
+			for(k in err){
+				console.log(k + ': ' + err[k]);
+			}            
+		});
+		myMedia.startRecord();
+	},function(err){
+		alert("Error setting audio file"); 
+	});  
+	
 	
 	superinterval = setInterval(function() {
 		updateVisualizer();
