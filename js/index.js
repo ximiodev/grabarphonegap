@@ -115,7 +115,19 @@ function startRecording(duracion)
 {
 	var src = audioRecord;
 	console.log("el otro play");
-	
+
+	audio = new Media(elaudioBK,
+			// success callback
+			 function () { mostrarMensaje("Termino el bk");},
+			// error callback
+			 function (err) { mostrarMensaje("No se pudo reproducir"); }
+	);
+
+	audio.play();
+			
+	superinterval = setInterval(function() {
+		updateVisualizer();
+	},1000);
 	
 	mostrarMensaje("Grabando... sad");
 	
@@ -126,33 +138,17 @@ function startRecording(duracion)
 		AVAudioSessionAdapter.CategoryOptions.MIX_WITH_OTHERS,
 		function() {
 			
-			myMedia = new Media('record2.wav', function(){
-				//console.log('Media File created');
-			}, function(err){
-				alert('Error creating the media file: ' + err.message);
-			});
+			myMedia = new Media('documents://record2.wav');
 			myMedia.startRecord();
 			
-			audio = new Media(elaudioBK,
-					// success callback
-					 function () { mostrarMensaje("Termino el bk");},
-					// error callback
-					 function (err) { mostrarMensaje("No se pudo reproducir"); }
+			audioSession.getCategory(
+				function(category) {
+					alert(category);
+				}
 			);
-
-			audio.play();
-					
-			superinterval = setInterval(function() {
-				updateVisualizer();
-			},1000);
 		}, 
 		function() {
 			// Handle the error.
-		}
-	);
-	audioSession.getCategory(
-		function(category) {
-			//~ alert(category);
 		}
 	);
 		
