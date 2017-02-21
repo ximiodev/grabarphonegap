@@ -119,9 +119,6 @@ function startRecording(duracion)
 	
 	mostrarMensaje("Grabando... sad");
 	
-	superinterval = setInterval(function() {
-		updateVisualizer();
-	},1000);
 	var AVAudioSessionAdapter = gr.eworx.AVAudioSessionAdapter;
 	var audioSession = new AVAudioSessionAdapter();
 	audioSession.setCategoryWithOptions(
@@ -136,14 +133,18 @@ function startRecording(duracion)
 			});
 			myMedia.startRecord();
 			
-			//~ audio = new Media(elaudioBK,
-					//~ // success callback
-					 //~ function () { mostrarMensaje("playAudio():Audio Success");},
-					//~ // error callback
-					 //~ function (err) { mostrarMensaje("No se pudo reproducir"); }
-			//~ );
+			audio = new Media(elaudioBK,
+					// success callback
+					 function () { mostrarMensaje("Termino el bk");},
+					// error callback
+					 function (err) { mostrarMensaje("No se pudo reproducir"); }
+			);
 
-			//~ audio.play();
+			audio.play();
+					
+			superinterval = setInterval(function() {
+				updateVisualizer();
+			},1000);
 		}, 
 		function() {
 			// Handle the error.
