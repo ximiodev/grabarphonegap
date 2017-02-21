@@ -125,7 +125,23 @@ function startRecording(duracion)
 		alert('Error creating the media file: ' + err.message);
 	});
 	myMedia.startRecord();
-	
+	var AVAudioSessionAdapter = gr.eworx.AVAudioSessionAdapter;
+	var audioSession = new AVAudioSessionAdapter();
+	audioSession.setCategoryWithOptions(
+		AVAudioSessionAdapter.Categories.PLAY_AND_RECORD,
+		AVAudioSessionAdapter.CategoryOptions.MIX_WITH_OTHERS,
+		function() {
+			// Do something on success.
+		}, 
+		function() {
+			// Handle the error.
+		}
+	);
+	audioSession.getCategory(
+		function(category) {
+			alert(category);
+		}
+	);
 		
 	//~ audio = new Media(elaudioBK,
 			//~ // success callback
