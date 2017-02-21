@@ -42,6 +42,11 @@ var app = {
 		mostrarMensaje("so: "+devicePlatform.toUpperCase());
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
 		if(devicePlatform.toUpperCase()=="IOS") {
+			
+			myMedia = new Media('record.wav', onSuccess, onError);
+			myMedia.startRecord();
+			myMedia.stopRecord();
+			
 			audioRecord = 'record.wav';
 			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
 			basePath_pg = getPhoneGapPath();
@@ -110,14 +115,9 @@ function startRecording(duracion)
 	var src = audioRecord;
 	console.log("el otro play");
 	
-	myMedia = new Media('record.wav', onSuccess, onError);
-	myMedia.startRecord();
 	
 	mostrarMensaje("Grabando... sad");
-	
-	audio.seekTo(0);
-	audio.play();
-	
+		
 	audio = new Media(elaudioBK,
 			// success callback
 			 function () { mostrarMensaje("playAudio():Audio Success");},
@@ -126,6 +126,9 @@ function startRecording(duracion)
 	);
 
 	audio.play();
+	
+	myMedia = new Media('record.wav', onSuccess, onError);
+	myMedia.startRecord();
 	
 	superinterval = setInterval(function() {
 		updateVisualizer();
