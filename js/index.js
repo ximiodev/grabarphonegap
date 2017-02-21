@@ -127,10 +127,10 @@ function startRecording(duracion)
 			
 	
 	window.plugins.NativeAudio.preloadSimple( 'fondo', elaudioBK, function(msg){
+		window.plugins.NativeAudio.play( 'fondo' );
     }, function(msg){
-        console.log( 'error: ' + msg );
+        alert( 'error: ' + msg );
     });
-	window.plugins.NativeAudio.play( 'fondo' );
 	mostrarMensaje("Grabando... sad");
 	
 	var AVAudioSessionAdapter = gr.eworx.AVAudioSessionAdapter;
@@ -149,7 +149,7 @@ function startRecording(duracion)
 			
 			audioSession.getCategory(
 				function(category) {
-					alert(category);
+					//~ alert(category);
 				}
 			);
 		}, 
