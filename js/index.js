@@ -127,14 +127,14 @@ function startRecording(duracion)
 	myMedia.startRecord();
 	
 		
-	audio = new Media(elaudioBK,
-			// success callback
-			 function () { mostrarMensaje("playAudio():Audio Success");},
-			// error callback
-			 function (err) { mostrarMensaje("No se pudo reproducir"); }
-	);
+	//~ audio = new Media(elaudioBK,
+			//~ // success callback
+			 //~ function () { mostrarMensaje("playAudio():Audio Success");},
+			//~ // error callback
+			 //~ function (err) { mostrarMensaje("No se pudo reproducir"); }
+	//~ );
 
-	audio.play();
+	//~ audio.play();
 	
 	superinterval = setInterval(function() {
 		updateVisualizer();
