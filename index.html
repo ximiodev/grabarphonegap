@@ -645,7 +645,7 @@
                     <div class="col-md-12 col-xs-12 mt-5 pw-10">
                         <div id="sec6-1-player" style="margin: 0 auto;">
                             <div id="sec6-1-player-bar">
-                                <div id="sec6-1-player-bar-circle"></div>
+                                <div id="sec6-1-player-bar-circle" class="circleBallTim"></div>
                                 <div id="sec6-1-player-bar-progress"></div>
                             </div>
                             <div id="sec6-1-player-equelizer">
@@ -671,7 +671,7 @@
                     <div class="col-md-12 col-xs-12 mt-5 pw-10">
                         <div id="sec6-1-player" style="margin: 0 auto;">
                             <div id="sec6-1-player-bar">
-                                <div id="sec6-1-player-bar-circle"></div>
+                                <div id="sec6-1-player-bar-circle" class="circleBallTim"></div>
                                 <div id="sec6-1-player-bar-progress"></div>
                             </div>
                             <div id="sec6-2-player-equelizer">
@@ -1767,100 +1767,104 @@
         $('#btn-step6-1-grabar').click(function() {
             $(this).addClass('hidden');
             $('#btn-step6-1-regrabar').removeClass('hidden');
+			console.log(basePath_pg+mp3);
             
             if ($(this).hasClass('active')) {
                 if (isPlaying) {
                     isPlaying = false;
-					audio.pause();
-					audio.seekTo(0);
+					//~ audio.pause();
+					//~ audio.seekTo(0);
                     $('#sec6-1-title').css({"display":"block"});
                     $('#subtitles').css({"display":"none"});
                 }
             } else {
-                $(this).addClass('active');
-                $('#sec6-1-title').css({"display":"none"});
-                $('#subtitles').css({"display":"block"});
-                if (isPlaying) {
-                    isPlaying = false;
-					audio.pause();
-					audio.seekTo(0);
-                    $('#sec6-1-title').css({"display":"block"});
-                    $('#subtitles').css({"display":"none"});
-                }
-                
-                var html = '';
-                for(var i=0;i<16;i++){
-                    html += '<div id="bar-'+i+'" class="bar" style="left:'+(i*17)+'px;"><div class="shadow"></div><div class="fill"></div></div>';
-                }
-                $('#sec6-1-player-equelizer').html(html);
-                
-                
-                
-                //~ actx = new(window.AudioContext || window.webkitAudioContext)();
-                //~ audio = actx.createBufferSource();
-                //~ analyser = actx.createAnalyser();
-                playing = false;
-                
-
-                //~ analyser.fftSize = 32;
-                //~ actx.smoothingConstant = 20;
-                //~ audio.connect(analyser);
-                //~ analyser.connect(actx.destination);
-
-                //~ var req = new XMLHttpRequest();
-                //~ req.open('GET', '/android_asset/www/bases/'+base+'.mp3', true);
-                //~ req.responseType = 'arraybuffer';
-
-                //~ req.onload = function() {
-                    //~ actx.decodeAudioData(req.response, function(buffer) {
-                        //~ console.log('received');
-                        //~ audio.buffer = buffer;
-                        //~ audio.start(0);
-                        //~ playing = true;
-                        //~ requestAnimationFrame(updateVisualizer);
-                    //~ });
-                //~ };
-                //~ req.send();
-
-                //~ audio.addEventListener("ended", audioEnded);
-                
-               								 
-				isPlaying = true;
-                withSubtitles=true;
-                //~ createSubtitle(line);
-                
-				
-				//////////////////////////////
-				
-				audio = new Media(basePath_pg+'bases/'+base+'.mp3',
-						// success callback
-						 function () {
-							 console.log("playAudio():Audio Success"); 
-						 },
-						// error callback
-						 function (err) { console.log("playAudio():Audio Error: " + err.code); console.log(err.message); }
-				);
-								 
-				//~ audio.play();
-				//~ audio.seekTo(0);
-				isPlaying = true;
-				timerDur = setInterval(function() {
-					counter = counter + 100;
-					if (counter > 2000) {
-						clearInterval(timerDur);
+				try {
+					$(this).addClass('active');
+					$('#sec6-1-title').css({"display":"none"});
+					$('#subtitles').css({"display":"block"});
+					if (isPlaying) {
+						isPlaying = false;
+						//~ audio.pause();
+						//~ audio.seekTo(0);
+						$('#sec6-1-title').css({"display":"block"});
+						$('#subtitles').css({"display":"none"});
 					}
-					var dur = audio.getDuration();
-					if (dur > 0) {
-						clearInterval(timerDur);
-						mostrarMensaje("Dura: "+dur);
-						
-						timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
-						
-						startRecording(dur);
+					
+					var html = '';
+					for(var i=0;i<16;i++){
+						html += '<div id="bar-'+i+'" class="bar" style="left:'+(i*17)+'px;"><div class="shadow"></div><div class="fill"></div></div>';
 					}
-				}, 100);
-                
-                
+					$('#sec6-1-player-equelizer').html(html);
+					
+					
+					
+					//~ actx = new(window.AudioContext || window.webkitAudioContext)();
+					//~ audio = actx.createBufferSource();
+					//~ analyser = actx.createAnalyser();
+					playing = false;
+					
+
+					//~ analyser.fftSize = 32;
+					//~ actx.smoothingConstant = 20;
+					//~ audio.connect(analyser);
+					//~ analyser.connect(actx.destination);
+
+					//~ var req = new XMLHttpRequest();
+					//~ req.open('GET', '/android_asset/www/bases/'+base+'.mp3', true);
+					//~ req.responseType = 'arraybuffer';
+
+					//~ req.onload = function() {
+						//~ actx.decodeAudioData(req.response, function(buffer) {
+							//~ console.log('received');
+							//~ audio.buffer = buffer;
+							//~ audio.start(0);
+							//~ playing = true;
+							//~ requestAnimationFrame(updateVisualizer);
+						//~ });
+					//~ };
+					//~ req.send();
+
+					//~ audio.addEventListener("ended", audioEnded);
+					
+												 
+					isPlaying = true;
+					withSubtitles=true;
+					//~ createSubtitle(line);
+					
+					
+					//////////////////////////////
+					
+					
+					audio = new Media(basePath_pg+mp3,
+							// success callback
+							 function () { mostrarMensaje("playAudio():Audio Success");},
+							// error callback
+							 function (err) { mostrarMensaje(basePath_pg+mp3); }
+					);
+									 
+					audio.play();
+					audio.stop();
+					//~ audio.seekTo(0);
+					isPlaying = true;
+					timerDur = setInterval(function() {
+						counter = counter + 100;
+						if (counter > 2000) {
+							clearInterval(timerDur);
+						}
+						var dur = audio.getDuration();
+						if (dur > 0) {
+							clearInterval(timerDur);
+							//~ mostrarMensaje("Dura: "+dur);
+							duracion = dur;
+							timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
+							
+							startRecording(dur);
+						}
+					}, 100);
+					
+				} catch(e) {
+					console.log(e.message);
+				}
 
             }
 
@@ -1915,6 +1919,7 @@
         
         var ponerPsub = true;
         var elElemento;
+        var duracion;
         
         
         function updateVisualizer() {
@@ -1923,6 +1928,8 @@
 					// success callback
 					function(position) {
 						var f = 3;
+						var porcentaje = (position*100)/duracion;
+						$('.circleBallTim').css({left:porcentaje+'%'});
 						window.ponerPsub = true;
 						if (isPlaying) {
 							//console.log(actx.currentTime);
@@ -2071,7 +2078,7 @@
 					if (dur > 0) {
 						clearInterval(timerDur);
 						mostrarMensaje("Dura: "+dur);
-						
+						duracion = dur;
 						timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
 						startRecording(dur);
 					}

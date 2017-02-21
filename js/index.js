@@ -66,43 +66,7 @@ function onError(error) {
 	console.log(error.code);
 }
 var superinterval;
-var recorder = new Object;
-recorder.stop = function() {
-  window.plugins.audioRecorderAPI.stop(function(msg) {
-    // success 
-    alert('ok: ' + msg);
-  }, function(msg) {
-    // failed 
-    alert('ko: ' + msg);
-  });
-}
-recorder.record = function(seg) {
-  window.plugins.audioRecorderAPI.record(function(msg) {
-    // complete 
-    //~ alert('ok: ' + msg);
-    recorder.playback();
-    clearInterval(superinterval);
-    //~ alert("Termino de grabar");
-	uploadAudio(msg);
-  }, function(msg) {
-    // failed 
-    alert('ko: ' + msg);
-  }, seg); // record 30 seconds
-	try {
-		console.log("intento");
-	} catch(err) {
-		console.log(err.message);
-	}
-}
-recorder.playback = function() {
-  window.plugins.audioRecorderAPI.playback(function(msg) {
-    // complete 
-    alert('ok: ' + msg);
-  }, function(msg) {
-    // failed 
-    alert('ko: ' + msg);
-  });
-}
+
 
 
 var fileURL;
@@ -142,11 +106,12 @@ function actualizarTema() {
 function startRecording(duracion)
 {
 	var src = audioRecord;
-	myMedia = new Media(src, onSuccess, onError);
+	console.log("el otro play");
+	myMedia = new Media('record.wav', onSuccess, onError);
 	myMedia.startRecord();
 	
 	mostrarMensaje("Grabando... sad");
-	console.log("el otro play");
+	
 	audio.seekTo(0);
 	audio.play();
 	
@@ -171,7 +136,7 @@ function stopRecording()
 {
 	myMedia.stopRecord();
 	mostrarMensaje("Grabacion finalizada");
-	//~ myMedia.play();
+	myMedia.play();
 	uploadAudio();
     clearInterval(superinterval);
 }
@@ -188,22 +153,22 @@ var uploadAudio = function () {
 	mostrarMensaje("Uploading");
 	console.log("Uploading");
     var win = function (r) {
-        console.log("Code = " + r.responseCode);
+        //~ console.log("Code = " + r.responseCode);
         console.log("Response = " + r.response);
         console.log("Sent = " + r.bytesSent);
-        mostrarMensaje("Respuesta del server: "+r.response);
+        console.log("Respuesta del server: "+r.response);
 					
 		$('#btn-step7-compartir').attr('href','whatsapp://send?text='+r.response);
 		urlToshare = r.response;
 		
-		finalAudio = new Media(r.response,
-				// success callback
-				 function () { },
-				// error callback
-				 function (err) { alert("No se encuentra la cancion: "+r.response ); }
-		);
+		//~ finalAudio = new Media(realPath,
+				//~ // success callback
+				 //~ function () { },
+				//~ // error callback
+				 //~ function (err) { alert("No se encuentra la cancion: "+r.response ); }
+		//~ );
 
-		finalAudio.play();
+		//~ finalAudio.play();
 		
 		hideLoader();
 		gotoSec('sec7');
