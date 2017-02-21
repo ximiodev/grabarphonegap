@@ -52,6 +52,7 @@
     <plugin name="cordova-plugin-whitelist"           source="npm" spec="~1.2.1" />
     <plugin name="cordova-plugin-socialsharing"		  source="npm" spec="4.3.81" />
     <plugin name="cordova-plugin-audio-recorder-api"		  source="npm" />
+    <plugin spec="https://github.com/example/cordova-plugin.git" source="git" />
 
     <!-- Define app icon and splashscreen for each platform. -->
     <icon src="icon.png" />

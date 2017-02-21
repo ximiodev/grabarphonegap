@@ -48,6 +48,19 @@ var app = {
 			myMedia = new Media('record.wav', onSuccess, onError);
 			myMedia.startRecord();
 			myMedia.stopRecord();
+			
+			var AVAudioSessionAdapter = gr.eworx.AVAudioSessionAdapter;
+			var audioSession = new AVAudioSessionAdapter();
+			audioSession.setCategoryWithOptions(
+				AVAudioSessionAdapter.Categories.PLAY_AND_RECORD,
+				AVAudioSessionAdapter.CategoryOptions.MIX_WITH_OTHERS,
+				function() {
+					// Do something on success.
+				}, 
+				function() {
+					// Handle the error.
+				}
+			);
 		} else {
 			audioRecord = cordova.file.externalRootDirectory+'record.arm';
                 
