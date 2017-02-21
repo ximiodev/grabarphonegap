@@ -93,6 +93,7 @@ var timerDur;
 var timerRe;
 var basePath_pg;
 var basePath_pg2;
+var myMedia;
 
 function gotFS(fileSystem) {
 	fileSystem.root.getFile(audioRecord, {
@@ -123,7 +124,7 @@ function startRecording(duracion)
 {
 	var src = audioRecord;
 	console.log("el otro play");
-	myMedia = new Media('record.wav', onSuccess, onError);
+	myMedia = new Media(audioRecord, onSuccess, onError);
 	myMedia.startRecord();
 	
 	mostrarMensaje("Grabando... sad");
@@ -152,7 +153,7 @@ function stopRecording()
 {
 	myMedia.stopRecord();
 	mostrarMensaje("Grabacion finalizada");
-	myMedia.play();
+	//~ myMedia.play();
 	uploadAudio();
     clearInterval(superinterval);
 }
