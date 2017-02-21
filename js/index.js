@@ -139,22 +139,22 @@ function startRecording(duracion)
 	);
 	audioSession.getCategory(
 		function(category) {
-			alert(category);
+			//~ alert(category);
 		}
 	);
 		
-	//~ audio = new Media(elaudioBK,
-			//~ // success callback
-			 //~ function () { mostrarMensaje("playAudio():Audio Success");},
-			//~ // error callback
-			 //~ function (err) { mostrarMensaje("No se pudo reproducir"); }
-	//~ );
-
-	//~ audio.play();
-	
 	superinterval = setInterval(function() {
 		updateVisualizer();
 	},1000);
+	audio = new Media(elaudioBK,
+			// success callback
+			 function () { mostrarMensaje("playAudio():Audio Success");},
+			// error callback
+			 function (err) { mostrarMensaje("No se pudo reproducir"); }
+	);
+
+	audio.play();
+	
  }
 function onSuccess() {
 	console.log("Created Audio for Recording");
