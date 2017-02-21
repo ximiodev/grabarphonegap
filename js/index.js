@@ -217,7 +217,7 @@ var uploadAudio = function () {
 		if(devicePlatform.toUpperCase()=="IOS") {
 			realPath = fileURL;
 		} else {
-			realPath = audioRecord;  
+			realPath = cordova.file.tempDirectory + 'record.wav';  
 		}
 		console.log("archivo: "+realPath);
 		ft.upload(realPath, encodeURI("http://server2.newcycle.com.ar/process-ios.php"), win, fail, options);
