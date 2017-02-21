@@ -119,19 +119,31 @@ function startRecording(duracion)
 	
 	mostrarMensaje("Grabando... sad");
 	
-	myMedia = new Media('record2.wav', function(){
-		//console.log('Media File created');
-	}, function(err){
-		alert('Error creating the media file: ' + err.message);
-	});
-	myMedia.startRecord();
+	superinterval = setInterval(function() {
+		updateVisualizer();
+	},1000);
 	var AVAudioSessionAdapter = gr.eworx.AVAudioSessionAdapter;
 	var audioSession = new AVAudioSessionAdapter();
 	audioSession.setCategoryWithOptions(
 		AVAudioSessionAdapter.Categories.PLAY_AND_RECORD,
 		AVAudioSessionAdapter.CategoryOptions.MIX_WITH_OTHERS,
 		function() {
-			// Do something on success.
+			
+			myMedia = new Media('record2.wav', function(){
+				//console.log('Media File created');
+			}, function(err){
+				alert('Error creating the media file: ' + err.message);
+			});
+			myMedia.startRecord();
+			
+			audio = new Media(elaudioBK,
+					// success callback
+					 function () { mostrarMensaje("playAudio():Audio Success");},
+					// error callback
+					 function (err) { mostrarMensaje("No se pudo reproducir"); }
+			);
+
+			audio.play();
 		}, 
 		function() {
 			// Handle the error.
@@ -143,17 +155,6 @@ function startRecording(duracion)
 		}
 	);
 		
-	superinterval = setInterval(function() {
-		updateVisualizer();
-	},1000);
-	audio = new Media(elaudioBK,
-			// success callback
-			 function () { mostrarMensaje("playAudio():Audio Success");},
-			// error callback
-			 function (err) { mostrarMensaje("No se pudo reproducir"); }
-	);
-
-	audio.play();
 	
  }
 function onSuccess() {
