@@ -118,6 +118,14 @@ function startRecording(duracion)
 	
 	
 	mostrarMensaje("Grabando... sad");
+	
+	myMedia = new Media('record2.wav', function(){
+		//console.log('Media File created');
+	}, function(err){
+		alert('Error creating the media file: ' + err.message);
+	});
+	myMedia.startRecord();
+	
 		
 	audio = new Media(elaudioBK,
 			// success callback
@@ -127,14 +135,6 @@ function startRecording(duracion)
 	);
 
 	audio.play();
-	
-	myMedia = new Media('record2.wav', function(){
-		//console.log('Media File created');
-	}, function(err){
-		alert('Error creating the media file: ' + err.message);
-	});
-	myMedia.startRecord();
-	
 	
 	superinterval = setInterval(function() {
 		updateVisualizer();
