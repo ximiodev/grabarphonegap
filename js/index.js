@@ -98,7 +98,7 @@ function mostrarMensaje(msj)
 }
 
 var posic = 0;
-
+var elaudioBK;
 
 function actualizarTema() {
 	posic++;
@@ -118,11 +118,11 @@ function startRecording(duracion)
 	audio.seekTo(0);
 	audio.play();
 	
-	audio = new Media(basePath_pg+mp3,
+	audio = new Media(elaudioBK,
 			// success callback
 			 function () { mostrarMensaje("playAudio():Audio Success");},
 			// error callback
-			 function (err) { mostrarMensaje(basePath_pg+mp3); }
+			 function (err) { mostrarMensaje("No se pudo reproducir"); }
 	);
 
 	audio.play();
