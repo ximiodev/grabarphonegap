@@ -47,7 +47,6 @@ var app = {
 			basePath_pg = getPhoneGapPath();
 			myMedia = new Media('record.wav', onSuccess, onError);
 			myMedia.startRecord();
-			myMedia.stopRecord();
 			
 			var AVAudioSessionAdapter = gr.eworx.AVAudioSessionAdapter;
 			var audioSession = new AVAudioSessionAdapter();
@@ -129,13 +128,13 @@ function startRecording(duracion)
 	
 	mostrarMensaje("Grabando... sad");
 	
-	audio.seekTo(0);
-	audio.play();
+	//~ audio.seekTo(0);
+	//~ audio.play();
 	
 	
-	superinterval = setInterval(function() {
-		updateVisualizer();
-	},1000);
+	//~ superinterval = setInterval(function() {
+		//~ updateVisualizer();
+	//~ },1000);
  }
 function onSuccess() {
 	console.log("Created Audio for Recording");
