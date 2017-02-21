@@ -115,8 +115,8 @@ function startRecording(duracion)
 	
 	mostrarMensaje("Grabando... sad");
 	
-	//~ audio.seekTo(0);
-	//~ audio.play();
+	audio.seekTo(0);
+	audio.play();
 	
 	audio = new Media(basePath_pg+mp3,
 			// success callback
