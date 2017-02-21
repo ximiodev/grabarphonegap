@@ -1629,9 +1629,7 @@
 
         $('#btn-step2').click(function() {
 			
-			myMedia.stopRecord();
-			myMedia.play();
-                    gotoSec('sec3');
+			gotoSec('sec3');
             //~ if ($('#terms').hasClass('active')) {
                 //~ userAge = new Date($('#ageYear').val() + '-' + $('#ageMonth').val() + '-' + $('#ageDay').val());
                 //~ console.log(userAge);
@@ -2055,7 +2053,7 @@
 					audio.pause();
                 }
 				
-                
+                audio.release();
                 var html = '';
                 for(var i=0;i<16;i++){
                     html += '<div id="bar-'+i+'" class="bar" style="left:'+(i*17)+'px;"><div class="shadow"></div><div class="fill"></div></div>';

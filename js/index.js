@@ -45,21 +45,7 @@ var app = {
 			audioRecord = 'record.wav';
 			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
 			basePath_pg = getPhoneGapPath();
-			myMedia = new Media('record.wav', onSuccess, onError);
-			myMedia.startRecord();
 			
-			var AVAudioSessionAdapter = gr.eworx.AVAudioSessionAdapter;
-			var audioSession = new AVAudioSessionAdapter();
-			audioSession.setCategoryWithOptions(
-				AVAudioSessionAdapter.Categories.PLAY_AND_RECORD,
-				AVAudioSessionAdapter.CategoryOptions.MIX_WITH_OTHERS,
-				function() {
-					// Do something on success.
-				}, 
-				function() {
-					// Handle the error.
-				}
-			);
 		} else {
 			audioRecord = cordova.file.externalRootDirectory+'record.arm';
                 
@@ -123,7 +109,8 @@ function startRecording(duracion)
 {
 	var src = audioRecord;
 	console.log("el otro play");
-	myMedia = new Media(audioRecord, onSuccess, onError);
+	
+	myMedia = new Media('record.wav', onSuccess, onError);
 	myMedia.startRecord();
 	
 	mostrarMensaje("Grabando... sad");
@@ -131,10 +118,18 @@ function startRecording(duracion)
 	//~ audio.seekTo(0);
 	//~ audio.play();
 	
+	audio = new Media(basePath_pg+mp3,
+			// success callback
+			 function () { mostrarMensaje("playAudio():Audio Success");},
+			// error callback
+			 function (err) { mostrarMensaje(basePath_pg+mp3); }
+	);
+
+	audio.play();
 	
-	//~ superinterval = setInterval(function() {
-		//~ updateVisualizer();
-	//~ },1000);
+	superinterval = setInterval(function() {
+		updateVisualizer();
+	},1000);
  }
 function onSuccess() {
 	console.log("Created Audio for Recording");
