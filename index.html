@@ -1906,7 +1906,18 @@
 			var porcentaje = (tiempoTranscurrido*100)/duracion;
 			$('.circleBallTim').css({left:porcentaje+'%'});
 			window.ponerPsub = true;
-			if (isPlaying) {
+			my_media.getCurrentAmplitude(
+				// success callback 
+				function (amp) {
+					mostrarMensaje(amp + "%");
+					console.log(amp + "%");
+				},
+				// error callback 
+				function (e) {
+					console.log("Error getting amp=" + e);
+				}
+			);
+			if (isRecording) {
 				//console.log(actx.currentTime);
 				if(withSubtitles){
 					

@@ -43,11 +43,6 @@ var app = {
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
 		if(devicePlatform.toUpperCase()=="IOS") {
 			
-			myMedia = new Media('record.wav', onSuccess, onError);
-			myMedia.startRecord();
-			myMedia.stopRecord();
-			myMedia.release();
-			
 			audioRecord = 'record.wav';
 			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
 			basePath_pg = getPhoneGapPath();
@@ -116,7 +111,7 @@ function startRecording(duracion)
 	var src = audioRecord;
 	isRecording = true;
 	
-	myMedia = new Media('documents://record2.wav');
+	myMedia = new Media('record2.wav');
 	myMedia.startRecord();
 	tiempoTranscurrido = 0;
 	superinterval = setInterval(function() {
