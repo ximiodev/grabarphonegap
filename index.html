@@ -1629,19 +1629,19 @@
 
         $('#btn-step2').click(function() {
 			
-			gotoSec('sec3');
-            //~ if ($('#terms').hasClass('active')) {
-                //~ userAge = new Date($('#ageYear').val() + '-' + $('#ageMonth').val() + '-' + $('#ageDay').val());
-                //~ console.log(userAge);
-                //~ console.log(_calculateAge(userAge));
-                //~ if (_calculateAge(userAge) >= 18) {
-                    //~ gotoSec('sec3');
-                //~ } else {
-                    //~ alert('Debes ser mayor de edad para entrar!');
-                //~ }
-            //~ } else {
-                //~ alert('Debes aceptar los terminos y condiciones!');
-            //~ }
+			//~ gotoSec('sec3');
+            if ($('#terms').hasClass('active')) {
+                userAge = new Date($('#ageYear').val() + '-' + $('#ageMonth').val() + '-' + $('#ageDay').val());
+                console.log(userAge);
+                console.log(_calculateAge(userAge));
+                if (_calculateAge(userAge) >= 18) {
+                    gotoSec('sec3');
+                } else {
+                    alert('Debes ser mayor de edad para entrar!');
+                }
+            } else {
+                alert('Debes aceptar los terminos y condiciones!');
+            }
         });
 
         $('#bases').click(function() {
@@ -1697,7 +1697,12 @@
             mp3 = '';
             base = '';
             gender = '';
-            
+            if(isRecording)
+				myMedia.stopRecord();
+				isRecording = false;
+				mostrarMensaje("Grabacion finalizada");
+				clearInterval(superinterval);
+			}
             
         });
         
@@ -1713,6 +1718,12 @@
                 gender = '';
                 gotoSec('sec5-1');
             }
+            if(isRecording)
+				myMedia.stopRecord();
+				isRecording = false;
+				mostrarMensaje("Grabacion finalizada");
+				clearInterval(superinterval);
+			}
             $('#icon-back').css({"display":"none"});
         });
 
@@ -1796,55 +1807,29 @@
 					}
 					$('#sec6-1-player-equelizer').html(html);
 					
-					
-					
-					//~ actx = new(window.AudioContext || window.webkitAudioContext)();
-					//~ audio = actx.createBufferSource();
-					//~ analyser = actx.createAnalyser();
 					playing = false;
 					
 
-					//~ analyser.fftSize = 32;
-					//~ actx.smoothingConstant = 20;
-					//~ audio.connect(analyser);
-					//~ analyser.connect(actx.destination);
-
-					//~ var req = new XMLHttpRequest();
-					//~ req.open('GET', '/android_asset/www/bases/'+base+'.mp3', true);
-					//~ req.responseType = 'arraybuffer';
-
-					//~ req.onload = function() {
-						//~ actx.decodeAudioData(req.response, function(buffer) {
-							//~ console.log('received');
-							//~ audio.buffer = buffer;
-							//~ audio.start(0);
-							//~ playing = true;
-							//~ requestAnimationFrame(updateVisualizer);
-						//~ });
-					//~ };
-					//~ req.send();
-
-					//~ audio.addEventListener("ended", audioEnded);
 					
 												 
 					isPlaying = true;
 					withSubtitles=true;
-					//~ createSubtitle(line);
-					
 					
 					//////////////////////////////
 					elaudioBK = basePath_pg+mp3;
 					
-					//~ audio = new Media(basePath_pg+mp3,
-							//~ // success callback
-							 //~ function () { mostrarMensaje("playAudio():Audio Success");},
-							//~ // error callback
-							 //~ function (err) { mostrarMensaje(basePath_pg+mp3); }
-					//~ );
+					audio = new Media(basePath_pg+mp3,
+							// success callback
+							 function () { mostrarMensaje("playAudio():Audio Success");},
+							// error callback
+							 function (err) { mostrarMensaje(basePath_pg+mp3); }
+					);
 									 
 					//~ audio.play();
 					//~ audio.stop();
 					//~ audio.seekTo(0);
+					
+					
 					isPlaying = true;
 					timerDur = setInterval(function() {
 						counter = counter + 100;
@@ -1854,10 +1839,9 @@
 						var dur = audio.getDuration();
 						if (dur > 0) {
 							clearInterval(timerDur);
-							//~ mostrarMensaje("Dura: "+dur);
+							mostrarMensaje("Dura: "+dur);
 							duracion = dur;
 							timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
-							
 							startRecording(dur);
 						}
 					}, 100);
@@ -1879,21 +1863,19 @@
         $('#btn-step6-1-regrabar').click(function(){
             isPlaying = false;
             playing = false;
+			myMedia.stopRecord();
+			isRecording = false;
+			mostrarMensaje("Grabacion finalizada");
             
             clearInterval(superinterval);
             clearInterval(timerDur);
             
-			audio.pause();
-			audio.seekTo(0);
             $('#sec6-1-title').css({"display":"block"});
             $('#subtitles').css({"display":"none"});
             $(this).addClass('hidden');
             $('#btn-step6-1-grabar').removeClass('hidden');
             $('#btn-step6-1-grabar').removeClass('active');
             
-            
-            //~ recorder && recorder.stop();
-            myMedia.stopRecord();
             
         });
         
@@ -1902,18 +1884,14 @@
             isPlaying = false;
             playing = false;
             
-            clearInterval(superinterval);
-            clearInterval(timerDur);
+			myMedia.stopRecord();
+			isRecording = false;
+			mostrarMensaje("Grabacion finalizada");
+			clearInterval(superinterval);
             
-			audio.pause();
-			audio.seekTo(0);
             $(this).addClass('hidden');
             $('#btn-step6-2-grabar').removeClass('hidden');
             $('#btn-step6-2-grabar').removeClass('active');
-            
-            
-            //~ recorder && recorder.stop();
-            myMedia.stopRecord();
             
         });
         
@@ -1923,45 +1901,32 @@
         
         
         function updateVisualizer() {
-			try {
-				myMedia.getCurrentPosition(
-					// success callback
-					function(position) {
-						var f = 3;
-						var porcentaje = (position*100)/duracion;
-						$('.circleBallTim').css({left:porcentaje+'%'});
-						window.ponerPsub = true;
-						if (isPlaying) {
-							//console.log(actx.currentTime);
-							if(withSubtitles){
-								
-								 syncData.forEach(function(element, index, array) {
-									if (position >= element.start){
-										if(element.line!=line){
-											line = element.line;
-											createSubtitle(line);
-										}
-									}
-								});
-
-								$('#subtitles span').each(function(){
-									if (position >= $(this).attr('start')){
-										$(this).css({"color":"#1e94d2"});
-									}
-								});
+			var f = 3;
+			tiempoTranscurrido++;
+			var porcentaje = (tiempoTranscurrido*100)/duracion;
+			$('.circleBallTim').css({left:porcentaje+'%'});
+			window.ponerPsub = true;
+			if (isPlaying) {
+				//console.log(actx.currentTime);
+				if(withSubtitles){
+					
+					 syncData.forEach(function(element, index, array) {
+						if (tiempoTranscurrido >= element.start){
+							if(element.line!=line){
+								line = element.line;
+								createSubtitle(line);
 							}
-							
-						}		
-					},
-					// error callback
-					function(e) {
-						console.log("Error getting pos=" + e);
+						}
+					});
+
+					$('#subtitles span').each(function(){
+						if (tiempoTranscurrido >= $(this).attr('start')){
+							$(this).css({"color":"#1e94d2"});
+						}
+					});
 				}
-				);
 				
-			} catch(err) {
-				console.log(err.message);
-			}
+			}	
         }
         
         
@@ -2063,9 +2028,6 @@
                 
                 
                 
-                //~ actx = new(window.AudioContext || window.webkitAudioContext)();
-                //~ audio = actx.createBufferSource();
-                //~ analyser = actx.createAnalyser();
                 playing = false;
                 withSubtitles=false;
 								 

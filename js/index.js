@@ -114,52 +114,21 @@ function actualizarTema() {
 function startRecording(duracion)
 {
 	var src = audioRecord;
-	console.log("el otro play");
-
-	//~ audio = new Media(elaudioBK,
-			//~ // success callback
-			 //~ function () { mostrarMensaje("Termino el bk");},
-			//~ // error callback
-			 //~ function (err) { mostrarMensaje("No se pudo reproducir"); }
-	//~ );
-
-	//~ audio.play();
-			
+	isRecording = true;
 	
-	window.plugins.NativeAudio.preloadSimple( 'fondo', elaudioBK, function(msg){
-		window.plugins.NativeAudio.play( 'fondo' );
-    }, function(msg){
-        alert( 'error: ' + msg );
-    });
+	myMedia = new Media('documents://record2.wav');
+	myMedia.startRecord();
+	tiempoTranscurrido = 0;
+	superinterval = setInterval(function() {
+		updateVisualizer();
+	},1000);
+	
 	mostrarMensaje("Grabando... sad");
 	
-	var AVAudioSessionAdapter = gr.eworx.AVAudioSessionAdapter;
-	var audioSession = new AVAudioSessionAdapter();
-	audioSession.setCategoryWithOptions(
-		AVAudioSessionAdapter.Categories.PLAY_AND_RECORD,
-		AVAudioSessionAdapter.CategoryOptions.MIX_WITH_OTHERS,
-		function() {
-			
-			myMedia = new Media('documents://record2.wav');
-			myMedia.startRecord();
-					
-			superinterval = setInterval(function() {
-				updateVisualizer();
-			},1000);
-			
-			audioSession.getCategory(
-				function(category) {
-					//~ alert(category);
-				}
-			);
-		}, 
-		function() {
-			// Handle the error.
-		}
-	);
-		
 	
  }
+ var isRecording = false;
+ var tiempoTranscurrido = 0;
 function onSuccess() {
 	console.log("Created Audio for Recording");
 }
@@ -175,11 +144,11 @@ function fail(error) {
 function stopRecording()
 {
 	myMedia.stopRecord();
+	isRecording = false;
 	mostrarMensaje("Grabacion finalizada");
-	myMedia.play();
-	uploadAudio();
-	indow.plugins.NativeAudio.stop( 'music' );
     clearInterval(superinterval);
+	
+	uploadAudio();
 }
 
 function compartirW() {
