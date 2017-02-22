@@ -40,10 +40,11 @@ var app = {
        //~ document.getElementById("btnStart").addEventListener('click', startRecording, false);
         devicePlatform = device.platform;
 		mostrarMensaje("so: "+devicePlatform.toUpperCase());
-		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
 		if(devicePlatform.toUpperCase()=="IOS") {
 			
 			audioRecord = 'record.wav';
+			
+			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
 			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
 			basePath_pg = getPhoneGapPath();
 			
@@ -205,7 +206,8 @@ var uploadAudio = function () {
 			realPath = audioRecord;  
 		}
 		console.log("archivo: "+realPath);
-		ft.upload(realPath, encodeURI("http://server2.newcycle.com.ar/process-ios.php"), win, fail, options);
+		ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
+		//~ ft.upload(realPath, encodeURI("http://server2.newcycle.com.ar/process-ios.php"), win, fail, options);
 		showLoader();
 	} catch(err) {
 		console.log(err.message);
