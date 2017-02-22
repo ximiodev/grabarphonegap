@@ -1701,6 +1701,7 @@
 				myMedia.stopRecord();
 				isRecording = false;
 				mostrarMensaje("Grabacion finalizada");
+				$('.circleBallTim').css({left:'0%'});
 				clearInterval(superinterval);
 			}
             
@@ -1722,6 +1723,7 @@
 				myMedia.stopRecord();
 				isRecording = false;
 				mostrarMensaje("Grabacion finalizada");
+				$('.circleBallTim').css({left:'0%'});
 				clearInterval(superinterval);
 			}
             $('#icon-back').css({"display":"none"});
@@ -1867,7 +1869,7 @@
 			myMedia.stopRecord();
 			isRecording = false;
 			mostrarMensaje("Grabacion finalizada");
-            
+            $('.circleBallTim').css({left:'0%'});
             clearInterval(superinterval);
             clearInterval(timerDur);
             
@@ -1888,6 +1890,7 @@
 			myMedia.stopRecord();
 			isRecording = false;
 			mostrarMensaje("Grabacion finalizada");
+			$('.circleBallTim').css({left:'0%'});
 			clearInterval(superinterval);
             
             $(this).addClass('hidden');
@@ -1908,7 +1911,7 @@
 			var porcentaje = (segTrans*100)/duracion;
 			$('.circleBallTim').css({left:porcentaje+'%'});
 			window.ponerPsub = true;
-			my_media.getCurrentAmplitude(
+			myMedia.getCurrentAmplitude(
 				// success callback 
 				function (amp) {
 					mostrarMensaje(amp + "%");

@@ -166,14 +166,14 @@ var uploadAudio = function () {
 		$('#btn-step7-compartir').attr('href','whatsapp://send?text='+r.response);
 		urlToshare = r.response;
 		
-		//~ finalAudio = new Media(realPath,
-				//~ // success callback
-				 //~ function () { },
-				//~ // error callback
-				 //~ function (err) { alert("No se encuentra la cancion: "+r.response ); }
-		//~ );
+		finalAudio = new Media(urlToshare,
+				// success callback
+				 function () { },
+				// error callback
+				 function (err) { alert("No se encuentra la cancion: "+r.response ); }
+		);
 
-		//~ finalAudio.play();
+		finalAudio.play();
 		
 		hideLoader();
 		gotoSec('sec7');
