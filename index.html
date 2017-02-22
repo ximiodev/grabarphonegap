@@ -1841,6 +1841,7 @@
 							clearInterval(timerDur);
 							mostrarMensaje("Dura: "+dur);
 							duracion = dur;
+							audio.release();
 							timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
 							startRecording(dur);
 						}
@@ -1903,7 +1904,8 @@
         function updateVisualizer() {
 			var f = 3;
 			tiempoTranscurrido++;
-			var porcentaje = (tiempoTranscurrido*100)/duracion;
+			var segTrans = (tiempoTranscurrido/10);
+			var porcentaje = (segTrans*100)/duracion;
 			$('.circleBallTim').css({left:porcentaje+'%'});
 			window.ponerPsub = true;
 			my_media.getCurrentAmplitude(
@@ -1922,7 +1924,7 @@
 				if(withSubtitles){
 					
 					 syncData.forEach(function(element, index, array) {
-						if (tiempoTranscurrido >= element.start){
+						if (segTrans >= element.start){
 							if(element.line!=line){
 								line = element.line;
 								createSubtitle(line);
@@ -2030,7 +2032,6 @@
 					audio.pause();
                 }
 				
-                audio.release();
                 var html = '';
                 for(var i=0;i<16;i++){
                     html += '<div id="bar-'+i+'" class="bar" style="left:'+(i*17)+'px;"><div class="shadow"></div><div class="fill"></div></div>';
@@ -2054,6 +2055,7 @@
 						mostrarMensaje("Dura: "+dur);
 						duracion = dur;
 						timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
+						audio.release();
 						startRecording(dur);
 					}
 				}, 100);

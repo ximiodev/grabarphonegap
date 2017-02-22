@@ -115,8 +115,8 @@ function startRecording(duracion)
 	myMedia.startRecord();
 	tiempoTranscurrido = 0;
 	superinterval = setInterval(function() {
-		updateVisualizer();
-	},1000);
+		window.updateVisualizer();
+	},100);
 	
 	mostrarMensaje("Grabando... sad");
 	
