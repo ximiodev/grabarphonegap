@@ -1697,7 +1697,7 @@
             mp3 = '';
             base = '';
             gender = '';
-            if(isRecording)
+            if(isRecording) {
 				myMedia.stopRecord();
 				isRecording = false;
 				mostrarMensaje("Grabacion finalizada");
@@ -1718,7 +1718,7 @@
                 gender = '';
                 gotoSec('sec5-1');
             }
-            if(isRecording)
+            if(isRecording) {
 				myMedia.stopRecord();
 				isRecording = false;
 				mostrarMensaje("Grabacion finalizada");
