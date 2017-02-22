@@ -111,7 +111,7 @@ function startRecording(duracion)
 	var src = audioRecord;
 	isRecording = true;
 	
-	myMedia = new Media('record2.wav');
+	myMedia = new Media('record.wav');
 	myMedia.startRecord();
 	tiempoTranscurrido = 0;
 	superinterval = setInterval(function() {
