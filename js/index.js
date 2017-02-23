@@ -91,7 +91,7 @@ function gotFS(fileSystem) {
 
 function gotFileEntry(fileEntry) {
 	fileURL = fileEntry.toURL();
-	alert(fileURL);
+	//~ alert(fileURL);
 }
 
 function mostrarMensaje(msj)
@@ -131,6 +131,8 @@ function resetGrabacion() {
 	myMedia.stopRecord();
 	isRecording = false;
 	mostrarMensaje("Grabacion finalizada");
+	$('#sec6-1-player-equelizer').html('');
+	$('#sec6-2-player-equelizer').html('');
 	$('.circleBallTim').css({left:'0%'});
 	for(var i=0;i<16;i++){
 		$('#bar-'+i).height(5);

@@ -1698,7 +1698,7 @@
             base = '';
             gender = '';
             if(isRecording) {
-				resetGrabacion():
+				resetGrabacion();
 			}
             
         });
@@ -1716,7 +1716,7 @@
                 gotoSec('sec5-1');
             }
             if(isRecording) {
-				resetGrabacion():
+				resetGrabacion();
 			}
             $('#icon-back').css({"display":"none"});
         });
@@ -1797,7 +1797,7 @@
 					
 					var html = '';
 					for(var i=0;i<16;i++){
-						html += '<div id="bar-'+i+'" class="bar" style="left:'+(i*17)+'px;"><div class="shadow"></div><div class="fill"></div></div>';
+						html += '<div id="bar-1-'+i+'" class="bar" style="left:'+(i*17)+'px;"><div class="shadow"></div><div class="fill"></div></div>';
 					}
 					$('#sec6-1-player-equelizer').html(html);
 					
@@ -1814,13 +1814,17 @@
 					
 					audio = new Media(basePath_pg+mp3,
 							// success callback
-							 function () { mostrarMensaje("playAudio():Audio Success");},
+							 function () { 
+								 console.log("dale");
+							},
 							// error callback
-							 function (err) { mostrarMensaje(basePath_pg+mp3); }
+							function (err) {
+								console.log("no va "+basePath_pg+mp3); 
+							}
 					);
 									 
-					//~ audio.play();
-					//~ audio.stop();
+					audio.play();
+					audio.stop();
 					//~ audio.seekTo(0);
 					
 					
@@ -1836,13 +1840,14 @@
 							mostrarMensaje("Dura: "+dur);
 							duracion = dur;
 							audio.release();
+							alert(dur);
 							timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
 							startRecording(dur);
 						}
 					}, 100);
 					
 				} catch(e) {
-					console.log(e.message);
+					console.log("DSAE "+e.message);
 				}
 
             }
@@ -1859,7 +1864,7 @@
             isPlaying = false;
             playing = false;
             
-            resetGrabacion():
+            resetGrabacion();
             
             $('#sec6-1-title').css({"display":"block"});
             $('#subtitles').css({"display":"none"});
@@ -1875,7 +1880,7 @@
             isPlaying = false;
             playing = false;
             
-            resetGrabacion():
+            resetGrabacion();
             
             $(this).addClass('hidden');
             $('#btn-step6-2-grabar').removeClass('hidden');
@@ -1900,24 +1905,41 @@
 				function (amp) {
 					//~ mostrarMensaje(amp + "%");
 					console.log(amp + "%");
-					var superBa = parseInt(amp*150);
+					var superBa = parseInt(amp*180);
 					
-					$('#bar-0').height(superBa/15);
-					$('#bar-1').height(superBa/12);
-					$('#bar-2').height(superBa/11);
-					$('#bar-3').height(superBa/9);
-					$('#bar-4').height(superBa/7);
-					$('#bar-5').height(superBa/5);
-					$('#bar-6').height(superBa/3);
-					$('#bar-7').height(superBa/1);
-					$('#bar-8').height(superBa/0);
-					$('#bar-9').height(superBa/2);
-					$('#bar-10').height(superBa/4);
-					$('#bar-11').height(superBa/6);
-					$('#bar-12').height(superBa/8);
-					$('#bar-13').height(superBa/10);
-					$('#bar-14').height(superBa/12);
-					$('#bar-15').height(superBa/14);
+					$('#bar-1-0').height(superBa/15);
+					$('#bar-1-1').height(superBa/12);
+					$('#bar-1-2').height(superBa/11);
+					$('#bar-1-3').height(superBa/9);
+					$('#bar-1-4').height(superBa/7);
+					$('#bar-1-5').height(superBa/5);
+					$('#bar-1-6').height(superBa/3);
+					$('#bar-1-7').height(superBa/1);
+					$('#bar-1-8').height(superBa/2);
+					$('#bar-1-9').height(superBa/4);
+					$('#bar-1-10').height(superBa/5);
+					$('#bar-1-11').height(superBa/7);
+					$('#bar-1-12').height(superBa/8);
+					$('#bar-1-13').height(superBa/10);
+					$('#bar-1-14').height(superBa/12);
+					$('#bar-1-15').height(superBa/14);
+					
+					$('#bar-2-0').height(superBa/15);
+					$('#bar-2-1').height(superBa/12);
+					$('#bar-2-2').height(superBa/11);
+					$('#bar-2-3').height(superBa/9);
+					$('#bar-2-4').height(superBa/7);
+					$('#bar-2-5').height(superBa/5);
+					$('#bar-2-6').height(superBa/3);
+					$('#bar-2-7').height(superBa/1);
+					$('#bar-2-8').height(superBa/2);
+					$('#bar-2-9').height(superBa/4);
+					$('#bar-2-10').height(superBa/5);
+					$('#bar-2-11').height(superBa/7);
+					$('#bar-2-12').height(superBa/8);
+					$('#bar-2-13').height(superBa/10);
+					$('#bar-2-14').height(superBa/12);
+					$('#bar-2-15').height(superBa/14);
 				},
 				// error callback 
 				function (e) {
@@ -1938,7 +1960,7 @@
 					});
 
 					$('#subtitles span').each(function(){
-						if (tiempoTranscurrido >= $(this).attr('start')){
+						if (segTrans >= $(this).attr('start')){
 							$(this).css({"color":"#1e94d2"});
 						}
 					});
@@ -2039,7 +2061,7 @@
 				
                 var html = '';
                 for(var i=0;i<16;i++){
-                    html += '<div id="bar-'+i+'" class="bar" style="left:'+(i*17)+'px;"><div class="shadow"></div><div class="fill"></div></div>';
+                    html += '<div id="bar-2-'+i+'" class="bar" style="left:'+(i*17)+'px;"><div class="shadow"></div><div class="fill"></div></div>';
                 }
                 $('#sec6-2-player-equelizer').html(html);
                 
