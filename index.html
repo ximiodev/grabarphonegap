@@ -1823,8 +1823,8 @@
 							}
 					);
 									 
-					//~ audio.play();
-					//~ audio.stop();
+					audio.play();
+					audio.setVolume(volume);
 					//~ audio.seekTo(0);
 					
 					
@@ -1836,6 +1836,7 @@
 						}
 						var dur = audio.getDuration();
 						if (dur > 0) {
+							audio.stop();
 							clearInterval(timerDur);
 							mostrarMensaje("Dura: "+dur);
 							duracion = dur;
