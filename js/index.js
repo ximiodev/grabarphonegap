@@ -91,6 +91,7 @@ function gotFS(fileSystem) {
 
 function gotFileEntry(fileEntry) {
 	fileURL = fileEntry.toURL();
+	alert(fileURL);
 }
 
 function mostrarMensaje(msj)
@@ -112,7 +113,7 @@ function startRecording(duracion)
 	var src = audioRecord;
 	isRecording = true;
 	
-	myMedia = new Media('record.wav');
+	myMedia = new Media(audioRecord, onSuccess, onError);
 	myMedia.startRecord();
 	tiempoTranscurrido = 0;
 	superinterval = setInterval(function() {
@@ -125,6 +126,20 @@ function startRecording(duracion)
  }
  var isRecording = false;
  var tiempoTranscurrido = 0;
+ 
+function resetGrabacion() {
+	myMedia.stopRecord();
+	isRecording = false;
+	mostrarMensaje("Grabacion finalizada");
+	$('.circleBallTim').css({left:'0%'});
+	for(var i=0;i<16;i++){
+		$('#bar-'+i).height(5);
+	}
+	clearInterval(superinterval);
+	clearInterval(timerDur);
+}
+ 
+ 
 function onSuccess() {
 	console.log("Created Audio for Recording");
 }
@@ -194,6 +209,7 @@ var uploadAudio = function () {
 	try {
 		var options = new FileUploadOptions();
 		options.fileKey = "file";
+		options.mimeType = "audio/wav";
 		options.fileName = audioRecord;
 		options.params = { 'devicePlatform': devicePlatform.toUpperCase()};
 		options.headers = { Connection: "close" };
@@ -206,8 +222,8 @@ var uploadAudio = function () {
 			realPath = audioRecord;  
 		}
 		console.log("archivo: "+realPath);
-		ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
-		//~ ft.upload(realPath, encodeURI("http://server2.newcycle.com.ar/process-ios.php"), win, fail, options);
+		//~ ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
+		ft.upload(realPath, encodeURI("http://server2.newcycle.com.ar/process-ios.php"), win, fail, options);
 		showLoader();
 	} catch(err) {
 		console.log(err.message);

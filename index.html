@@ -1698,11 +1698,7 @@
             base = '';
             gender = '';
             if(isRecording) {
-				myMedia.stopRecord();
-				isRecording = false;
-				mostrarMensaje("Grabacion finalizada");
-				$('.circleBallTim').css({left:'0%'});
-				clearInterval(superinterval);
+				resetGrabacion():
 			}
             
         });
@@ -1720,11 +1716,7 @@
                 gotoSec('sec5-1');
             }
             if(isRecording) {
-				myMedia.stopRecord();
-				isRecording = false;
-				mostrarMensaje("Grabacion finalizada");
-				$('.circleBallTim').css({left:'0%'});
-				clearInterval(superinterval);
+				resetGrabacion():
 			}
             $('#icon-back').css({"display":"none"});
         });
@@ -1866,12 +1858,8 @@
         $('#btn-step6-1-regrabar').click(function(){
             isPlaying = false;
             playing = false;
-			myMedia.stopRecord();
-			isRecording = false;
-			mostrarMensaje("Grabacion finalizada");
-            $('.circleBallTim').css({left:'0%'});
-            clearInterval(superinterval);
-            clearInterval(timerDur);
+            
+            resetGrabacion():
             
             $('#sec6-1-title').css({"display":"block"});
             $('#subtitles').css({"display":"none"});
@@ -1887,11 +1875,7 @@
             isPlaying = false;
             playing = false;
             
-			myMedia.stopRecord();
-			isRecording = false;
-			mostrarMensaje("Grabacion finalizada");
-			$('.circleBallTim').css({left:'0%'});
-			clearInterval(superinterval);
+            resetGrabacion():
             
             $(this).addClass('hidden');
             $('#btn-step6-2-grabar').removeClass('hidden');
@@ -1916,7 +1900,7 @@
 				function (amp) {
 					//~ mostrarMensaje(amp + "%");
 					console.log(amp + "%");
-					var superBa = parseInt(amp*130);
+					var superBa = parseInt(amp*150);
 					
 					$('#bar-0').height(superBa/15);
 					$('#bar-1').height(superBa/12);
