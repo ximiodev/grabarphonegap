@@ -1823,8 +1823,8 @@
 							}
 					);
 									 
-					audio.play();
-					audio.stop();
+					//~ audio.play();
+					//~ audio.stop();
 					//~ audio.seekTo(0);
 					
 					
@@ -1840,7 +1840,6 @@
 							mostrarMensaje("Dura: "+dur);
 							duracion = dur;
 							audio.release();
-							alert(dur);
 							timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
 							startRecording(dur);
 						}

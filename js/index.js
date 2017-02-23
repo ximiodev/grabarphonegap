@@ -97,7 +97,7 @@ function gotFileEntry(fileEntry) {
 function mostrarMensaje(msj)
 {
 	var cont = document.getElementById("responde");
-	cont.innerHTML = msj;
+	//~ cont.innerHTML = msj;
 }
 
 var posic = 0;
@@ -146,12 +146,12 @@ function onSuccess() {
 	console.log("Created Audio for Recording");
 }
 function onError(error) {
-	alert('code: '    + error.code    + '\n' +
+	alert('149: code: '    + error.code    + '\n' +
 		  'message: ' + error.message + '\n');
 	console.log(error);
 }
 function fail(error) {
-	alert('code: '    + error.code    + '\n' +
+	alert('154: code: '    + error.code    + '\n' +
 		  'message: ' + error.message + '\n');
 }
 function stopRecording()
@@ -162,10 +162,6 @@ function stopRecording()
     clearInterval(superinterval);
 	
 	uploadAudio();
-}
-
-function compartirW() {
-	window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null /* img */, urlToshare /* url */, function() {console.log('share ok')}, function(errormsg){alert(errormsg)})
 }
 
 function failFile(err) {
@@ -188,7 +184,7 @@ var uploadAudio = function () {
 				// success callback
 				 function () { },
 				// error callback
-				 function (err) { alert("No se encuentra la cancion: "+r.response ); }
+				 function (err) { alert("Canción no disponible. "+r.response ); }
 		);
 
 		finalAudio.play();
@@ -199,7 +195,26 @@ var uploadAudio = function () {
 		$('#btn-step6-2-grabar').removeClass('active');
 		$('#btn-step7-compartir').click(function(e) {
 			e.preventDefault();
-			window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null /* img */, urlToshare /* url */, function() {console.log('share ok')}, function(errormsg){alert(errormsg)});
+			
+			
+			var rnd = Math.round((Math.random()*2))+1;
+			var whatsappText = '';
+			
+			switch(rnd){
+				case 1:
+					whatsappText = 'Si con esto no activas, eres un quedao!';
+					break;
+				case 2:
+					whatsappText = '¡Es hora de romper el hielo! Actívate con mi flow.';                        
+					break;
+				case 3: 
+					whatsappText = '¿Vamos al arranque? Activa ahora y rompe el hielo.';                        
+					break;
+			}
+			$('#btn-step7-compartir').attr('href','whatsapp://send?text='+whatsappText+' https://'+data);
+			
+			
+			window.plugins.socialsharing.shareViaWhatsApp(whatsappText+' ', null /* img */, urlToshare /* url */, function() {console.log('share ok')}, function(errormsg){alert("Debes tener instalado WhatsApp.")});
 		});
     }
 
@@ -213,7 +228,7 @@ var uploadAudio = function () {
 		options.fileKey = "file";
 		options.mimeType = "audio/wav";
 		options.fileName = audioRecord;
-		options.params = { 'devicePlatform': devicePlatform.toUpperCase()};
+		options.params = { 'devicePlatform': devicePlatform.toUpperCase(), 'base': base};
 		options.headers = { Connection: "close" };
 
 		var ft = new FileTransfer();
