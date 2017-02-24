@@ -1772,7 +1772,6 @@
         $('#btn-step6-1-grabar').click(function() {
             $(this).addClass('hidden');
             $('#btn-step6-1-regrabar').removeClass('hidden');
-			console.log(basePath_pg+mp3);
             
             if ($(this).hasClass('active')) {
                 if (isPlaying) {
@@ -1783,7 +1782,7 @@
                     $('#subtitles').css({"display":"none"});
                 }
             } else {
-				try {
+				//~ try {
 					$(this).addClass('active');
 					$('#sec6-1-title').css({"display":"none"});
 					$('#subtitles').css({"display":"block"});
@@ -1811,6 +1810,7 @@
 					
 					//////////////////////////////
 					elaudioBK = basePath_pg+mp3;
+					console.log("POPPO");
 					
 					audio = new Media(basePath_pg+mp3,
 							// success callback
@@ -1824,8 +1824,9 @@
 					);
 									 
 					audio.play();
-					audio.setVolume(volume);
+					audio.setVolume(0);
 					//~ audio.seekTo(0);
+					console.log("p0232222");
 					
 					
 					isPlaying = true;
@@ -1846,9 +1847,9 @@
 						}
 					}, 100);
 					
-				} catch(e) {
-					console.log("DSAE "+e.message);
-				}
+				//~ } catch(e) {
+					//~ console.log("DSAE "+e.message);
+				//~ }
 
             }
 
@@ -2011,20 +2012,23 @@
                     isPlaying = false;
 					audio.release();
                 }
-                
-                console.log("2017 "+basePath_pg+mp3);
-				elaudioBK = basePath_pg+mp3;
-                audio = new Media(basePath_pg+mp3,
-						// success callback
-						 function () { mostrarMensaje("playAudio():Audio Success");},
-						// error callback
-						 function (err) { mostrarMensaje(basePath_pg+mp3); }
-				);
+                try {
+					console.log("2017 "+basePath_pg+mp3);
+					elaudioBK = basePath_pg+mp3;
+					audio = new Media(basePath_pg+mp3,
+							// success callback	
+							 function () { mostrarMensaje("playAudio():Audio Success");},
+							// error callback
+							 function (err) { mostrarMensaje(basePath_pg+mp3); }
+					);
 
-                audio.play();
-                mostrarMensaje("play "+basePath_pg+mp3);
-                console.log("play "+basePath_pg+mp3);
-                isPlaying = true;
+					audio.play();
+					mostrarMensaje("play "+basePath_pg+mp3);
+					console.log("play "+basePath_pg+mp3);
+					isPlaying = true;
+				} catch(e) {
+					console.log("DSAE "+e.message);
+				}
                 
             }
 

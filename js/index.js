@@ -47,6 +47,7 @@ var app = {
 			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
 			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
 			basePath_pg = getPhoneGapPath();
+			basePath_pg = '';
 			
 		} else {
 			audioRecord = cordova.file.externalRootDirectory+'record.arm';
