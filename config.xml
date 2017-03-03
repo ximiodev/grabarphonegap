@@ -51,7 +51,7 @@
     <plugin name="cordova-plugin-statusbar"           source="npm" spec="~2.1.2" />
     <plugin name="cordova-plugin-vibration"           source="npm" spec="~2.1.0" />
     <plugin name="cordova-plugin-whitelist"           source="npm" spec="~1.2.1" />
-    <plugin name="cordova-plugin-socialsharing"		  source="npm" spec="4.3.81" />
+    <plugin name="cordova-plugin-socialsharing"		  source="npm" />
     <plugin name="cordova-plugin-audio-recorder-api"		  source="npm" />
     <plugin spec="https://github.com/eworx/av-audio-session-adapter.git" source="git" />
 
@@ -165,6 +165,10 @@
 	<feature name="Capture">
 		<param name="android-package" value="org.apache.cordova.mediacapture.Capture" />
 		<param name="ios-package" value="CDVCapture" />
+	</feature>
+	
+	<feature name="SocialSharing">
+	  <param name="ios-package" value="SocialSharing" />
 	</feature>
 	<!-- root-level config-file block -->
 

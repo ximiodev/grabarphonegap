@@ -43,6 +43,10 @@ var app = {
 		if(devicePlatform.toUpperCase()=="IOS") {
 			
 			audioRecord = 'record.wav';
+					
+			myMedia = new Media(audioRecord, onSuccess, onError);
+			myMedia.startRecord();
+			myMedia.stopRecord();
 			
 			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
 			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
@@ -138,6 +142,7 @@ function resetGrabacion() {
 	for(var i=0;i<16;i++){
 		$('#bar-'+i).height(5);
 	}
+	duracion = 0;
 	clearInterval(superinterval);
 	clearInterval(timerDur);
 }
@@ -215,7 +220,7 @@ var uploadAudio = function () {
 			$('#btn-step7-compartir').attr('href','whatsapp://send?text='+whatsappText+' https://'+data);
 			
 			
-			window.plugins.socialsharing.shareViaWhatsApp(whatsappText+' ', null /* img */, urlToshare /* url */, function() {console.log('share ok')}, function(errormsg){alert("Debes tener instalado WhatsApp.")});
+			window.plugins.socialsharing.share(whatsappText+urlToshare);
 		});
     }
 
