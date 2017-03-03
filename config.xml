@@ -173,6 +173,7 @@
 	<!-- root-level config-file block -->
 
     <allow-intent href="http://*/*" />
+    <allow-intent href="whatsapp://*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />

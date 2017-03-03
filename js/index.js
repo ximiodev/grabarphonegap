@@ -183,7 +183,7 @@ var uploadAudio = function () {
         console.log("Sent = " + r.bytesSent);
         console.log("Respuesta del server: "+r.response);
 					
-		$('#btn-step7-compartir').attr('href','whatsapp://send?text='+r.response);
+		//~ $('#btn-step7-compartir').attr('href','whatsapp://send?text='+r.response);
 		urlToshare = r.response;
 		
 		finalAudio = new Media(urlToshare,
@@ -217,10 +217,13 @@ var uploadAudio = function () {
 					whatsappText = '¿Vamos al arranque? Activa ahora y rompe el hielo.';                        
 					break;
 			}
-			$('#btn-step7-compartir').attr('href','whatsapp://send?text='+whatsappText+' https://'+data);
 			
 			
-			window.plugins.socialsharing.share(whatsappText+urlToshare);
+			try {
+				window.plugins.socialsharing.share(whatsappText+urlToshare);
+			} catch(e) {
+				verfallo();
+			}
 		});
     }
 
@@ -252,6 +255,15 @@ var uploadAudio = function () {
 		console.log(err.message);
 	}
     //~ ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
+}
+
+function verfallo(whatsappText, urlToshare) {
+	try {
+		window.plugins.socialsharing.shareViaWhatsApp(whatsappText+' ', null /* img */, urlToshare /* url */, function() {console.log('share ok')}, function(errormsg){alert("Debes tener instalado WhatsApp.")});
+	} catch(e) {
+		$('#btn-step7-compartir').attr('href','whatsapp://send?text='+whatsappText+' https://'+urlToshare);
+		$('#btn-step7-compartir').click();
+	}
 }
 
 function getMediaURL(s) {
