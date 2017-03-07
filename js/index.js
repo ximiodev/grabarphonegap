@@ -138,11 +138,23 @@ function resetGrabacion() {
 	mostrarMensaje("Grabacion finalizada");
 	$('#sec6-1-player-equelizer').html('');
 	$('#sec6-2-player-equelizer').html('');
+	$('#sec6-1-title').css({"display":"block"});
+	$('#subtitles').css({"display":"none"});
+	$('#btn-step6-1-regrabar').addClass('hidden');
+	$('#btn-step6-2-regrabar').addClass('hidden');
+	$('#btn-step6-1-grabar').removeClass('hidden');
+	$('#btn-step6-2-grabar').removeClass('hidden');
+	$('#btn-step6-1-grabar').removeClass('active');
+	$('#btn-step6-2-grabar').removeClass('active');
+	
 	$('.circleBallTim').css({left:'0%'});
 	for(var i=0;i<16;i++){
 		$('#bar-'+i).height(5);
 	}
 	duracion = 0;
+	if(isFinlaPlay) {
+		finalAudio.stop();
+	}
 	clearInterval(superinterval);
 	clearInterval(timerDur);
 }
