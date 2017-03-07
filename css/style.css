@@ -571,6 +571,13 @@ text-align: center;
         width: 150px;
     margin: 0 auto;
 }
+#btn-step7-play {
+	width: 150px;
+	margin: 0 auto;
+	display: block;
+	color: #fff;
+	text-decoration: none;
+}
 
 
 

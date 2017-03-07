@@ -170,6 +170,26 @@ function stopRecording()
 	uploadAudio();
 }
 
+var isFinlaPlay = false;
+function reproducirResp() {
+	if(!isFinlaPlay) {
+		finalAudio = new Media(urlToshare,
+				// success callback
+				 function () { },
+				// error callback
+				 function (err) { alert("Canción no disponible. "+r.response ); }
+		);
+		$('#btn-step7-play').html('<img src="imgs/ico-pause.png">');
+		finalAudio.play();
+		isFinlaPlay = true;
+	} else {
+		isFinlaPlay = false;
+		finalAudio.pause();
+		$('#btn-step7-play').html('<img src="imgs/ico-play.png">');
+	}
+}
+
+
 function failFile(err) {
 }
 var urlToshare;
@@ -186,14 +206,6 @@ var uploadAudio = function () {
 		//~ $('#btn-step7-compartir').attr('href','whatsapp://send?text='+r.response);
 		urlToshare = r.response;
 		
-		finalAudio = new Media(urlToshare,
-				// success callback
-				 function () { },
-				// error callback
-				 function (err) { alert("Canción no disponible. "+r.response ); }
-		);
-
-		finalAudio.play();
 		
 		hideLoader();
 		gotoSec('sec7');
