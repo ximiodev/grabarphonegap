@@ -45,9 +45,9 @@ var app = {
 			
 			audioRecord = 'record2.wav';
 					
-			myMedia = new Media(audioRecord, onSuccess, onError);
-			myMedia.startRecord();
-			myMedia.stopRecord();
+			//~ myMedia = new Media(audioRecord, onSuccess, onError);
+			//~ myMedia.startRecord();
+			//~ myMedia.stopRecord();
 			
 			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
 			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
@@ -105,6 +105,10 @@ function gotFS(fileSystem) {
 
 function gotFileEntry(fileEntry) {
 	fileURL = fileEntry.toURL();
+					
+	myMedia = new Media(fileURL, onSuccess, onError);
+	myMedia.startRecord();
+	myMedia.stopRecord();
 	//~ alert(fileURL);
 }
 
@@ -163,6 +167,7 @@ function resetGrabacion() {
 	duracion = 0;
 	if(isFinlaPlay) {
 		finalAudio.stop();
+		isFinlaPlay = false;
 	}
 	clearInterval(superinterval);
 	clearInterval(timerDur);
