@@ -55,9 +55,19 @@ var app = {
 			basePath_pg = '';
 			
 		} else {
-			audioRecord = cordova.file.externalRootDirectory+'record.arm';
+			//~ audioRecord = cordova.file.externalRootDirectory+'record.arm';
                 
-			basePath_pg = '/android_asset/www/';
+			//~ basePath_pg = '/android_asset/www/';
+			audioRecord = 'record.wav';
+					
+			myMedia = new Media(audioRecord, onSuccess, onError);
+			myMedia.startRecord();
+			myMedia.stopRecord();
+			
+			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
+			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
+			basePath_pg = getPhoneGapPath();
+			basePath_pg = '';
 		}
     }
 };
@@ -271,6 +281,7 @@ var uploadAudio = function () {
 			realPath = fileURL;
 		} else {
 			realPath = audioRecord;  
+			realPath = fileURL;
 		}
 		console.log("archivo: "+realPath);
 		//~ ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
