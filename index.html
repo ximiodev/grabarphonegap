@@ -1834,7 +1834,7 @@
 					audio.setVolume(0);
 					//~ audio.seekTo(0);
 					console.log("p0232222");
-					
+					createSubtitle(line);
 					
 					isPlaying = true;
 					timerDur = setInterval(function() {
@@ -1849,7 +1849,12 @@
 							mostrarMensaje("Dura: "+dur);
 							duracion = dur;
 							audio.release();
-							timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
+							//~ timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
+							someTimer = new TimerJob({interval: (dur*1000)}, function(done) {
+								console.log('hey');
+								stopRecording();
+							});
+							someTimer.start();
 							startRecording(dur);
 						}
 					}, 100);
@@ -2092,7 +2097,11 @@
 						clearInterval(timerDur);
 						mostrarMensaje("Dura: "+dur);
 						duracion = dur;
-						timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
+						//~ timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
+						someTimer = new TimerJob({interval: (dur*1000)}, function(done) {
+							console.log('hey');
+							stopRecording();
+						});
 						audio.release();
 						startRecording(dur);
 					}

@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+ var someTimer;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -157,6 +158,7 @@ function resetGrabacion() {
 	}
 	clearInterval(superinterval);
 	clearInterval(timerDur);
+	someTimer.stop();
 }
  
  
@@ -178,6 +180,7 @@ function stopRecording()
 	isRecording = false;
 	mostrarMensaje("Grabacion finalizada");
     clearInterval(superinterval);
+    someTimer.stop();
 	
 	uploadAudio();
 }
