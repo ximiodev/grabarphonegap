@@ -43,7 +43,7 @@ var app = {
 		mostrarMensaje("so: "+devicePlatform.toUpperCase());
 		if(devicePlatform.toUpperCase()=="IOS") {
 			
-			audioRecord = 'record.wav';
+			audioRecord = 'record2.wav';
 					
 			myMedia = new Media(audioRecord, onSuccess, onError);
 			myMedia.startRecord();
@@ -58,7 +58,7 @@ var app = {
 			//~ audioRecord = cordova.file.externalRootDirectory+'record.arm';
                 
 			//~ basePath_pg = '/android_asset/www/';
-			audioRecord = 'record.wav';
+			audioRecord = 'record2.wav';
 					
 			myMedia = new Media(audioRecord, onSuccess, onError);
 			myMedia.startRecord();
