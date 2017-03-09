@@ -696,9 +696,6 @@
                         <img id="sec7-title" src="imgs/sec7-title.png" />
                     </div>
                     <div class="col-md-12 col-xs-12 mt-15 pw-10">
-                        <a class="red-gradient" id="btn-step7-play" href="" ><img src="imgs/ico-play.png"></a>
-                    </div>
-                    <div class="col-md-12 col-xs-12 mt-15 pw-10">
                         <a class="red-gradient" id="btn-step7-compartir" href="" >COMPARTIRLA</a>
                     </div>
                     <div class="col-md-12 col-xs-12 mt-15 pw-10">
@@ -1647,10 +1644,6 @@
             }
         });
 
-        $('#btn-step7-play').click(function() {
-			reproducirResp();
-        });
-
         $('#bases').click(function() {
             $('#bases-box').css({
                 "display": "block"
@@ -1834,8 +1827,10 @@
 					audio.setVolume(0);
 					//~ audio.seekTo(0);
 					console.log("p0232222");
-					$('#subtitles').css({"display":"block"});
+					
 					createSubtitle(1);
+					$('#subtitles').css({"display":"block"});
+					
 					
 					isPlaying = true;
 					timerDur = setInterval(function() {
@@ -1850,13 +1845,8 @@
 							mostrarMensaje("Dura: "+dur);
 							duracion = dur;
 							audio.release();
-							//~ timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
-							someTimer.start();
+							timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
 							startRecording(dur);
-							someTimer = new TimerJob({interval: (dur*1000)}, function(done) {
-								console.log('hey');
-								stopRecording();
-							});
 						}
 					}, 100);
 					
@@ -2098,13 +2088,9 @@
 						clearInterval(timerDur);
 						mostrarMensaje("Dura: "+dur);
 						duracion = dur;
-						//~ timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
+						timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
 						audio.release();
 						startRecording(dur);
-						someTimer = new TimerJob({interval: (dur*1000)}, function(done) {
-							console.log('hey');
-							stopRecording();
-						});
 					}
 				}, 100);
 				

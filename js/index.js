@@ -16,7 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
- var someTimer;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -43,22 +42,7 @@ var app = {
 		mostrarMensaje("so: "+devicePlatform.toUpperCase());
 		if(devicePlatform.toUpperCase()=="IOS") {
 			
-			audioRecord = 'record2.wav';
-					
-			//~ myMedia = new Media(audioRecord, onSuccess, onError);
-			//~ myMedia.startRecord();
-			//~ myMedia.stopRecord();
-			
-			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
-			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
-			basePath_pg = getPhoneGapPath();
-			basePath_pg = '';
-			
-		} else {
-			//~ audioRecord = cordova.file.externalRootDirectory+'record.arm';
-                
-			//~ basePath_pg = '/android_asset/www/';
-			audioRecord = 'record2.wav';
+			audioRecord = 'record.wav';
 					
 			myMedia = new Media(audioRecord, onSuccess, onError);
 			myMedia.startRecord();
@@ -68,6 +52,11 @@ var app = {
 			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
 			basePath_pg = getPhoneGapPath();
 			basePath_pg = '';
+			
+		} else {
+			audioRecord = cordova.file.externalRootDirectory+'record.arm';
+                
+			basePath_pg = '/android_asset/www/';
 		}
     }
 };
@@ -81,7 +70,9 @@ function onSuccess(fileSystem) {
 	console.log(fileSystem.name);
 	//~ basePath_pg2 = fileSystem.name;
 }
-
+function onError(error) {
+	console.log(error.code);
+}
 var superinterval;
 
 
@@ -105,10 +96,6 @@ function gotFS(fileSystem) {
 
 function gotFileEntry(fileEntry) {
 	fileURL = fileEntry.toURL();
-					
-	myMedia = new Media(fileURL, onSuccess, onError);
-	myMedia.startRecord();
-	myMedia.stopRecord();
 	//~ alert(fileURL);
 }
 
@@ -151,27 +138,13 @@ function resetGrabacion() {
 	mostrarMensaje("Grabacion finalizada");
 	$('#sec6-1-player-equelizer').html('');
 	$('#sec6-2-player-equelizer').html('');
-	$('#sec6-1-title').css({"display":"block"});
-	$('#subtitles').css({"display":"none"});
-	$('#btn-step6-1-regrabar').addClass('hidden');
-	$('#btn-step6-2-regrabar').addClass('hidden');
-	$('#btn-step6-1-grabar').removeClass('hidden');
-	$('#btn-step6-2-grabar').removeClass('hidden');
-	$('#btn-step6-1-grabar').removeClass('active');
-	$('#btn-step6-2-grabar').removeClass('active');
-	
 	$('.circleBallTim').css({left:'0%'});
 	for(var i=0;i<16;i++){
 		$('#bar-'+i).height(5);
 	}
 	duracion = 0;
-	if(isFinlaPlay) {
-		finalAudio.stop();
-		isFinlaPlay = false;
-	}
 	clearInterval(superinterval);
 	clearInterval(timerDur);
-	someTimer.stop();
 }
  
  
@@ -193,30 +166,9 @@ function stopRecording()
 	isRecording = false;
 	mostrarMensaje("Grabacion finalizada");
     clearInterval(superinterval);
-    someTimer.stop();
 	
 	uploadAudio();
 }
-
-var isFinlaPlay = false;
-function reproducirResp() {
-	if(!isFinlaPlay) {
-		finalAudio = new Media(urlToshare,
-				// success callback
-				 function () { },
-				// error callback
-				 function (err) { alert("Canción no disponible. "+r.response ); }
-		);
-		$('#btn-step7-play').html('<img src="imgs/ico-pause.png">');
-		finalAudio.play();
-		isFinlaPlay = true;
-	} else {
-		isFinlaPlay = false;
-		finalAudio.pause();
-		$('#btn-step7-play').html('<img src="imgs/ico-play.png">');
-	}
-}
-
 
 function failFile(err) {
 }
@@ -234,6 +186,14 @@ var uploadAudio = function () {
 		//~ $('#btn-step7-compartir').attr('href','whatsapp://send?text='+r.response);
 		urlToshare = r.response;
 		
+		finalAudio = new Media(urlToshare,
+				// success callback
+				 function () { },
+				// error callback
+				 function (err) { alert("Canción no disponible. "+r.response ); }
+		);
+
+		finalAudio.play();
 		
 		hideLoader();
 		gotoSec('sec7');
@@ -286,7 +246,6 @@ var uploadAudio = function () {
 			realPath = fileURL;
 		} else {
 			realPath = audioRecord;  
-			realPath = fileURL;
 		}
 		console.log("archivo: "+realPath);
 		//~ ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
