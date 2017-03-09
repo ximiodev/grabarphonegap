@@ -71,9 +71,7 @@ function onSuccess(fileSystem) {
 	console.log(fileSystem.name);
 	//~ basePath_pg2 = fileSystem.name;
 }
-function onError(error) {
-	console.log(error.code);
-}
+
 var superinterval;
 
 
