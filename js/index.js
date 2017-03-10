@@ -51,7 +51,7 @@ var app = {
 			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
 			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
 			basePath_pg = getPhoneGapPath();
-			basePath_pg = '';
+			//~ basePath_pg = '';
 			
 		} else {
 			audioRecord = cordova.file.externalRootDirectory+'record.arm';
@@ -121,6 +121,7 @@ function startRecording(duracion)
 	myMedia = new Media(audioRecord, onSuccess, onError);
 	myMedia.startRecord();
 	tiempoTranscurrido = 0;
+	
 	superinterval = setInterval(function() {
 		window.updateVisualizer();
 	},100);
@@ -134,15 +135,31 @@ function startRecording(duracion)
  
 function resetGrabacion() {
 	myMedia.stopRecord();
+	console.log("reset");
 	isRecording = false;
 	mostrarMensaje("Grabacion finalizada");
 	$('#sec6-1-player-equelizer').html('');
 	$('#sec6-2-player-equelizer').html('');
+	$('#sec6-1-title').css({"display":"block"});
+	$('#subtitles').css({"display":"none"});
+	$('#btn-step6-1-regrabar').addClass('hidden');
+	$('#btn-step6-2-regrabar').addClass('hidden');
+	$('#btn-step6-1-grabar').removeClass('hidden');
+	$('#btn-step6-2-grabar').removeClass('hidden');
+	$('#btn-step6-1-grabar').removeClass('active');
+	$('#btn-step6-2-grabar').removeClass('active');
+	
 	$('.circleBallTim').css({left:'0%'});
 	for(var i=0;i<16;i++){
 		$('#bar-'+i).height(5);
 	}
 	duracion = 0;
+	if(isFinlaPlay) {
+		
+		isFinlaPlay = false;
+		$('#btn-step7-play').html('<img src="imgs/ico-play.png">');
+		finalAudio.stop();
+	}
 	clearInterval(superinterval);
 	clearInterval(timerDur);
 }
@@ -170,6 +187,26 @@ function stopRecording()
 	uploadAudio();
 }
 
+var isFinlaPlay = false;
+function reproducirResp() {
+	if(!isFinlaPlay) {
+		finalAudio = new Media(urlToshare,
+				// success callback
+				 function () { },
+				// error callback
+				 function (err) { alert("Canción no disponible. "+r.response ); }
+		);
+		$('#btn-step7-play').html('<img src="imgs/ico-pause.png">');
+		finalAudio.play();
+		isFinlaPlay = true;
+	} else {
+		isFinlaPlay = false;
+		finalAudio.pause();
+		$('#btn-step7-play').html('<img src="imgs/ico-play.png">');
+	}
+}
+
+
 function failFile(err) {
 }
 var urlToshare;
@@ -186,14 +223,6 @@ var uploadAudio = function () {
 		//~ $('#btn-step7-compartir').attr('href','whatsapp://send?text='+r.response);
 		urlToshare = r.response;
 		
-		finalAudio = new Media(urlToshare,
-				// success callback
-				 function () { },
-				// error callback
-				 function (err) { alert("Canción no disponible. "+r.response ); }
-		);
-
-		finalAudio.play();
 		
 		hideLoader();
 		gotoSec('sec7');
