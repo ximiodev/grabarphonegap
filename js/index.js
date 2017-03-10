@@ -42,12 +42,16 @@ var app = {
 		mostrarMensaje("so: "+devicePlatform.toUpperCase());
 		if(devicePlatform.toUpperCase()=="IOS") {
 			
-			audioRecord = 'record.wav';
+			audioRecord = 'documents://record.wav';
 			
 			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
 			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
 			basePath_pg = getPhoneGapPath();
 			//~ basePath_pg = '';
+			myMedia = new Media(audioRecord, onSuccess, onError);
+			myMedia.startRecord();
+			myMedia.stopRecord();
+			//~ myMedia.release();
 			
 		} else {
 			audioRecord = cordova.file.externalRootDirectory+'record.arm';
@@ -92,13 +96,10 @@ function gotFS(fileSystem) {
 
 function gotFileEntry(fileEntry) {
 	fileURL = fileEntry.toURL();
-	audioRecord = entry.toURI();
+	//~ audioRecord = entry.toURI();
 	//~ alert(fileURL);
 	
 	mostrarMensaje("este archivo: "+audioRecord);
-	myMedia = new Media(audioRecord, onSuccess, onError);
-	myMedia.startRecord();
-	myMedia.stopRecord();
 }
 
 function mostrarMensaje(msj)
