@@ -44,12 +44,9 @@ var app = {
 			
 			audioRecord = 'record.wav';
 					
-			myMedia = new Media(audioRecord, onSuccess, onError);
-			myMedia.startRecord();
-			myMedia.stopRecord();
 			
-			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
-			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
+			//~ window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
+			//~ window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
 			basePath_pg = getPhoneGapPath();
 			basePath_pg = '';
 		} else {
@@ -68,6 +65,10 @@ function getPhoneGapPath() {
 function onSuccess(fileSystem) {
 	console.log(fileSystem.name);
 	//~ basePath_pg2 = fileSystem.name;
+	var mediaLO = new Media(audioRecord, onSuccess, onError);
+	mediaLO.startRecord();
+	mediaLO.stopRecord();
+	mediaLO.release();
 }
 var superinterval;
 
