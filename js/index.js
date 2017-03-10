@@ -92,10 +92,11 @@ function gotFS(fileSystem) {
 
 function gotFileEntry(fileEntry) {
 	fileURL = fileEntry.toURL();
+	audioRecord = entry.toURI();
 	//~ alert(fileURL);
 	
-	mostrarMensaje("este archivo: "+fileURL);
-	myMedia = new Media(fileURL, onSuccess, onError);
+	mostrarMensaje("este archivo: "+audioRecord);
+	myMedia = new Media(audioRecord, onSuccess, onError);
 	myMedia.startRecord();
 	myMedia.stopRecord();
 }
