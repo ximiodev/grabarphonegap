@@ -43,10 +43,6 @@ var app = {
 		if(devicePlatform.toUpperCase()=="IOS") {
 			
 			audioRecord = 'record.wav';
-					
-			myMedia = new Media(audioRecord, onSuccess, onError);
-			myMedia.startRecord();
-			myMedia.stopRecord();
 			
 			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
 			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
@@ -97,12 +93,17 @@ function gotFS(fileSystem) {
 function gotFileEntry(fileEntry) {
 	fileURL = fileEntry.toURL();
 	//~ alert(fileURL);
+	
+	mostrarMensaje("este archivo: "+fileURL);
+	myMedia = new Media(fileURL, onSuccess, onError);
+	myMedia.startRecord();
+	myMedia.stopRecord();
 }
 
 function mostrarMensaje(msj)
 {
 	var cont = document.getElementById("responde");
-	//~ cont.innerHTML = msj;
+	cont.innerHTML = msj;
 }
 
 var posic = 0;
