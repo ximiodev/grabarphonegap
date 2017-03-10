@@ -69,9 +69,6 @@ function onSuccess(fileSystem) {
 	console.log(fileSystem.name);
 	//~ basePath_pg2 = fileSystem.name;
 }
-function onError(error) {
-	console.log(error.code);
-}
 var superinterval;
 
 
@@ -101,7 +98,7 @@ function gotFileEntry(fileEntry) {
 function mostrarMensaje(msj)
 {
 	var cont = document.getElementById("responde");
-	//~ cont.innerHTML = msj;
+	cont.innerHTML = msj;
 }
 
 var posic = 0;
