@@ -540,7 +540,7 @@
                         <div class="blue-gradient-small btn-lyric" _id="3" mp3="bases/ice.mp3" base="ice">PONE LAS PEORES EXCUSAS DEL MUNDO.</div>
                     </div>
                     <div class="col-md-12 col-xs-12 mt-5 pw-10">
-                        <div class="blue-gradient-small btn-lyric" _id="4" mp3="bases/pam.mp3" base="rap" _base="pam">CANCELA SIEMPRE A ÚLTIMO MOMENTO.</div>
+                        <div class="blue-gradient-small btn-lyric" _id="4" mp3="bases/rap.mp3" base="rap">CANCELA SIEMPRE A ÚLTIMO MOMENTO.</div>
                     </div>
 
                     <div class="col-md-12 col-xs-12 mt-15 pw-10">
@@ -1704,7 +1704,7 @@
             mp3 = '';
             base = '';
             gender = '';
-            if(isRecording) {
+            if(isRecording || isFinlaPlay) {
 				resetGrabacion();
 			}
             
@@ -1722,7 +1722,7 @@
                 gender = '';
                 gotoSec('sec5-1');
             }
-            if(isRecording) {
+            if(isRecording || isFinlaPlay) {
 				resetGrabacion();
 			}
             $('#icon-back').css({"display":"none"});
@@ -1814,51 +1814,58 @@
 												 
 					isPlaying = true;
 					withSubtitles=true;
+					var dur = 33;
+					switch(base) {
+						case "crash":
+							dur=27;
+							break;
+						case "fine":
+							dur=31;
+							break;
+						case "ice":
+							dur=45;
+							break;
+						case "pam":
+							dur=31;
+							break;
+						case "rap":
+							dur=33;
+							break;
+					}
 					
 					//////////////////////////////
 					elaudioBK = basePath_pg+mp3;
-					console.log("POPPO");
+					console.log(basePath_pg+mp3);
 					
-					audio = new Media(basePath_pg+mp3,
-							// success callback
-							 function () { 
-								 console.log("dale");
-							},
-							// error callback
-							function (err) {
-								console.log("no va "+basePath_pg+mp3); 
-							}
-					);
+					//~ audio = new Media(basePath_pg+mp3,
+							//~ // success callback
+							 //~ function () { 
+								 //~ console.log("dale");
+							//~ },
+							//~ // error callback
+							//~ function (err) {
+								//~ console.log("no va "+basePath_pg+mp3); 
+							//~ }
+					//~ );
 									 
-					audio.play();
-					audio.setVolume(0);
+					//~ audio.play();
+					//~ audio.setVolume(0);
 					//~ audio.seekTo(0);
 					console.log("p0232222");
+					withSubtitles = true;
 					$('#subtitles').css({"display":"block"});
 					createSubtitle(1);
 					
 					isPlaying = true;
-					timerDur = setInterval(function() {
-						counter = counter + 100;
-						if (counter > 2000) {
-							clearInterval(timerDur);
-						}
-						var dur = audio.getDuration();
-						if (dur > 0) {
-							audio.stop();
-							clearInterval(timerDur);
-							mostrarMensaje("Dura: "+dur);
-							duracion = dur;
-							audio.release();
-							timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
-							//~ someTimer.start();
-							startRecording(dur);
-							//~ someTimer = new TimerJob({interval: (dur*1000)}, function(done) {
-								//~ console.log('hey');
-								//~ stopRecording();
-							//~ });
-						}
-					}, 100);
+				
+					//~ audio.stop();
+					
+					mostrarMensaje("Dura: "+dur);
+					duracion = dur;
+					//~ audio.release();
+					timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
+					console.log(dur);
+					startRecording(dur);
 					
 				//~ } catch(e) {
 					//~ console.log("DSAE "+e.message);
@@ -1918,7 +1925,6 @@
 				// success callback 
 				function (amp) {
 					//~ mostrarMensaje(amp + "%");
-					console.log(amp + "%");
 					var superBa = parseInt(amp*180);
 					
 					$('#bar-1-0').height(superBa/15);
@@ -1962,8 +1968,8 @@
 			);
 			if (isRecording) {
 				//console.log(actx.currentTime);
-				mostrarMensaje(segTrans);
 				if(withSubtitles){
+					//~ console.log("#");
 					
 					 syncData.forEach(function(element, index, array) {
 						if (segTrans >= element.start){
@@ -1981,7 +1987,9 @@
 					});
 				}
 				
-			}	
+			}	else {
+				console.log("no esta grbando");
+			}
         }
         
         
@@ -1991,6 +1999,7 @@
             $('.btn-gender').removeClass('active');
             $('#sec4-btn2').removeClass('active');
             $('#sec4-btn1').removeClass('active');
+            resetGrabacion();
             gender = '';
             lyrics = 0;
             mp3_id = '';
@@ -2041,7 +2050,7 @@
 					console.log("play "+basePath_pg+mp3);
 					isPlaying = true;
 				} catch(e) {
-					mostrarMensaje("DSAE "+e.message);
+					console.log("DSAE "+e.message);
 				}
                 
             }
@@ -2083,31 +2092,40 @@
                 }
                 $('#sec6-2-player-equelizer').html(html);
                 
-                
+			
+				var dur = 33;
+				switch(base) {
+					case "crash":
+						dur=27;
+						break;
+					case "fine":
+						dur=31;
+						break;
+					case "ice":
+						dur=45;
+						break;
+					case "pam":
+						dur=31;
+						break;
+					case "rap":
+						dur=33;
+						break;
+				}
                 
                 playing = false;
                 withSubtitles=false;
 								 
 				isPlaying = true;
-				timerDur = setInterval(function() {
-					counter = counter + 100;
-					if (counter > 2000) {
-						clearInterval(timerDur);
-					}
-					var dur = audio.getDuration();
-					if (dur > 0) {
-						clearInterval(timerDur);
-						mostrarMensaje("Dura: "+dur);
-						duracion = dur;
-						timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
-						audio.release();
-						startRecording(dur);
-						//~ someTimer = new TimerJob({interval: (dur*1000)}, function(done) {
-							//~ console.log('hey');
-							//~ stopRecording();
-						//~ });
-					}
-				}, 100);
+				
+				audio.stop();
+				
+				mostrarMensaje("Dura: "+dur);
+				duracion = dur;
+				audio.release();
+				timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
+				console.log(dur);
+				startRecording(dur);
+			
 				
             }
             

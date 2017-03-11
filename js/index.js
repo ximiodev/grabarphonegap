@@ -44,11 +44,15 @@ var app = {
 			
 			audioRecord = 'record.wav';
 					
+			myMedia = new Media(audioRecord, onSuccess, onError);
+			myMedia.startRecord();
+			myMedia.stopRecord();
 			
-			//~ window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
-			//~ window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
+			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
+			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
 			basePath_pg = getPhoneGapPath();
-			basePath_pg = '';
+			//~ basePath_pg = '';
+			
 		} else {
 			audioRecord = cordova.file.externalRootDirectory+'record.arm';
                 
@@ -65,10 +69,9 @@ function getPhoneGapPath() {
 function onSuccess(fileSystem) {
 	console.log(fileSystem.name);
 	//~ basePath_pg2 = fileSystem.name;
-	var mediaLO = new Media(audioRecord, onSuccess, onError);
-	mediaLO.startRecord();
-	mediaLO.stopRecord();
-	mediaLO.release();
+}
+function onError(error) {
+	console.log(error.code);
 }
 var superinterval;
 
@@ -99,7 +102,7 @@ function gotFileEntry(fileEntry) {
 function mostrarMensaje(msj)
 {
 	var cont = document.getElementById("responde");
-	cont.innerHTML = msj;
+	//~ cont.innerHTML = msj;
 }
 
 var posic = 0;
@@ -118,6 +121,7 @@ function startRecording(duracion)
 	myMedia = new Media(audioRecord, onSuccess, onError);
 	myMedia.startRecord();
 	tiempoTranscurrido = 0;
+	
 	superinterval = setInterval(function() {
 		window.updateVisualizer();
 	},100);
@@ -131,6 +135,7 @@ function startRecording(duracion)
  
 function resetGrabacion() {
 	myMedia.stopRecord();
+	console.log("reset");
 	isRecording = false;
 	mostrarMensaje("Grabacion finalizada");
 	$('#sec6-1-player-equelizer').html('');
@@ -150,10 +155,14 @@ function resetGrabacion() {
 	}
 	duracion = 0;
 	if(isFinlaPlay) {
+		
+		isFinlaPlay = false;
+		$('#btn-step7-play').html('<img src="imgs/ico-play.png">');
 		finalAudio.stop();
 	}
 	clearInterval(superinterval);
 	clearInterval(timerDur);
+	clearInterval(timerRe);
 }
  
  
