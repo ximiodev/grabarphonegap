@@ -1921,55 +1921,60 @@
 			var porcentaje = (segTrans*100)/duracion;
 			$('.circleBallTim').css({left:porcentaje+'%'});
 			window.ponerPsub = true;
-			myMedia.getCurrentAmplitude(
-				// success callback 
-				function (amp) {
-					//~ mostrarMensaje(amp + "%");
-					var superBa = parseInt(amp*180);
-					
-					$('#bar-1-0').height(superBa/15);
-					$('#bar-1-1').height(superBa/12);
-					$('#bar-1-2').height(superBa/11);
-					$('#bar-1-3').height(superBa/9);
-					$('#bar-1-4').height(superBa/7);
-					$('#bar-1-5').height(superBa/5);
-					$('#bar-1-6').height(superBa/3);
-					$('#bar-1-7').height(superBa/1);
-					$('#bar-1-8').height(superBa/2);
-					$('#bar-1-9').height(superBa/4);
-					$('#bar-1-10').height(superBa/5);
-					$('#bar-1-11').height(superBa/7);
-					$('#bar-1-12').height(superBa/8);
-					$('#bar-1-13').height(superBa/10);
-					$('#bar-1-14').height(superBa/12);
-					$('#bar-1-15').height(superBa/14);
-					
-					$('#bar-2-0').height(superBa/15);
-					$('#bar-2-1').height(superBa/12);
-					$('#bar-2-2').height(superBa/11);
-					$('#bar-2-3').height(superBa/9);
-					$('#bar-2-4').height(superBa/7);
-					$('#bar-2-5').height(superBa/5);
-					$('#bar-2-6').height(superBa/3);
-					$('#bar-2-7').height(superBa/1);
-					$('#bar-2-8').height(superBa/2);
-					$('#bar-2-9').height(superBa/4);
-					$('#bar-2-10').height(superBa/5);
-					$('#bar-2-11').height(superBa/7);
-					$('#bar-2-12').height(superBa/8);
-					$('#bar-2-13').height(superBa/10);
-					$('#bar-2-14').height(superBa/12);
-					$('#bar-2-15').height(superBa/14);
-				},
-				// error callback 
-				function (e) {
-					console.log("Error getting amp=" + e);
-				}
-			);
+			try {
+				myMedia.getCurrentAmplitude(
+					// success callback 
+					function (amp) {
+						//~ mostrarMensaje(amp + "%");
+						var superBa = parseInt(amp*180);
+						console.log(amp + "%");
+						
+						$('#bar-1-0').height(superBa/15);
+						$('#bar-1-1').height(superBa/12);
+						$('#bar-1-2').height(superBa/11);
+						$('#bar-1-3').height(superBa/9);
+						$('#bar-1-4').height(superBa/7);
+						$('#bar-1-5').height(superBa/5);
+						$('#bar-1-6').height(superBa/3);
+						$('#bar-1-7').height(superBa/1);
+						$('#bar-1-8').height(superBa/2);
+						$('#bar-1-9').height(superBa/4);
+						$('#bar-1-10').height(superBa/5);
+						$('#bar-1-11').height(superBa/7);
+						$('#bar-1-12').height(superBa/8);
+						$('#bar-1-13').height(superBa/10);
+						$('#bar-1-14').height(superBa/12);
+						$('#bar-1-15').height(superBa/14);
+						
+						$('#bar-2-0').height(superBa/15);
+						$('#bar-2-1').height(superBa/12);
+						$('#bar-2-2').height(superBa/11);
+						$('#bar-2-3').height(superBa/9);
+						$('#bar-2-4').height(superBa/7);
+						$('#bar-2-5').height(superBa/5);
+						$('#bar-2-6').height(superBa/3);
+						$('#bar-2-7').height(superBa/1);
+						$('#bar-2-8').height(superBa/2);
+						$('#bar-2-9').height(superBa/4);
+						$('#bar-2-10').height(superBa/5);
+						$('#bar-2-11').height(superBa/7);
+						$('#bar-2-12').height(superBa/8);
+						$('#bar-2-13').height(superBa/10);
+						$('#bar-2-14').height(superBa/12);
+						$('#bar-2-15').height(superBa/14);
+					},
+					// error callback 
+					function (e) {
+						console.log("Error getting amp=" + e);
+					}
+				);
+			} catch(e) {
+				console.log(e.message);
+			}
 			if (isRecording) {
 				//console.log(actx.currentTime);
 				if(withSubtitles){
-					//~ console.log("#");
+					console.log("#");
 					
 					 syncData.forEach(function(element, index, array) {
 						if (segTrans >= element.start){
@@ -1981,6 +1986,7 @@
 					});
 
 					$('#subtitles span').each(function(){
+					console.log("#2");
 						if (segTrans >= $(this).attr('start')){
 							$(this).css({"color":"#1e94d2"});
 						}
