@@ -120,7 +120,7 @@ function startRecording(duracion)
 	var src = audioRecord;
 	isRecording = true;
 	
-	myMedia = new Media(audioRecord, onSuccess, onError);
+	myMedia = new Media(fileURL, onSuccess, onError);
 	myMedia.startRecord();
 	tiempoTranscurrido = 0;
 	
