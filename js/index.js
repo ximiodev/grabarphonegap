@@ -46,7 +46,7 @@ var app = {
 			audioRecord = 'record.wav';
 				
 			
-			//~ window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
+			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
 			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
 			basePath_pg = getPhoneGapPath();
 			basePath_pg = '';
@@ -66,7 +66,7 @@ function getPhoneGapPath() {
 
 function onSuccess(fileSystem) {
 	console.log(fileSystem.name);
-	//~ basePath_pg2 = fileSystem.name;
+	basePath_pg2 = fileSystem.name;
 }
 
 var superinterval;
@@ -96,7 +96,8 @@ function gotFileEntry(fileEntry) {
 	myMedia.startRecord();
 	myMedia.stopRecord();
 	myMedia.release();
-	fileURL = fileEntry;
+	fileURL = fileEntry.toURL();
+	mostrarMensaje(fileURL);
 	//~ alert(fileURL);
 }
 
@@ -218,9 +219,23 @@ function failFile(err) {
 }
 var urlToshare;
 var finalAudio;
+
 var uploadAudio = function () {
 	mostrarMensaje("Uploading");
 	console.log("Uploading");
+	window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, verArchivooGrabado, fail);
+}
+
+function verArchivooGrabado(fileSystem) {
+	fileSystem.root.getFile(audioRecord, {
+		create: true,
+		exclusive: false
+	}, gotFileEntry2, failo);
+}
+
+function gotFileEntry2(fileEntry) {
+	
+	fileURL = fileEntry.toURL();
     var win = function (r) {
         //~ console.log("Code = " + r.responseCode);
         console.log("Response = " + r.response);
@@ -279,18 +294,18 @@ var uploadAudio = function () {
 		var ft = new FileTransfer();
 		var realPath;
 		if(devicePlatform.toUpperCase()=="IOS") {
-			realPath = fileURL.nativeURL;
+			realPath = fileURL;
 		} else {
 			realPath = audioRecord;  
 		}
 		console.log("archivo: "+realPath);
+		
 		//~ ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
 		ft.upload(realPath, encodeURI("http://server2.newcycle.com.ar/process-ios.php"), win, fail, options);
 		showLoader();
 	} catch(err) {
 		mostrarMensaje(err.message);
 	}
-    //~ ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
 }
 
 function verfallo(whatsappText, urlToshare) {
