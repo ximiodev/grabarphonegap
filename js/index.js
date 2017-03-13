@@ -92,7 +92,7 @@ function gotFS(fileSystem) {
 
 function gotFileEntry(fileEntry) {
 	
-	myMedia = new Media(audioRecord, onSuccess, onErrorF);
+	myMedia = new Media("test.wav", onSuccess, onErrorF);
 	myMedia.startRecord();
 	myMedia.stopRecord();
 	fileURL = fileEntry.toURL();
