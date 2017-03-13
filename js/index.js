@@ -185,6 +185,10 @@ function fail(error) {
 	alert('154: code: '    + error.code    + '\n' +
 		  'message: ' + error.message + '\n');
 }
+function failo(error) {
+	alert('189: code: '    + error.code    + '\n' +
+		  'message: ' + error.message + '\n');
+}
 function stopRecording()
 {
 	myMedia.stopRecord();
@@ -223,14 +227,22 @@ var finalAudio;
 var uploadAudio = function () {
 	mostrarMensaje("Uploading");
 	console.log("Uploading");
-	window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, verArchivooGrabado, fail);
+	try {
+		windo.requestFileSystem(LocalFileSystem.TEMPORARY, 0, verArchivooGrabado, fail);
+	} catch(e) {
+		mostrarMensaje("229: "+e.message);
+	}
 }
 
 function verArchivooGrabado(fileSystem) {
-	fileSystem.root.getFile(audioRecord, {
-		create: true,
-		exclusive: false
-	}, gotFileEntry2, failo);
+	try {
+		fileSystem.root.getFile(audioRecord, {
+			create: true,
+			exclusive: false
+		}, gotFileEntry2, failo);
+	} catch(e) {
+		mostrarMensaje("240: "+e.message);
+	}
 }
 
 function gotFileEntry2(fileEntry) {
