@@ -40,13 +40,11 @@ var app = {
        //~ document.getElementById("btnStart").addEventListener('click', startRecording, false);
         devicePlatform = device.platform;
 		mostrarMensaje("so: "+devicePlatform.toUpperCase());
-		if(devicePlatform.toUpperCase()=="IOS") {
+		//~ if(devicePlatform.toUpperCase()=="IOS") {
+		if(1) {
 			
 			audioRecord = 'record.wav';
-					
-			myMedia = new Media(audioRecord, onSuccess, onError);
-			myMedia.startRecord();
-			myMedia.stopRecord();
+				
 			
 			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
 			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
@@ -70,9 +68,7 @@ function onSuccess(fileSystem) {
 	console.log(fileSystem.name);
 	//~ basePath_pg2 = fileSystem.name;
 }
-function onError(error) {
-	console.log(error.code);
-}
+
 var superinterval;
 
 
@@ -91,10 +87,14 @@ function gotFS(fileSystem) {
 	fileSystem.root.getFile(audioRecord, {
 		create: true,
 		exclusive: false
-	}, gotFileEntry, fail);
+	}, gotFileEntry, failo);
 }
 
 function gotFileEntry(fileEntry) {
+	
+	myMedia = new Media(audioRecord, onSuccess, onErrorF);
+	myMedia.startRecord();
+	myMedia.stopRecord();
 	fileURL = fileEntry.toURL();
 	//~ alert(fileURL);
 }
@@ -168,6 +168,11 @@ function resetGrabacion() {
  
 function onSuccess() {
 	console.log("Created Audio for Recording");
+}
+function onErrorF(error) {
+	alert('173: code: '    + error.code    + '\n' +
+		  'message: ' + error.message + '\n');
+	console.log(error);
 }
 function onError(error) {
 	alert('149: code: '    + error.code    + '\n' +
