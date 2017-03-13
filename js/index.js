@@ -92,11 +92,11 @@ function gotFS(fileSystem) {
 
 function gotFileEntry(fileEntry) {
 	
-	myMedia = new Media("test.wav", onSuccess, onErrorF);
+	fileURL = fileEntry.toURL();
+	myMedia = new Media(fileURL, onSuccess, onErrorF);
 	myMedia.startRecord();
 	myMedia.stopRecord();
 	myMedia.release();
-	fileURL = fileEntry.toURL();
 	mostrarMensaje(fileURL);
 	//~ alert(fileURL);
 }
@@ -228,7 +228,7 @@ var uploadAudio = function () {
 	mostrarMensaje("Uploading");
 	console.log("Uploading");
 	try {
-		windo.requestFileSystem(LocalFileSystem.TEMPORARY, 0, verArchivooGrabado, fail);
+		window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, verArchivooGrabado, fail);
 	} catch(e) {
 		mostrarMensaje("229: "+e.message);
 	}
