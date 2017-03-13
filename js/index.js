@@ -96,7 +96,7 @@ function gotFileEntry(fileEntry) {
 	myMedia.startRecord();
 	myMedia.stopRecord();
 	myMedia.release();
-	fileURL = fileEntry.toURL();
+	fileURL = fileEntry;
 	//~ alert(fileURL);
 }
 
@@ -279,7 +279,7 @@ var uploadAudio = function () {
 		var ft = new FileTransfer();
 		var realPath;
 		if(devicePlatform.toUpperCase()=="IOS") {
-			realPath = fileURL;
+			realPath = fileURL.nativeURL;
 		} else {
 			realPath = audioRecord;  
 		}
