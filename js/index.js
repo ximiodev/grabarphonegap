@@ -95,6 +95,7 @@ function gotFileEntry(fileEntry) {
 	myMedia = new Media("test.wav", onSuccess, onErrorF);
 	myMedia.startRecord();
 	myMedia.stopRecord();
+	myMedia.release();
 	fileURL = fileEntry.toURL();
 	//~ alert(fileURL);
 }
