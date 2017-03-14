@@ -102,7 +102,7 @@ function gotFileEntry(fileEntry) {
 function mostrarMensaje(msj)
 {
 	var cont = document.getElementById("responde");
-	//~ cont.innerHTML = msj;
+	cont.innerHTML = msj;
 }
 
 var posic = 0;
