@@ -21,6 +21,7 @@
 
     <!-- Customize your app and platform with the preference element. -->
     <preference name="DisallowOverscroll"         value="true" />
+    <preference name="orientation" value="portrait" />
     <!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->
     <preference name="android-minSdkVersion"      value="11" />
     <preference name="deployment-target" value="7.1.2" />
@@ -38,6 +39,7 @@
     <plugin name="cordova-plugin-device"              source="npm" spec="~1.1.1" />
     <plugin name="cordova-plugin-device-motion"       source="npm" spec="~1.2.0" />
     <plugin name="cordova-plugin-device-orientation"  source="npm" spec="~1.0.2" />
+    <plugin name="cordova-plugin-screen-orientation"  source="npm" spec="~1.4.2" />
     <plugin name="cordova-plugin-dialogs"             source="npm" spec="~1.2.0" />
     <plugin name="cordova-plugin-file"                source="npm"  />
     <plugin name="cordova-plugin-nativeaudio"         source="npm"  />

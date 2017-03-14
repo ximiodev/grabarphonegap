@@ -739,7 +739,13 @@
                 "opacity": "1"
             }, 500, function() {
                 $('#wraper').animate({"opacity":"1"},1500,function() {
-                    gotoSec('sec2');
+					var value = window.localStorage.getItem("mayor");
+					alert(value);
+					if(value!=undefined) {
+						gotoSec('sec3');
+					} else {
+						gotoSec('sec2');
+					}
                     $('#main-header').animate({
                         "top": "0px"
                     }, 1000, function() {
@@ -1008,7 +1014,7 @@
                             
                             {"end": "3.2","start": "3.1","line": "2","id": "sub_8","text": "Con "}, 
                             {"end": "3.4","start": "3.4","line": "2","id": "sub_9","text": "unas "},
-                            {"end": "4.2","start": "4.2","line": "2","id": "sub_10","text": "giales "},
+                            {"end": "4.2","start": "4.2","line": "2","id": "sub_10","text": "guiales "},
                             {"end": "4.4","start": "4.4","line": "2","id": "sub_11","text": "en la "},
                             {"end": "4.6","start": "4.6","line": "2","id": "sub_12","text": "pista "},
                             {"end": "4.8","start": "4.8","line": "2","id": "sub_13","text": "la "},
@@ -1638,6 +1644,7 @@
                 console.log(userAge);
                 console.log(_calculateAge(userAge));
                 if (_calculateAge(userAge) >= 18) {
+					window.localStorage.setItem("mayor", true);
                     gotoSec('sec3');
                 } else {
                     alert('Debes ser mayor de edad para entrar!');
@@ -1704,6 +1711,11 @@
             mp3 = '';
             base = '';
             gender = '';
+			if (isPlaying) {
+				isPlaying = false;
+				audio.pause();
+				//~ audio.seekTo(0);
+			}
             if(isRecording || isFinlaPlay) {
 				resetGrabacion();
 			}
@@ -1722,6 +1734,11 @@
                 gender = '';
                 gotoSec('sec5-1');
             }
+			if (isPlaying) {
+				isPlaying = false;
+				audio.pause();
+				//~ audio.seekTo(0);
+			}
             if(isRecording || isFinlaPlay) {
 				resetGrabacion();
 			}
@@ -1863,7 +1880,8 @@
 					mostrarMensaje("Dura: "+dur);
 					duracion = dur;
 					//~ audio.release();
-					timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
+					//~ timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
+					duraciondegrabado = dur*1000;
 					console.log(dur);
 					startRecording(dur);
 					
@@ -2044,7 +2062,7 @@
                 try {
 					console.log("2017 "+basePath_pg+mp3);
 					elaudioBK = basePath_pg+mp3;
-					audio = new Media(basePath_pg+mp3,
+					audio = new Media(mp3,
 							// success callback	
 							 function () { mostrarMensaje("playAudio():Audio Success");},
 							// error callback
@@ -2052,8 +2070,8 @@
 					);
 
 					audio.play();
-					mostrarMensaje("play "+basePath_pg+mp3);
-					console.log("play "+basePath_pg+mp3);
+					mostrarMensaje("play "+mp3);
+					console.log("play "+mp3);
 					isPlaying = true;
 				} catch(e) {
 					console.log("DSAE "+e.message);
@@ -2128,7 +2146,8 @@
 				mostrarMensaje("Dura: "+dur);
 				duracion = dur;
 				audio.release();
-				timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
+				//~ timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
+				duraciondegrabado = dur*1000;
 				console.log(dur);
 				startRecording(dur);
 			
@@ -2214,7 +2233,7 @@
             //~ }
 
             //~ navigator.getUserMedia({
-                audio: true
+                //~ audio: true
             //~ }, startUserMedia, function(e) {
                 //~ __log('No live audio input: ' + e);
             //~ });

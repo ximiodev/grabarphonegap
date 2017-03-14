@@ -40,6 +40,7 @@ var app = {
        //~ document.getElementById("btnStart").addEventListener('click', startRecording, false);
         devicePlatform = device.platform;
 		mostrarMensaje("so: "+devicePlatform.toUpperCase());
+		screen.lockOrientation('portrait');
 		//~ if(devicePlatform.toUpperCase()=="IOS") {
 		if(1) {
 			
@@ -126,6 +127,10 @@ function startRecording(duracion)
 	
 	superinterval = setInterval(function() {
 		window.updateVisualizer();
+		if((tiempoTranscurrido*10)>=duraciondegrabado) {
+			clearInterval(superinterval);
+			stopRecording();
+		}
 	},100);
 	
 	mostrarMensaje("Grabando... sad");
@@ -134,6 +139,7 @@ function startRecording(duracion)
  }
  var isRecording = false;
  var tiempoTranscurrido = 0;
+ var duraciondegrabado = 0;
  
 function resetGrabacion() {
 	myMedia.stopRecord();
@@ -164,7 +170,7 @@ function resetGrabacion() {
 	}
 	clearInterval(superinterval);
 	clearInterval(timerDur);
-	clearInterval(timerRe);
+	//~ clearInterval(timerRe);
 }
  
  
