@@ -112,6 +112,7 @@ function mostrarMensaje(msj)
 var posic = 0;
 var elaudioBK;
 var someTimer;
+var TimerJob = require('timer-jobs');
 function actualizarTema() {
 	posic++;
 	mostrarMesaje("pasas: "+posic);
