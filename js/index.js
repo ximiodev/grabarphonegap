@@ -127,11 +127,11 @@ function startRecording(duracion)
 	tiempoTranscurrido = 0;
 	
 	superinterval = setInterval(function() {
-		window.updateVisualizer();
 		if((tiempoTranscurrido*100)>=duraciondegrabado) {
 			clearInterval(superinterval);
 			stopRecording();
 		}
+		window.updateVisualizer();
 	},100);
 	
 	mostrarMensaje("Grabando... sad");
