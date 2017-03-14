@@ -111,6 +111,7 @@ function mostrarMensaje(msj)
 
 var posic = 0;
 var elaudioBK;
+var inicioGraba = 0;
 
 function actualizarTema() {
 	posic++;
@@ -124,10 +125,13 @@ function startRecording(duracion)
 	
 	myMedia = new Media(fileURL_P, onSuccess, onError);
 	myMedia.startRecord();
+	inicioGraba = new Date().getTime();
 	tiempoTranscurrido = 0;
 	
 	superinterval = setInterval(function() {
-		if((tiempoTranscurrido*100)>=duraciondegrabado) {
+		var tiempoPasasdo = new Date().getTime();
+		var tiemppoTransc = tiempoPasasdo-inicioGraba;
+		if(tiemppoTransc>=duraciondegrabado) {
 			clearInterval(superinterval);
 			stopRecording();
 		}
