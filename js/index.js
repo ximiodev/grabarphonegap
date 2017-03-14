@@ -120,7 +120,7 @@ function startRecording(duracion)
 	var src = audioRecord;
 	isRecording = true;
 	
-	myMedia = new Media(fileURL, onSuccess, onError);
+	myMedia = new Media(audioRecord, onSuccess, onError);
 	myMedia.startRecord();
 	tiempoTranscurrido = 0;
 	
@@ -228,7 +228,7 @@ var uploadAudio = function () {
 	mostrarMensaje("Uploading");
 	console.log("Uploading");
 	try {
-		windo.requestFileSystem(LocalFileSystem.TEMPORARY, 0, verArchivooGrabado, fail);
+		window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, verArchivooGrabado, fail);
 	} catch(e) {
 		mostrarMensaje("229: "+e.message);
 	}
