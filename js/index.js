@@ -215,7 +215,11 @@ function reproducirResp() {
 	if(!isFinlaPlay) {
 		finalAudio = new Media(urlToshare,
 				// success callback
-				 function () { },
+				 function () {
+					 isFinlaPlay = false;
+					$('#btn-step7-play').html('<img src="imgs/ico-play.png">');
+					finalAudio.stop();
+				},
 				// error callback
 				 function (err) { alert("Canción no disponible. "+r.response ); }
 		);
