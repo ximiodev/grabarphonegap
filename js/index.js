@@ -111,8 +111,7 @@ function mostrarMensaje(msj)
 
 var posic = 0;
 var elaudioBK;
-var someTimer;
-var TimerJob = require('timer-jobs');
+
 function actualizarTema() {
 	posic++;
 	mostrarMesaje("pasas: "+posic);
@@ -126,14 +125,14 @@ function startRecording(duracion)
 	myMedia = new Media(fileURL_P, onSuccess, onError);
 	myMedia.startRecord();
 	tiempoTranscurrido = 0;
-	someTimer = new TimerJob({interval: 100}, function(done) {
+	
+	superinterval = setInterval(function() {
+		window.updateVisualizer();
 		if((tiempoTranscurrido*100)>=duraciondegrabado) {
-			someTimer.stop();
+			clearInterval(superinterval);
 			stopRecording();
 		}
-		window.updateVisualizer();
-	});
-	someTimer.start();
+	},100);
 	
 	mostrarMensaje("Grabando... sad");
 	
@@ -170,7 +169,7 @@ function resetGrabacion() {
 		$('#btn-step7-play').html('<img src="imgs/ico-play.png">');
 		finalAudio.stop();
 	}
-	//~ clearInterval(superinterval);
+	clearInterval(superinterval);
 	clearInterval(timerDur);
 	//~ clearInterval(timerRe);
 }
