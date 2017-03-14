@@ -90,11 +90,12 @@ function gotFS(fileSystem) {
 		exclusive: false
 	}, gotFileEntry, failo);
 }
-
+var fileURL_P;
 function gotFileEntry(fileEntry) {
 	
 	fileURL = fileEntry.toURL();
-	myMedia = new Media(fileURL, onSuccess, onErrorF);
+	fileURL_P = fileEntry.fullPath;
+	myMedia = new Media(fileURL_P, onSuccess, onErrorF);
 	myMedia.startRecord();
 	myMedia.stopRecord();
 	myMedia.release();
@@ -121,7 +122,7 @@ function startRecording(duracion)
 	var src = audioRecord;
 	isRecording = true;
 	
-	myMedia = new Media(fileURL, onSuccess, onError);
+	myMedia = new Media(fileURL_P, onSuccess, onError);
 	myMedia.startRecord();
 	tiempoTranscurrido = 0;
 	
