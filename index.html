@@ -1935,7 +1935,10 @@
 			var f = 3;
 			tiempoTranscurrido++;
 			var segTrans = (tiempoTranscurrido/10);
-			var porcentaje = (segTrans*100)/duracion;
+			
+			var tiempoPasasdo = new Date().getTime();
+			var tiemppoTransc = (tiempoPasasdo-inicioGraba)/1000;
+			var porcentaje = (tiemppoTransc*100)/duracion;
 			$('.circleBallTim').css({left:porcentaje+'%'});
 			window.ponerPsub = true;
 			try {
@@ -1994,7 +1997,7 @@
 					console.log("#");
 					
 					 syncData.forEach(function(element, index, array) {
-						if (segTrans >= element.start){
+						if (tiemppoTransc >= element.start){
 							if(element.line!=line){
 								line = element.line;
 								createSubtitle(line);
@@ -2004,7 +2007,7 @@
 
 					$('#subtitles span').each(function(){
 					console.log("#2");
-						if (segTrans >= $(this).attr('start')){
+						if (tiemppoTransc >= $(this).attr('start')){
 							$(this).css({"color":"#1e94d2"});
 						}
 					});
