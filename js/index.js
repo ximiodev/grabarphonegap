@@ -172,6 +172,7 @@ function resetGrabacion() {
 		isFinlaPlay = false;
 		$('#btn-step7-play').html('<img src="imgs/ico-play.png">');
 		finalAudio.stop();
+		finalAudio.release();
 	}
 	clearInterval(superinterval);
 	clearInterval(timerDur);
