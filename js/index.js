@@ -277,32 +277,6 @@ function gotFileEntry2(fileEntry) {
 		gotoSec('sec7');
 		$('#btn-step6-1-grabar').removeClass('active');
 		$('#btn-step6-2-grabar').removeClass('active');
-		$('#btn-step7-compartir').click(function(e) {
-			e.preventDefault();
-			
-			
-			var rnd = Math.round((Math.random()*2))+1;
-			var whatsappText = '';
-			
-			switch(rnd){
-				case 1:
-					whatsappText = 'Si con esto no activas, eres un quedao!';
-					break;
-				case 2:
-					whatsappText = '¡Es hora de romper el hielo! Actívate con mi flow.';                        
-					break;
-				case 3: 
-					whatsappText = '¿Vamos al arranque? Activa ahora y rompe el hielo.';                        
-					break;
-			}
-			
-			
-			try {
-				window.plugins.socialsharing.share(whatsappText+urlToshare);
-			} catch(e) {
-				verfallo();
-			}
-		});
     }
 
     var fail = function (error) {

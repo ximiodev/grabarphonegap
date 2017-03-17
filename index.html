@@ -1620,6 +1620,69 @@
                 });
             }
         }
+        
+        
+        function gotoSecR(sec) {
+
+            if (animating == false) {
+                animating = true;
+
+                $('#' + current_sec).animate({
+                    "left": ($(window).width()) + "px",
+                    "right": -$(window).width() + "px"
+                }, 1000, function() {
+                    $('#' + current_sec).css({
+                        "display": "none"
+                    });
+                    $('#' + current_sec).removeClass('current');
+                    //$('#'+current_sec).css({"left":$(window).width()+"px","display":"block"});
+                    current_sec = sec;
+                    animating = false;
+                    $('#' + current_sec).addClass('current');
+
+
+                });
+                $('#' + sec).css({
+                    "left": -$(window).width() + "px",
+                    "right": ($(window).width()) + "px",
+                    "display": "block"
+                });
+                $('#' + sec).animate({
+                    "left": "0px",
+                    "right": "0px"
+                }, 1000, function() {
+
+                });
+            }
+        }
+        
+        
+		$('#btn-step7-compartir').click(function(e) {
+			e.preventDefault();
+			
+			
+			var rnd = Math.round((Math.random()*2))+1;
+			var whatsappText = '';
+			
+			switch(rnd){
+				case 1:
+					whatsappText = 'Si con esto no activas, eres un quedao! ';
+					break;
+				case 2:
+					whatsappText = '¡Es hora de romper el hielo! Actívate con mi flow. ';                        
+					break;
+				case 3: 
+					whatsappText = '¿Vamos al arranque? Activa ahora y rompe el hielo. ';                        
+					break;
+			}
+			
+			
+			try {
+				window.plugins.socialsharing.share(whatsappText+urlToshare);
+			} catch(e) {
+				verfallo();
+			}
+		});
 
         $('.btn-sec').click(function() {
             var goto = $(this).attr('goto');
@@ -1698,7 +1761,7 @@
         
         
         $('#icon-home').click(function() {
-            gotoSec('sec4');
+            gotoSecR('sec4');
             $('#sec4-btn1').removeClass('active');
             $('#sec4-btn2').removeClass('active');
             $('#icon-home').css({"display":"none"});
@@ -1723,7 +1786,7 @@
         
         $('#icon-back').click(function() {
             if(lyrics==0){
-                gotoSec('sec5-2');
+                gotoSecR('sec5-2');
             }else{
                 $('.btn-lyric').removeClass('active');
                 $('.btn-gender').removeClass('active');
@@ -1731,7 +1794,7 @@
                 mp3 = '';
                 base = '';
                 gender = '';
-                gotoSec('sec5-1');
+                gotoSecR('sec5-1');
             }
 			if (isPlaying) {
 				isPlaying = false;
