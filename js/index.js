@@ -159,6 +159,7 @@ function resetGrabacion() {
 	$('#subtitles').css({"display":"none"});
 	$('#btn-step6-1-regrabar').addClass('hidden');
 	$('#btn-step6-2-regrabar').addClass('hidden');
+	$('#btn-step6-2-grabar-s').addClass('hidden');
 	$('#btn-step6-1-grabar').removeClass('hidden');
 	$('#btn-step6-2-grabar').removeClass('hidden');
 	$('#btn-step6-1-grabar').removeClass('active');
