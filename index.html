@@ -64,6 +64,11 @@
             z-index: 1;
         }
         
+        #btn-step6-2-grabar-s {
+			width: 150px;
+			margin: 5px auto;
+		}
+        
         #sec3-title {
             max-width: 250px;
         }
@@ -682,6 +687,7 @@
 
                     <div class="col-md-12 col-xs-12 mt-15 pw-10">
                         <div class="red-gradient" id="btn-step6-2-grabar">GRABAR</div>
+                        <div class="red-gradient hidden" id="btn-step6-2-grabar-s">TERMINAR</div>
                         <div class="red-gradient hidden" id="btn-step6-2-regrabar">VOLVER A GRABAR</div>
                     </div>
                 </div>
@@ -1854,7 +1860,7 @@
         var analyser;
         var playing;
         var withSubtitles = true;
-
+		
         $('#btn-step6-1-grabar').click(function() {
             $(this).addClass('hidden');
             $('#btn-step6-1-regrabar').removeClass('hidden');
@@ -1930,7 +1936,6 @@
 					//~ audio.play();
 					//~ audio.setVolume(0);
 					//~ audio.seekTo(0);
-					console.log("p0232222");
 					withSubtitles = true;
 					$('#subtitles').css({"display":"block"});
 					createSubtitle(1);
@@ -1944,7 +1949,7 @@
 					//~ audio.release();
 					//~ timerRe = setTimeout(function(){ stopRecording(); }, (dur*1000));
 					duraciondegrabado = dur*1000;
-					console.log(dur);
+					//~ console.log(dur);
 					startRecording(dur);
 					
 				//~ } catch(e) {
@@ -1984,6 +1989,7 @@
             resetGrabacion();
             
             $(this).addClass('hidden');
+            $('#btn-step6-2-grabar-s').addClass('hidden');
             $('#btn-step6-2-grabar').removeClass('hidden');
             $('#btn-step6-2-grabar').removeClass('active');
             
@@ -2010,7 +2016,7 @@
 					function (amp) {
 						//~ mostrarMensaje(amp + "%");
 						var superBa = parseInt(amp*180);
-						console.log(amp + "%");
+						//~ console.log(amp + "%");
 						
 						$('#bar-1-0').height(superBa/15);
 						$('#bar-1-1').height(superBa/12);
@@ -2052,12 +2058,11 @@
 					}
 				);
 			} catch(e) {
-				console.log(e.message);
+				//~ console.log(e.message);
 			}
 			if (isRecording) {
 				//console.log(actx.currentTime);
 				if(withSubtitles){
-					console.log("#");
 					
 					 syncData.forEach(function(element, index, array) {
 						if (tiemppoTransc >= element.start){
@@ -2069,7 +2074,6 @@
 					});
 
 					$('#subtitles span').each(function(){
-					console.log("#2");
 						if (tiemppoTransc >= $(this).attr('start')){
 							$(this).css({"color":"#1e94d2"});
 						}
@@ -2157,9 +2161,16 @@
             $('.record-btn').addClass('hidden');
             $('#icon-back').css({"display":"block"});
         });
+        
+
+        $('#btn-step6-2-grabar-s').click(function() {
+			
+            stopRecording()
+		});
 
         $('#btn-step6-2-grabar').click(function() {
             $(this).addClass('hidden');
+			$('#btn-step6-2-grabar-s').removeClass('hidden');
             $('#btn-step6-2-regrabar').removeClass('hidden');
             
             if ($(this).hasClass('active')) {

@@ -80,8 +80,8 @@ var counter;
 var devicePlatform;
 var timerDur;
 var timerRe;
-var basePath_pg;
-var basePath_pg2;
+var basePath_pg = '';
+var basePath_pg2 = '';
 var myMedia;
 
 function gotFS(fileSystem) {
@@ -122,22 +122,24 @@ function startRecording(duracion)
 {
 	var src = audioRecord;
 	isRecording = true;
-	
-	myMedia = new Media(fileURL_P, onSuccess, onError);
-	myMedia.startRecord();
-	inicioGraba = new Date().getTime();
-	tiempoTranscurrido = 0;
-	
-	superinterval = setInterval(function() {
-		var tiempoPasasdo = new Date().getTime();
-		var tiemppoTransc = tiempoPasasdo-inicioGraba;
-		if(tiemppoTransc>=duraciondegrabado) {
-			clearInterval(superinterval);
-			stopRecording();
-		}
-		window.updateVisualizer();
-	},100);
-	
+	try {
+		myMedia = new Media(fileURL_P, onSuccessG, onError);
+		myMedia.startRecord();
+		inicioGraba = new Date().getTime();
+		tiempoTranscurrido = 0;
+		
+		superinterval = setInterval(function() {
+			var tiempoPasasdo = new Date().getTime();
+			var tiemppoTransc = tiempoPasasdo-inicioGraba;
+			if(tiemppoTransc>=duraciondegrabado) {
+				clearInterval(superinterval);
+				stopRecording();
+			}
+			window.updateVisualizer();
+		},100);
+	} catch(e) {
+		console.log(e);
+	}
 	mostrarMensaje("Grabando... sad");
 	
 	
@@ -174,13 +176,14 @@ function resetGrabacion() {
 		finalAudio.stop();
 		finalAudio.release();
 	}
+	myMedia.release();
 	clearInterval(superinterval);
 	clearInterval(timerDur);
 	//~ clearInterval(timerRe);
 }
  
  
-function onSuccess() {
+function onSuccessG() {
 	console.log("Created Audio for Recording");
 }
 function onErrorF(error) {
@@ -256,6 +259,7 @@ function verArchivooGrabado(fileSystem) {
 			create: true,
 			exclusive: false
 		}, gotFileEntry2, failo);
+		
 	} catch(e) {
 		mostrarMensaje("240: "+e.message);
 	}
@@ -285,6 +289,13 @@ function gotFileEntry2(fileEntry) {
         console.log("upload error source " + error.source);
         console.log("upload error target " + error.target);
     }
+	var realPath;
+	if(devicePlatform.toUpperCase()=="IOS") {
+		realPath = fileURL;
+	} else {
+		realPath = audioRecord;  
+	}
+	console.log("archivo: "+realPath);
 	try {
 		var options = new FileUploadOptions();
 		options.fileKey = "file";
@@ -294,19 +305,12 @@ function gotFileEntry2(fileEntry) {
 		options.headers = { Connection: "close" };
 
 		var ft = new FileTransfer();
-		var realPath;
-		if(devicePlatform.toUpperCase()=="IOS") {
-			realPath = fileURL;
-		} else {
-			realPath = audioRecord;  
-		}
-		console.log("archivo: "+realPath);
 		
 		//~ ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
 		ft.upload(realPath, encodeURI("http://server2.newcycle.com.ar/process-ios.php"), win, fail, options);
 		showLoader();
 	} catch(err) {
-		mostrarMensaje(err.message);
+		mostrarMensaje("SA"+err.message);
 	}
 }
 
