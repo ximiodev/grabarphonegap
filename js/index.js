@@ -224,6 +224,7 @@ function reproducirResp() {
 					 isFinlaPlay = false;
 					$('#btn-step7-play').html('<img src="imgs/ico-play.png">');
 					finalAudio.stop();
+					finalAudio.release();
 				},
 				// error callback
 				 function (err) { alert("Canción no disponible. "+r.response ); }
@@ -308,7 +309,7 @@ function gotFileEntry2(fileEntry) {
 		var ft = new FileTransfer();
 		
 		//~ ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
-		ft.upload(realPath, encodeURI("http://server2.newcycle.com.ar/process-ios.php"), win, fail, options);
+		ft.upload(realPath, encodeURI("https://www.dimelocantando.com.pa/process-ios.php"), win, fail, options);
 		showLoader();
 	} catch(err) {
 		mostrarMensaje("SA"+err.message);

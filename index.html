@@ -2155,7 +2155,10 @@
             if (isPlaying) {
                 isPlaying = false;
 				audio.stop();
-				console.log("SAD");
+				try {
+					audio.release();
+				} catch(e) {
+				}
             }
             $('.play-btn').removeClass('active');
             $('.record-btn').addClass('hidden');
@@ -2176,14 +2179,16 @@
             if ($(this).hasClass('active')) {
                 if (isPlaying) {
                     isPlaying = false;
-					audio.pause();
+					try {
+						audio.release();
+					} catch(e) {
+					}
                 }
             } else {
                 $(this).addClass('active');
                 
                 if (isPlaying) {
                     isPlaying = false;
-					audio.pause();
                 }
 				
                 var html = '';
@@ -2216,9 +2221,10 @@
                 withSubtitles=false;
 								 
 				isPlaying = true;
-				
-				audio.stop();
-				
+				try {
+					audio.release();
+				} catch(e) {
+				}
 				mostrarMensaje("Dura: "+dur);
 				duracion = dur;
 				audio.release();
