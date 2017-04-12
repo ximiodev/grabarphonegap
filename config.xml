@@ -27,7 +27,7 @@
     <preference name="deployment-target" value="7.1.2" />
 
     <!-- Define a specific version of PhoneGap to build into your app. -->
-    <preference name="phonegap-version"       value="cli-6.1.0" />
+    <preference name="phonegap-version"       value="cli-6.5.0" />
 
     <!-- Plugins -->
     <!-- Core plugins -->
@@ -53,7 +53,7 @@
     <plugin name="cordova-plugin-statusbar"           source="npm" spec="~2.1.2" />
     <plugin name="cordova-plugin-vibration"           source="npm" spec="~2.1.0" />
     <plugin name="cordova-plugin-whitelist"           source="npm" spec="~1.2.1" />
-    <plugin name="cordova-plugin-socialsharing"		  source="npm" spec="~4.3.16" />
+    <plugin name="cordova-plugin-x-socialsharing"	  source="npm"  />
     <plugin name="cordova-plugin-audio-recorder-api"		  source="npm" />
     <plugin spec="https://github.com/eworx/av-audio-session-adapter.git" source="git" />
 
