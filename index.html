@@ -2129,13 +2129,18 @@
 					audio.release();
                 }
                 try {
-					console.log("2017 "+basePath_pg+mp3);
+					console.log("Vamos "+basePath_pg+mp3);
 					elaudioBK = basePath_pg+mp3;
+					if(devicePlatform.toUpperCase()=="IOS") {
+						mp3 = mp3;
+					} else {
+						mp3 = getPhoneGapPath()+mp3;
+					}
 					audio = new Media(mp3,
 							// success callback	
-							 function () { mostrarMensaje("playAudio():Audio Success");},
+							 function () { console.log("playAudio():Audio Success");},
 							// error callback
-							 function (err) { mostrarMensaje(basePath_pg+mp3); }
+							 function (err) { console.log(err.code); }
 					);
 
 					audio.play();

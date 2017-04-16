@@ -39,13 +39,13 @@ var app = {
     receivedEvent: function(id) {
        //~ document.getElementById("btnStart").addEventListener('click', startRecording, false);
         devicePlatform = device.platform;
-		mostrarMensaje("so: "+devicePlatform.toUpperCase());
+		console.log("soo: "+devicePlatform.toUpperCase());
 		screen.lockOrientation('portrait');
-		//~ if(devicePlatform.toUpperCase()=="IOS") {
-		if(1) {
+		if(devicePlatform.toUpperCase()=="IOS") {
+		//~ if(0) {
 			
 			audioRecord = 'record.wav';
-				
+			
 			
 			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onSuccess, onError);
 			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
@@ -54,8 +54,10 @@ var app = {
 			
 		} else {
 			audioRecord = cordova.file.externalRootDirectory+'record.arm';
-                
-			basePath_pg = '/android_asset/www/';
+			console.log("Trolazo:"+audioRecord);
+            
+            mp3
+			//~ basePath_pg = '/android_asset/www/';
 		}
     }
 };
@@ -122,8 +124,13 @@ function startRecording(duracion)
 {
 	var src = audioRecord;
 	isRecording = true;
+	
 	try {
-		myMedia = new Media(fileURL_P, onSuccessG, onError);
+		if(devicePlatform.toUpperCase()=="IOS") {
+			myMedia = new Media(fileURL_P, onSuccessG, onError);
+		} else {
+			myMedia = new Media(audioRecord, onSuccessG, onError);
+		}
 		myMedia.startRecord();
 		inicioGraba = new Date().getTime();
 		tiempoTranscurrido = 0;
@@ -219,15 +226,15 @@ var isFinlaPlay = false;
 function reproducirResp() {
 	if(!isFinlaPlay) {
 		finalAudio = new Media(urlToshare,
-				// success callback
-				 function () {
-					 isFinlaPlay = false;
-					$('#btn-step7-play').html('<img src="imgs/ico-play.png">');
-					finalAudio.stop();
-					finalAudio.release();
-				},
-				// error callback
-				 function (err) { alert("Canción no disponible. "+r.response ); }
+			// success callback
+			 function () {
+				 isFinlaPlay = false;
+				$('#btn-step7-play').html('<img src="imgs/ico-play.png">');
+				finalAudio.stop();
+				finalAudio.release();
+			},
+			// error callback
+			 function (err) { alert("Canción no disponible. "+r.response ); }
 		);
 		$('#btn-step7-play').html('<img src="imgs/ico-pause.png">');
 		finalAudio.play();
@@ -248,10 +255,14 @@ var finalAudio;
 var uploadAudio = function () {
 	mostrarMensaje("Uploading");
 	console.log("Uploading");
-	try {
-		window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, verArchivooGrabado, fail);
-	} catch(e) {
-		mostrarMensaje("229: "+e.message);
+	if(devicePlatform.toUpperCase()=="IOS") {
+		try {
+			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, verArchivooGrabado, fail);
+		} catch(e) {
+			mostrarMensaje("229: "+e.message);
+		}
+	} else {
+		subirAndroid();
 	}
 }
 
@@ -270,6 +281,54 @@ function verArchivooGrabado(fileSystem) {
 function gotFileEntry2(fileEntry) {
 	
 	fileURL = fileEntry.toURL();
+    var win = function (r) {
+        //~ console.log("Code = " + r.responseCode);
+        console.log("Response = " + r.response);
+        console.log("Sent = " + r.bytesSent);
+        console.log("Respuesta del server: "+r.response);
+					
+		//~ $('#btn-step7-compartir').attr('href','whatsapp://send?text='+r.response);
+		urlToshare = r.response;
+		
+		
+		hideLoader();
+		gotoSec('sec7');
+		$('#btn-step6-1-grabar').removeClass('active');
+		$('#btn-step6-2-grabar').removeClass('active');
+    }
+
+    var fail = function (error) {
+        mostrarMensaje("An error has occurred: Code = " + error.code);
+        console.log("upload error source " + error.source);
+        console.log("upload error target " + error.target);
+    }
+	var realPath;
+	if(devicePlatform.toUpperCase()=="IOS") {
+		realPath = fileURL;
+	} else {
+		realPath = audioRecord;  
+	}
+	console.log("archivo: "+realPath);
+	try {
+		var options = new FileUploadOptions();
+		options.fileKey = "file";
+		options.mimeType = "audio/wav";
+		options.fileName = audioRecord;
+		options.params = { 'devicePlatform': devicePlatform.toUpperCase(), 'base': base};
+		options.headers = { Connection: "close" };
+
+		var ft = new FileTransfer();
+		
+		//~ ft.upload(realPath, encodeURI("http://ximiodev.com/grabar/upload.php"), win, fail, options);
+		ft.upload(realPath, encodeURI("https://www.dimelocantando.com.pa/process-ios.php"), win, fail, options);
+		showLoader();
+	} catch(err) {
+		mostrarMensaje("SA"+err.message);
+	}
+}
+
+function subirAndroid() {
+	
     var win = function (r) {
         //~ console.log("Code = " + r.responseCode);
         console.log("Response = " + r.response);
