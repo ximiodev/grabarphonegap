@@ -4,7 +4,7 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.dimelocantnado.dimelocantandopanama"
-        version   = "1.0.2">
+        version   = "1.0.3">
 
     <name>Dimelo Cantando</name>
 
@@ -60,6 +60,11 @@
     <plugin name="cordova-plugin-x-socialsharing"	  source="npm"  />
     <plugin name="cordova-plugin-audio-recorder-api"		  source="npm" />
     <plugin spec="https://github.com/eworx/av-audio-session-adapter.git" source="git" />
+    
+     <gap:plugin name="cordova-plugin-facebook4" source="npm" spec="1.7.4">
+        <param name="APP_ID" value="621221938069097" />
+        <param name="APP_NAME" value="dimelocantando" />
+    </gap:plugin>
 
     <!-- Define app icon and splashscreen for each platform. -->
     <icon src="icon.png" />
