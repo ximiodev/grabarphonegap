@@ -23,7 +23,7 @@
     <preference name="DisallowOverscroll"         value="true" />
     <preference name="orientation" value="portrait" />
     <!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->
-    <preference name="android-minSdkVersion"      value="14" />
+    <preference name="android-minSdkVersion"      value="15" />
     <preference name="deployment-target" value="7.1.2" />
 
     <!-- Define a specific version of PhoneGap to build into your app. -->
