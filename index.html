@@ -1859,8 +1859,9 @@
 				audio.pause();
 				//~ audio.seekTo(0);
 			}
-            if(isRecording || isFinlaPlay) {
+            try {
 				resetGrabacion();
+			} catch(e) {
 			}
             
         });
@@ -1882,8 +1883,9 @@
 				audio.pause();
 				//~ audio.seekTo(0);
 			}
-            if(isRecording || isFinlaPlay) {
+            try {
 				resetGrabacion();
+			} catch(e) {
 			}
             $('#icon-back').css({"display":"none"});
         });
@@ -1983,7 +1985,7 @@
 							dur=31;
 							break;
 						case "ice":
-							dur=45;
+							dur=26;
 							break;
 						case "pam":
 							dur=31;
@@ -2045,7 +2047,10 @@
             isPlaying = false;
             playing = false;
             
-            resetGrabacion();
+            try {
+				resetGrabacion();
+			} catch(e) {
+			}
             
             $('#sec6-1-title').css({"display":"block"});
             $('#subtitles').css({"display":"none"});
@@ -2061,7 +2066,10 @@
             isPlaying = false;
             playing = false;
             
-            resetGrabacion();
+            try {
+				resetGrabacion();
+			} catch(e) {
+			}
             
             $(this).addClass('hidden');
             $('#btn-step6-2-grabar-s').addClass('hidden');
@@ -2167,7 +2175,11 @@
             $('.btn-gender').removeClass('active');
             $('#sec4-btn2').removeClass('active');
             $('#sec4-btn1').removeClass('active');
-            resetGrabacion();
+            
+            try {
+				resetGrabacion();
+			} catch(e) {
+			}
             gender = '';
             lyrics = 0;
             mp3_id = '';
@@ -2287,7 +2299,7 @@
 						dur=31;
 						break;
 					case "ice":
-						dur=45;
+						dur=26;
 						break;
 					case "pam":
 						dur=31;
